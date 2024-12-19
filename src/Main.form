@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="GenderGroup">
+    </Component>
+    <Container class="javax.swing.JDialog" name="NumberVerification">
+      <Properties>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[1200, 650]"/>
+        </Property>
+        <Property name="modalityType" type="java.awt.Dialog$ModalityType" editor="org.netbeans.modules.form.editors.EnumEditor">
+          <Value id="APPLICATION_MODAL"/>
+        </Property>
+        <Property name="undecorated" type="boolean" value="true"/>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="1200" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="658" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+    </Container>
+    <Container class="javax.swing.JDialog" name="NoInternet">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[1200, 650]"/>
+        </Property>
+        <Property name="modalityType" type="java.awt.Dialog$ModalityType" editor="org.netbeans.modules.form.editors.EnumEditor">
+          <Value id="APPLICATION_MODAL"/>
+        </Property>
+        <Property name="undecorated" type="boolean" value="true"/>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="1200" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="650" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+    </Container>
+    <Container class="javax.swing.JDialog" name="SavingAnimation">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[1200, 720]"/>
+        </Property>
+        <Property name="undecorated" type="boolean" value="true"/>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="1200" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="720" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+    </Container>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[1200, 720]"/>
+    </Property>
+    <Property name="undecorated" type="boolean" value="true"/>
+    <Property name="resizable" type="boolean" value="false"/>
+    <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[1200, 720]"/>
+    </Property>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="DetailsPanel" alignment="0" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="DetailsPanel" min="-2" max="-2" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="DetailsPanel">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="33" red="33" type="rgb"/>
+        </Property>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[1200, 720]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[1200, 720]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[1200, 720]"/>
+        </Property>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="false"/>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="LogoLabel">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="33" red="33" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Images/NewIcon.png"/>
+            </Property>
+            <Property name="opaque" type="boolean" value="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="40" y="0" width="106" height="70"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="WelcomeLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="26" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="700" y="0" width="400" height="70"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="Logout">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Images/LOGOUT.png"/>
+            </Property>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="LogoutMouseClicked"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="1120" y="10" width="50" height="60"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="HeadingLabel">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="36" style="1"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="Enter your Details:"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="400" y="70" width="400" height="90"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="NameLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="18" style="1"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="text" type="java.lang.String" value="Name:"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="190" y="180" width="100" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="EmailLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="18" style="1"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="text" type="java.lang.String" value="Email:"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="190" y="240" width="100" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="GenderLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="18" style="1"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="11"/>
+            <Property name="text" type="java.lang.String" value="Gender:"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="190" y="300" width="100" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JTextField" name="NameField">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="17" style="0"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="310" y="180" width="270" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JTextField" name="EmailField">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="17" style="0"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="310" y="240" width="270" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="MRadioButton">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="GenderGroup"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="17" style="0"/>
+            </Property>
+            <Property name="selected" type="boolean" value="true"/>
+            <Property name="text" type="java.lang.String" value="Male"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="310" y="300" width="170" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="FRadioButton">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="GenderGroup"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="17" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Female"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="310" y="340" width="170" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="ORadioButton">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="GenderGroup"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="17" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Non-Binary"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="310" y="380" width="170" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="DOBLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="18" style="1"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="text" type="java.lang.String" value="Date of Birth:"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="570" y="180" width="220" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="CountryLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="18" style="1"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="text" type="java.lang.String" value="Country of residence:"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="570" y="240" width="220" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="CountryComboBox">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="16" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="229">
+                <StringItem index="0" value="Afghanistan (AF)"/>
+                <StringItem index="1" value="Albania (AL)"/>
+                <StringItem index="2" value="Algeria (DZ)"/>
+                <StringItem index="3" value="American Samoa (AS)"/>
+                <StringItem index="4" value="Andorra (AD)"/>
+                <StringItem index="5" value="Angola (AO)"/>
+                <StringItem index="6" value="Anguilla (AI)"/>
+                <StringItem index="7" value="Antigua (AG)"/>
+                <StringItem index="8" value="Argentina (AR)"/>
+                <StringItem index="9" value="Armenia (AM)"/>
+                <StringItem index="10" value="Aruba (AW)"/>
+                <StringItem index="11" value="Australia (AU)"/>
+                <StringItem index="12" value="Austria (AT)"/>
+                <StringItem index="13" value="Azerbaijan (AZ)"/>
+                <StringItem index="14" value="The Bahamas (BS)"/>
+                <StringItem index="15" value="Bahrain (BH)"/>
+                <StringItem index="16" value="Bangladesh (BD)"/>
+                <StringItem index="17" value="Barbados (BB)"/>
+                <StringItem index="18" value="Belarus (BY)"/>
+                <StringItem index="19" value="Belgium (BE)"/>
+                <StringItem index="20" value="Belize (BZ)"/>
+                <StringItem index="21" value="Benin (BJ)"/>
+                <StringItem index="22" value="Bermuda (BM)"/>
+                <StringItem index="23" value="Bhutan (BT)"/>
+                <StringItem index="24" value="Bolivia (BO)"/>
+                <StringItem index="25" value="Bosnia and Herzegovina (BA)"/>
+                <StringItem index="26" value="Botswana (BW)"/>
+                <StringItem index="27" value="Brazil (BR)"/>
+                <StringItem index="28" value="British Indian Ocean Territory (IO)"/>
+                <StringItem index="29" value="Brunei (BN)"/>
+                <StringItem index="30" value="Bulgaria (BG)"/>
+                <StringItem index="31" value="Burkina Faso (BF)"/>
+                <StringItem index="32" value="Burundi (BI)"/>
+                <StringItem index="33" value="Cambodia (KH)"/>
+                <StringItem index="34" value="Cameroon (CM)"/>
+                <StringItem index="35" value="Canada (CA)"/>
+                <StringItem index="36" value="Cape Verde (CV)"/>
+                <StringItem index="37" value="Cayman Islands (KY)"/>
+                <StringItem index="38" value="Central African Republic (CF)"/>
+                <StringItem index="39" value="Chad (TD)"/>
+                <StringItem index="40" value="Chile (CL)"/>
+                <StringItem index="41" value="China (CN)"/>
+                <StringItem index="42" value="Colombia (CO)"/>
+                <StringItem index="43" value="Comoros (KM)"/>
+                <StringItem index="44" value="Republic of the Congo (CG)"/>
+                <StringItem index="45" value="Democratic Republic of Congo (CD)"/>
+                <StringItem index="46" value="Cook Islands (CK)"/>
+                <StringItem index="47" value="Costa Rica (CR)"/>
+                <StringItem index="48" value="C&#xc3;&#xb4;te d&apos;Ivoire (CI)"/>
+                <StringItem index="49" value="Croatia (HR)"/>
+                <StringItem index="50" value="Cuba (CU)"/>
+                <StringItem index="51" value="Cyprus (CY)"/>
+                <StringItem index="52" value="Czech Republic (CZ)"/>
+                <StringItem index="53" value="Denmark (DK)"/>
+                <StringItem index="54" value="Djibouti (DJ)"/>
+                <StringItem index="55" value="Dominica (DM)"/>
+                <StringItem index="56" value="Dominican Republic (DO)"/>
+                <StringItem index="57" value="Ecuador (EC)"/>
+                <StringItem index="58" value="Egypt (EG)"/>
+                <StringItem index="59" value="El Salvador (SV)"/>
+                <StringItem index="60" value="Equatorial Guinea (GQ)"/>
+                <StringItem index="61" value="Eritrea (ER)"/>
+                <StringItem index="62" value="Estonia (EE)"/>
+                <StringItem index="63" value="Ethiopia (ET)"/>
+                <StringItem index="64" value="Falkland Islands (FK)"/>
+                <StringItem index="65" value="Faroe Islands (FO)"/>
+                <StringItem index="66" value="Fiji (FJ)"/>
+                <StringItem index="67" value="Finland (FI)"/>
+                <StringItem index="68" value="France (FR)"/>
+                <StringItem index="69" value="French Guiana (GF)"/>
+                <StringItem index="70" value="French Polynesia (PF)"/>
+                <StringItem index="71" value="Gabon (GA)"/>
+                <StringItem index="72" value="The Gambia (GM)"/>
+                <StringItem index="73" value="Georgia (GE)"/>
+                <StringItem index="74" value="Germany (DE)"/>
+                <StringItem index="75" value="Ghana (GH)"/>
+                <StringItem index="76" value="Gibraltar (GI)"/>
+                <StringItem index="77" value="Greece (GR)"/>
+                <StringItem index="78" value="Greenland (GL)"/>
+                <StringItem index="79" value="Grenada (GD)"/>
+                <StringItem index="80" value="Guadeloupe (GP)"/>
+                <StringItem index="81" value="Guam (GU)"/>
+                <StringItem index="82" value="Guatemala (GT)"/>
+                <StringItem index="83" value="Guinea (GN)"/>
+                <StringItem index="84" value="Guinea-Bissau (GW)"/>
+                <StringItem index="85" value="Guyana (GY)"/>
+                <StringItem index="86" value="Haiti (HT)"/>
+                <StringItem index="87" value="Vatican City (VA)"/>
+                <StringItem index="88" value="Honduras (HN)"/>
+                <StringItem index="89" value="Hong Kong (HK)"/>
+                <StringItem index="90" value="Hungary (HU)"/>
+                <StringItem index="91" value="Iceland (IS)"/>
+                <StringItem index="92" value="India (IN)"/>
+                <StringItem index="93" value="Indonesia (ID)"/>
+                <StringItem index="94" value="Iran (IR)"/>
+                <StringItem index="95" value="Iraq (IQ)"/>
+                <StringItem index="96" value="Ireland (IE)"/>
+                <StringItem index="97" value="Israel (IL)"/>
+                <StringItem index="98" value="Italy (IT)"/>
+                <StringItem index="99" value="Jamaica (JM)"/>
+                <StringItem index="100" value="Japan (JP)"/>
+                <StringItem index="101" value="Jordan (JO)"/>
+                <StringItem index="102" value="Kazakhstan (KZ)"/>
+                <StringItem index="103" value="Kenya (KE)"/>
+                <StringItem index="104" value="Kiribati (KI)"/>
+                <StringItem index="105" value="South Korea (KR)"/>
+                <StringItem index="106" value="Kuwait (KW)"/>
+                <StringItem index="107" value="Kyrgyzstan (KG)"/>
+                <StringItem index="108" value="Laos (LA)"/>
+                <StringItem index="109" value="Latvia (LV)"/>
+                <StringItem index="110" value="Lebanon (LB)"/>
+                <StringItem index="111" value="Lesotho (LS)"/>
+                <StringItem index="112" value="Liberia (LR)"/>
+                <StringItem index="113" value="Libya (LY)"/>
+                <StringItem index="114" value="Liechtenstein (LI)"/>
+                <StringItem index="115" value="Lithuania (LT)"/>
+                <StringItem index="116" value="Luxembourg (LU)"/>
+                <StringItem index="117" value="Macau (MO)"/>
+                <StringItem index="118" value="Macedonia (MK)"/>
+                <StringItem index="119" value="Madagascar (MG)"/>
+                <StringItem index="120" value="Malawi (MW)"/>
+                <StringItem index="121" value="Malaysia (MY)"/>
+                <StringItem index="122" value="Maldives (MV)"/>
+                <StringItem index="123" value="Mali (ML)"/>
+                <StringItem index="124" value="Malta (MT)"/>
+                <StringItem index="125" value="Marshall Islands (MH)"/>
+                <StringItem index="126" value="Martinique (MQ)"/>
+                <StringItem index="127" value="Mauritania (MR)"/>
+                <StringItem index="128" value="Mauritius (MU)"/>
+                <StringItem index="129" value="Mayotte (YT)"/>
+                <StringItem index="130" value="Mexico (MX)"/>
+                <StringItem index="131" value="Federated States of Micronesia (FM)"/>
+                <StringItem index="132" value="Moldova (MD)"/>
+                <StringItem index="133" value="Monaco (MC)"/>
+                <StringItem index="134" value="Mongolia (MN)"/>
+                <StringItem index="135" value="Montenegro (ME)"/>
+                <StringItem index="136" value="Montserrat (MS)"/>
+                <StringItem index="137" value="Morocco (MA)"/>
+                <StringItem index="138" value="Mozambique (MZ)"/>
+                <StringItem index="139" value="Burma Myanmar (MM)"/>
+                <StringItem index="140" value="Namibia (NA)"/>
+                <StringItem index="141" value="Nauru (NR)"/>
+                <StringItem index="142" value="Nepal (NP)"/>
+                <StringItem index="143" value="Netherlands (NL)"/>
+                <StringItem index="144" value="Netherlands Antilles (AN)"/>
+                <StringItem index="145" value="New Caledonia (NC)"/>
+                <StringItem index="146" value="New Zealand (NZ)"/>
+                <StringItem index="147" value="Nicaragua (NI)"/>
+                <StringItem index="148" value="Niger (NE)"/>
+                <StringItem index="149" value="Nigeria (NG)"/>
+                <StringItem index="150" value="Niue (NU)"/>
+                <StringItem index="151" value="Norfolk Island (NF)"/>
+                <StringItem index="152" value="Northern Mariana Islands (MP)"/>
+                <StringItem index="153" value="Norway (NO)"/>
+                <StringItem index="154" value="Oman (OM)"/>
+                <StringItem index="155" value="Pakistan (PK)"/>
+                <StringItem index="156" value="Palau (PW)"/>
+                <StringItem index="157" value="Palestine (PS)"/>
+                <StringItem index="158" value="Panama (PA)"/>
+                <StringItem index="159" value="Papua New Guinea (PG)"/>
+                <StringItem index="160" value="Paraguay (PY)"/>
+                <StringItem index="161" value="Peru (PE)"/>
+                <StringItem index="162" value="Philippines (PH)"/>
+                <StringItem index="163" value="Poland (PL)"/>
+                <StringItem index="164" value="Portugal (PT)"/>
+                <StringItem index="165" value="Puerto Rico (PR)"/>
+                <StringItem index="166" value="Qatar (QA)"/>
+                <StringItem index="167" value="R&#xc3;&#xa9;union (RE)"/>
+                <StringItem index="168" value="Romania (RO)"/>
+                <StringItem index="169" value="Russia (RU)"/>
+                <StringItem index="170" value="Rwanda (RW)"/>
+                <StringItem index="171" value="Saint Barth&#xc3;&#xa9;lemy (BL)"/>
+                <StringItem index="172" value="Saint Helena (SH)"/>
+                <StringItem index="173" value="Saint Kitts and Nevis (KN)"/>
+                <StringItem index="174" value="St. Lucia (LC)"/>
+                <StringItem index="175" value="Saint Martin (MF)"/>
+                <StringItem index="176" value="Saint Pierre and Miquelon (PM)"/>
+                <StringItem index="177" value="Saint Vincent and the Grenadines (VC)"/>
+                <StringItem index="178" value="Samoa (WS)"/>
+                <StringItem index="179" value="San Marino (SM)"/>
+                <StringItem index="180" value="S&#xc3;&#xa3;o Tom&#xc3;&#xa9; and Pr&#xc3;&#xad;ncipe (ST)"/>
+                <StringItem index="181" value="Saudi Arabia (SA)"/>
+                <StringItem index="182" value="Senegal (SN)"/>
+                <StringItem index="183" value="Serbia (RS)"/>
+                <StringItem index="184" value="Seychelles (SC)"/>
+                <StringItem index="185" value="Sierra Leone (SL)"/>
+                <StringItem index="186" value="Singapore (SG)"/>
+                <StringItem index="187" value="Slovakia (SK)"/>
+                <StringItem index="188" value="Slovenia (SI)"/>
+                <StringItem index="189" value="Solomon Islands (SB)"/>
+                <StringItem index="190" value="Somalia (SO)"/>
+                <StringItem index="191" value="South Africa (ZA)"/>
+                <StringItem index="192" value="Spain (ES)"/>
+                <StringItem index="193" value="Sri Lanka (LK)"/>
+                <StringItem index="194" value="Sudan (SD)"/>
+                <StringItem index="195" value="Suriname (SR)"/>
+                <StringItem index="196" value="Swaziland (SZ)"/>
+                <StringItem index="197" value="Sweden (SE)"/>
+                <StringItem index="198" value="Switzerland (CH)"/>
+                <StringItem index="199" value="Syria (SY)"/>
+                <StringItem index="200" value="Taiwan (TW)"/>
+                <StringItem index="201" value="Tajikistan (TJ)"/>
+                <StringItem index="202" value="Tanzania (TZ)"/>
+                <StringItem index="203" value="Thailand (TH)"/>
+                <StringItem index="204" value="Timor-Leste (TL)"/>
+                <StringItem index="205" value="Togo (TG)"/>
+                <StringItem index="206" value="Tokelau (TK)"/>
+                <StringItem index="207" value="Tonga (TO)"/>
+                <StringItem index="208" value="Trinidad and Tobago (TT)"/>
+                <StringItem index="209" value="Tunisia (TN)"/>
+                <StringItem index="210" value="Turkey (TR)"/>
+                <StringItem index="211" value="Turkmenistan (TM)"/>
+                <StringItem index="212" value="Turks and Caicos Islands (TC)"/>
+                <StringItem index="213" value="Tuvalu (TV)"/>
+                <StringItem index="214" value="Uganda (UG)"/>
+                <StringItem index="215" value="Ukraine (UA)"/>
+                <StringItem index="216" value="United Arab Emirates (AE)"/>
+                <StringItem index="217" value="United Kingdom (GB)"/>
+                <StringItem index="218" value="United States (US)"/>
+                <StringItem index="219" value="Uruguay (UY)"/>
+                <StringItem index="220" value="US Virgin Islands (VI)"/>
+                <StringItem index="221" value="Uzbekistan (UZ)"/>
+                <StringItem index="222" value="Vanuatu (VU)"/>
+                <StringItem index="223" value="Venezuela (VE)"/>
+                <StringItem index="224" value="Vietnam (VN)"/>
+                <StringItem index="225" value="Wallis and Futuna (WF)"/>
+                <StringItem index="226" value="Yemen (YE)"/>
+                <StringItem index="227" value="Zambia (ZM)"/>
+                <StringItem index="228" value="Zimbabwe (ZW)"/>
+              </StringArray>
+            </Property>
+            <Property name="selectedIndex" type="int" value="92"/>
+            <Property name="toolTipText" type="java.lang.String" value="Drop down menu for selection of country of residence."/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="810" y="240" width="210" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="NumberLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="18" style="1"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="text" type="java.lang.String" value="Phone number:"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="570" y="300" width="220" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="DatePicker">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="date" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new java.util.Date()" type="code"/>
+            </Property>
+            <Property name="dateFormatString" type="java.lang.String" value="dd.MM.yyyy"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="18" style="0"/>
+            </Property>
+            <Property name="icon" type="javax.swing.ImageIcon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.ImageIcon(&quot;C:\\Users\\Saksham\\Downloads\\CalenderIcon.png&quot;)" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="DatePickerKeyPressed"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="810" y="180" width="210" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JTextField" name="NumberField">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="14" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Enter Phone Number"/>
+            <Property name="toolTipText" type="java.lang.String" value=" Press Enter after completion."/>
+          </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="NumberFieldFocusGained"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="NumberFieldKeyPressed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="NumberFieldKeyTyped"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="810" y="300" width="210" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="InstructionLabel1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="14" style="0"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="2"/>
+            <Property name="text" type="java.lang.String" value="*Number should be of country of residence."/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="810" y="340" width="290" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JButton" name="Next">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="25" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="NEXT"/>
+            <Property name="toolTipText" type="java.lang.String" value="Next Button"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="NextMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="NextMouseExited"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NextActionPerformed"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="400" y="610" width="200" height="50"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JButton" name="Exit">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="25" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="EXIT"/>
+            <Property name="toolTipText" type="java.lang.String" value="Exit Button"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ExitMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ExitMouseExited"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ExitActionPerformed"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="640" y="610" width="190" height="50"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="Background">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Images/BACKGROUND3.jpg"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="verticalAlignment" type="int" value="3"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="0" y="70" width="1200" height="650"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Images/AlphaWhiteLogoNN.png"/>
+            </Property>
+            <Property name="verticalAlignment" type="int" value="1"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="100" y="15" width="300" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

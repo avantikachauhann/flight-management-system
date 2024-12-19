@@ -1,0 +1,9747 @@
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author Saksham
+ */
+public class Final extends javax.swing.JFrame {
+
+    //Global Declarations
+    int icon;
+    int flagc1 = 0,flagp1 = 0, flagp2 = 0;
+    String email, name, mobilenumber, date;
+    int farekey = 0, totalfare = 0, farekeyN = 0;
+    
+    public static String location = "";  
+    private static int passengers = 1;
+
+    //Global Icons
+    ImageIcon exitIcon = new ImageIcon(getClass().getResource("/Images/EXITPLOGO1.png"));
+    ImageIcon infoIcon = new ImageIcon(getClass().getResource("/Images/InformationIcon.png"));
+    ImageIcon errorIcon = new ImageIcon(getClass().getResource("/Images/ErrorIcon.png"));
+    ImageIcon warningIcon = new ImageIcon(getClass().getResource("/Images/WarningIcon.png"));
+    ImageIcon NoInternetIcon = new ImageIcon(getClass().getResource("Images/NoInternetIcon.png"));
+    ImageIcon successIcon = new ImageIcon(getClass().getResource("Images/SuccessIcon.png"));
+    ImageIcon questionIcon = new ImageIcon(getClass().getResource("Images/QuestionIcon.png"));
+    InputStream imageInputStream = getClass().getResourceAsStream("Images/TitleIcon.png");
+    BufferedImage bufferedImage;
+    
+    //Global Colours:
+    Color lightGray = new Color(240, 240, 240);  
+    
+    //Global StyledDocument:
+    StyledDocument doc;
+
+    //Global Arrays:
+    String[] list = {"AMS","BAH","PEK","BNE","CAI", "CPT","DMM","DEL","DXB","DUR","FRA","JNB",
+                    "LAX","LHR","MRU","MED","MEX","MUC","MCT","JFK","CDG","SCL","GRU","PVG","SIN"};
+    String[] names = {"Amsterdam"			,            "Bahrain"   		,
+            "Beijing"   	 	,            "Brisbane"  	 	,            "Cairo"			 ,
+            "Cape Town"    		,            "Dammam"    		,            "Delhi"   	 		,
+            "Dubai"    			,            "Durban"    		,            "Frankfurt"    	,
+            "Johannesburg"    	,            "Los Angeles"    	,            "London"    		,
+            "Mauritius"    		,            "Medina"   	 	,            "Mexico City"    	,
+            "Munich"    		,            "Muscat"    		,            "New York"    		,
+            "Paris"    			,            "Santiago"    		,            "São Paulo"    		,
+            "Shanghai"    		,            "Singapore"};
+
+    {
+        try {
+            bufferedImage = ImageIO.read(imageInputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Creates new form Final
+     * @param name
+     * @param emailID
+     * @throws java.net.URISyntaxException
+     * @throws java.text.ParseException
+     */
+    public Final(String name, String emailID, String location) throws URISyntaxException{
+        if(name.equals("") && emailID.equals("")){
+            name = "Saksham Chauhan";
+            emailID = "adidrcool@gmail.com";
+        }
+        
+        email = emailID;
+        initComponents();
+        myinitComponents();
+        updateFlightDashboard();
+   
+        String[] Details = Database.getUserDetails(email);
+        settingDetails(Details);
+        setDOB(date);
+
+        if(!location.equals("") && location.length() == 3){
+            int index = Arrays.asList(list).indexOf(location);
+            CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+            cardLayout.show(getContentPane(), "CARD2");
+            Country2Combo.setSelectedIndex(index);
+            LabelPanel2.setVisible(false);
+        }else if(location.equals("CODERED")){
+            CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+            cardLayout.show(getContentPane(), "CARD5");
+            LabelPanel5.setVisible(false);
+        }
+        
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        GenderMGroup = new javax.swing.ButtonGroup();
+        MealButtonGroup = new javax.swing.ButtonGroup();
+        TypeButtonGroup = new javax.swing.ButtonGroup();
+        Meal1 = new javax.swing.ButtonGroup();
+        Meal2 = new javax.swing.ButtonGroup();
+        Type1 = new javax.swing.ButtonGroup();
+        Type2 = new javax.swing.ButtonGroup();
+        NoInternet = new javax.swing.JDialog();
+        HomePanel = new javax.swing.JPanel();
+        TopPanel1 = new javax.swing.JPanel();
+        MenuLabel1 = new javax.swing.JLabel();
+        LogoLabel1 = new javax.swing.JLabel();
+        Logout1 = new javax.swing.JLabel();
+        Exit1 = new javax.swing.JLabel();
+        LayeredPane1 = new javax.swing.JLayeredPane();
+        IconPanel1 = new javax.swing.JPanel();
+        DashIcon1 = new javax.swing.JLabel();
+        BookIcon1 = new javax.swing.JLabel();
+        ManageIcon1 = new javax.swing.JLabel();
+        ExperienceIcon1 = new javax.swing.JLabel();
+        WhereweFlyIcon1 = new javax.swing.JLabel();
+        HelpIcon1 = new javax.swing.JLabel();
+        SettingsIcon1 = new javax.swing.JLabel();
+        LabelPanel1 = new javax.swing.JPanel();
+        DashboardLabel1 = new javax.swing.JLabel();
+        BookLabel1 = new javax.swing.JLabel();
+        ManageLabel1 = new javax.swing.JLabel();
+        ExperienceLabel1 = new javax.swing.JLabel();
+        WhereweFlyLabel1 = new javax.swing.JLabel();
+        HelpLabel1 = new javax.swing.JLabel();
+        SettingsLabel1 = new javax.swing.JLabel();
+        ContentPanel1 = new javax.swing.JPanel();
+        Avatar = new javax.swing.JLabel();
+        WelcomeLabel1 = new javax.swing.JLabel();
+        FullNameTLabel = new javax.swing.JLabel();
+        FullNameBLabel = new javax.swing.JLabel();
+        EmailTLabel = new javax.swing.JLabel();
+        EmailBLabel = new javax.swing.JLabel();
+        MobileTLabel = new javax.swing.JLabel();
+        MobileBLabel = new javax.swing.JLabel();
+        DOBTLabel = new javax.swing.JLabel();
+        DOBBLabel = new javax.swing.JLabel();
+        InfotainmentPanel = new javax.swing.JPanel();
+        FlightsDisplay = new javax.swing.JPanel();
+        UpcomingFlightsLabel = new javax.swing.JLabel();
+        TableNScrollPane = new javax.swing.JScrollPane();
+        FlightNDisplayTable = new javax.swing.JTable();
+        TipsPanel = new javax.swing.JPanel();
+        TipsLabel = new javax.swing.JLabel();
+        BookPanel = new javax.swing.JPanel();
+        TopPanel2 = new javax.swing.JPanel();
+        MenuLabel2 = new javax.swing.JLabel();
+        LogoLabel2 = new javax.swing.JLabel();
+        Logout2 = new javax.swing.JLabel();
+        Exit2 = new javax.swing.JLabel();
+        LayeredPane2 = new javax.swing.JLayeredPane();
+        IconPanel2 = new javax.swing.JPanel();
+        DashIcon2 = new javax.swing.JLabel();
+        BookIcon2 = new javax.swing.JLabel();
+        ManageIcon2 = new javax.swing.JLabel();
+        ExperienceIcon2 = new javax.swing.JLabel();
+        WhereweFlyIcon2 = new javax.swing.JLabel();
+        HelpIcon2 = new javax.swing.JLabel();
+        SettingsIcon2 = new javax.swing.JLabel();
+        LabelPanel2 = new javax.swing.JPanel();
+        DashboardLabel2 = new javax.swing.JLabel();
+        BookLabel2 = new javax.swing.JLabel();
+        ManageLabel2 = new javax.swing.JLabel();
+        ExperienceLabel2 = new javax.swing.JLabel();
+        WhereweFlyLabel2 = new javax.swing.JLabel();
+        HelpLabel2 = new javax.swing.JLabel();
+        SettingsLabel2 = new javax.swing.JLabel();
+        ContentPanel2 = new javax.swing.JPanel();
+        Home2 = new javax.swing.JPanel();
+        Header1 = new javax.swing.JLabel();
+        Country1Combo = new javax.swing.JComboBox<>();
+        Header2 = new javax.swing.JLabel();
+        Country2Combo = new javax.swing.JComboBox<>();
+        Header3 = new javax.swing.JLabel();
+        DepartingDate = new com.toedter.calendar.JDateChooser();
+        Hyphen = new javax.swing.JSeparator();
+        Header4 = new javax.swing.JLabel();
+        ReturningDate = new com.toedter.calendar.JDateChooser();
+        Header5 = new javax.swing.JLabel();
+        AdultsLabel = new javax.swing.JLabel();
+        AMinus = new javax.swing.JLabel();
+        ATextField = new javax.swing.JTextField();
+        FieldUnderline1 = new javax.swing.JSeparator();
+        APlus = new javax.swing.JLabel();
+        VerticalLine = new javax.swing.JSeparator();
+        KidsLabel = new javax.swing.JLabel();
+        KMinus = new javax.swing.JLabel();
+        KTextField = new javax.swing.JTextField();
+        FieldUnderline2 = new javax.swing.JSeparator();
+        KPlus = new javax.swing.JLabel();
+        Header6 = new javax.swing.JLabel();
+        ClassCombo = new javax.swing.JComboBox<>();
+        SearchFlights = new javax.swing.JLabel();
+        FlexibilityCheckbox = new javax.swing.JCheckBox();
+        BookingInstruction = new javax.swing.JLabel();
+        InstructionsBookFlights = new javax.swing.JTextArea();
+        BackgroundPic1 = new javax.swing.JLabel();
+        Result = new javax.swing.JPanel();
+        DisplayPanel = new javax.swing.JPanel();
+        TablePanel = new javax.swing.JPanel();
+        TableScrollPane = new javax.swing.JScrollPane();
+        FlightDisplayTable = new javax.swing.JTable();
+        NoResultPanel = new javax.swing.JPanel();
+        NoResultLabel = new javax.swing.JLabel();
+        NoFlightSelected = new javax.swing.JPanel();
+        Astronaut = new javax.swing.JLabel();
+        NoFlightSelectedLabel = new javax.swing.JLabel();
+        BackLabel = new javax.swing.JLabel();
+        NextLabel = new javax.swing.JLabel();
+        BackgroundPic2 = new javax.swing.JLabel();
+        Result2 = new javax.swing.JPanel();
+        ResultDisplayPanel = new javax.swing.JPanel();
+        MainR2Panel = new javax.swing.JPanel();
+        DepartureFlightsTableLabel = new javax.swing.JLabel();
+        ArrivalFlightsTableLabel = new javax.swing.JLabel();
+        DisplayPanel1 = new javax.swing.JPanel();
+        TablePanel1 = new javax.swing.JPanel();
+        TableScrollPane1 = new javax.swing.JScrollPane();
+        FlightDisplayTable1 = new javax.swing.JTable();
+        NoFlightSelected1 = new javax.swing.JPanel();
+        Astronaut1 = new javax.swing.JLabel();
+        NoFlightSelectedLabel1 = new javax.swing.JLabel();
+        DisplayPanel2 = new javax.swing.JPanel();
+        TablePanel2 = new javax.swing.JPanel();
+        TableScrollPane2 = new javax.swing.JScrollPane();
+        FlightDisplayTable2 = new javax.swing.JTable();
+        NoFlightSelected2 = new javax.swing.JPanel();
+        Astronaut2 = new javax.swing.JLabel();
+        NoFlightSelectedLabel2 = new javax.swing.JLabel();
+        NoFlightR2Panel = new javax.swing.JPanel();
+        NoFlightR2Label = new javax.swing.JLabel();
+        NoFlightR2Image = new javax.swing.JLabel();
+        Back2WLabel = new javax.swing.JLabel();
+        Next2WLabel = new javax.swing.JLabel();
+        SearchBackground2 = new javax.swing.JLabel();
+        Confimation = new javax.swing.JPanel();
+        ConfirmationHeading = new javax.swing.JLabel();
+        FlightCodeLabel = new javax.swing.JLabel();
+        FlightCodeField = new javax.swing.JLabel();
+        FlightClassLabel = new javax.swing.JLabel();
+        FlightClassField = new javax.swing.JLabel();
+        FlightPassengersField = new javax.swing.JLabel();
+        FlightPassengersLabel = new javax.swing.JLabel();
+        DetailsDisplay = new javax.swing.JPanel();
+        DirectPanel = new javax.swing.JPanel();
+        FromDLabel = new javax.swing.JLabel();
+        AnimationDLabel = new javax.swing.JLabel();
+        ToDLabel = new javax.swing.JLabel();
+        IndirectPanel = new javax.swing.JPanel();
+        FromILabel = new javax.swing.JLabel();
+        AnimationILabel1 = new javax.swing.JLabel();
+        ConnectingILabel = new javax.swing.JLabel();
+        AnimationILabel2 = new javax.swing.JLabel();
+        ToILabel = new javax.swing.JLabel();
+        SourceLabel = new javax.swing.JLabel();
+        DestinationLabel = new javax.swing.JLabel();
+        ISLF1 = new javax.swing.JLabel();
+        ISLF2 = new javax.swing.JLabel();
+        ISLF3 = new javax.swing.JLabel();
+        ISLF4 = new javax.swing.JLabel();
+        ISLF5 = new javax.swing.JLabel();
+        ISL1 = new javax.swing.JLabel();
+        ISL2 = new javax.swing.JLabel();
+        ISL3 = new javax.swing.JLabel();
+        ISL4 = new javax.swing.JLabel();
+        ISL5 = new javax.swing.JLabel();
+        IDLF1 = new javax.swing.JLabel();
+        IDLF2 = new javax.swing.JLabel();
+        IDLF3 = new javax.swing.JLabel();
+        IDLF4 = new javax.swing.JLabel();
+        IDLF5 = new javax.swing.JLabel();
+        IDL1 = new javax.swing.JLabel();
+        IDL2 = new javax.swing.JLabel();
+        IDL3 = new javax.swing.JLabel();
+        IDL4 = new javax.swing.JLabel();
+        IDL5 = new javax.swing.JLabel();
+        RCheckBox = new javax.swing.JCheckBox();
+        MealsLabel = new javax.swing.JLabel();
+        InclusiveRadioButton = new javax.swing.JRadioButton();
+        ExclusiveRadioButton = new javax.swing.JRadioButton();
+        MealTypeLabel = new javax.swing.JLabel();
+        MealRadioButton1 = new javax.swing.JRadioButton();
+        MealRadioButton2 = new javax.swing.JRadioButton();
+        ReturnFlightsButton = new javax.swing.JButton();
+        ContinueFlightsButton = new javax.swing.JButton();
+        BottomInstructionBookingLabel = new javax.swing.JLabel();
+        Confirmation2ScrollPane = new javax.swing.JScrollPane();
+        Confirmation2 = new javax.swing.JPanel();
+        ConfirmationHeading1 = new javax.swing.JLabel();
+        FlightClassLabel1 = new javax.swing.JLabel();
+        FlightClassField1 = new javax.swing.JLabel();
+        FlightPassengersLabel1 = new javax.swing.JLabel();
+        FlightPassengersField1 = new javax.swing.JLabel();
+        FirstFlight = new javax.swing.JPanel();
+        FlightCodeLabel1 = new javax.swing.JLabel();
+        FlightCodeField1 = new javax.swing.JLabel();
+        DetailsDisplay1 = new javax.swing.JPanel();
+        DirectPanel2 = new javax.swing.JPanel();
+        FromDLabel2 = new javax.swing.JLabel();
+        AnimationDLabel2 = new javax.swing.JLabel();
+        ToDLabel2 = new javax.swing.JLabel();
+        IndirectPanel2 = new javax.swing.JPanel();
+        FromILabel2 = new javax.swing.JLabel();
+        AnimationILabel5 = new javax.swing.JLabel();
+        ConnectingILabel2 = new javax.swing.JLabel();
+        AnimationILabel6 = new javax.swing.JLabel();
+        ToILabel2 = new javax.swing.JLabel();
+        SourceLabel2 = new javax.swing.JLabel();
+        DestinationLabel2 = new javax.swing.JLabel();
+        IDLF11 = new javax.swing.JLabel();
+        IDLF12 = new javax.swing.JLabel();
+        IDLF13 = new javax.swing.JLabel();
+        IDLF14 = new javax.swing.JLabel();
+        IDLF15 = new javax.swing.JLabel();
+        ISLF11 = new javax.swing.JLabel();
+        ISLF12 = new javax.swing.JLabel();
+        ISLF13 = new javax.swing.JLabel();
+        ISLF14 = new javax.swing.JLabel();
+        ISLF15 = new javax.swing.JLabel();
+        S2W1_1 = new javax.swing.JLabel();
+        S2W1_2 = new javax.swing.JLabel();
+        S2W1_3 = new javax.swing.JLabel();
+        S2W1_4 = new javax.swing.JLabel();
+        S2W1_5 = new javax.swing.JLabel();
+        D2W1_1 = new javax.swing.JLabel();
+        D2W1_2 = new javax.swing.JLabel();
+        D2W1_3 = new javax.swing.JLabel();
+        D2W1_4 = new javax.swing.JLabel();
+        D2W1_5 = new javax.swing.JLabel();
+        MealsLabel1 = new javax.swing.JLabel();
+        InclusiveRadioButton1 = new javax.swing.JRadioButton();
+        ExclusiveRadioButton1 = new javax.swing.JRadioButton();
+        MealTypeLabel1 = new javax.swing.JLabel();
+        MealRadioButton3 = new javax.swing.JRadioButton();
+        MealRadioButton4 = new javax.swing.JRadioButton();
+        SecondFlight = new javax.swing.JPanel();
+        FlightCodeLabel2 = new javax.swing.JLabel();
+        FlightCodeField2 = new javax.swing.JLabel();
+        DetailsDisplay2 = new javax.swing.JPanel();
+        DirectPanel3 = new javax.swing.JPanel();
+        FromDLabel3 = new javax.swing.JLabel();
+        AnimationDLabel3 = new javax.swing.JLabel();
+        ToDLabel3 = new javax.swing.JLabel();
+        IndirectPanel3 = new javax.swing.JPanel();
+        FromILabel3 = new javax.swing.JLabel();
+        AnimationILabel7 = new javax.swing.JLabel();
+        ConnectingILabel3 = new javax.swing.JLabel();
+        AnimationILabel8 = new javax.swing.JLabel();
+        ToILabel3 = new javax.swing.JLabel();
+        SourceLabel3 = new javax.swing.JLabel();
+        DestinationLabel3 = new javax.swing.JLabel();
+        IDLF16 = new javax.swing.JLabel();
+        IDLF17 = new javax.swing.JLabel();
+        IDLF18 = new javax.swing.JLabel();
+        IDLF19 = new javax.swing.JLabel();
+        IDLF20 = new javax.swing.JLabel();
+        ISLF16 = new javax.swing.JLabel();
+        ISLF17 = new javax.swing.JLabel();
+        ISLF18 = new javax.swing.JLabel();
+        ISLF19 = new javax.swing.JLabel();
+        ISLF20 = new javax.swing.JLabel();
+        S2W1_6 = new javax.swing.JLabel();
+        S2W1_7 = new javax.swing.JLabel();
+        S2W1_8 = new javax.swing.JLabel();
+        S2W1_9 = new javax.swing.JLabel();
+        S2W1_10 = new javax.swing.JLabel();
+        D2W1_6 = new javax.swing.JLabel();
+        D2W1_7 = new javax.swing.JLabel();
+        D2W1_8 = new javax.swing.JLabel();
+        D2W1_9 = new javax.swing.JLabel();
+        D2W1_10 = new javax.swing.JLabel();
+        MealsLabel2 = new javax.swing.JLabel();
+        InclusiveRadioButton2 = new javax.swing.JRadioButton();
+        ExclusiveRadioButton2 = new javax.swing.JRadioButton();
+        MealTypeLabel2 = new javax.swing.JLabel();
+        MealRadioButton5 = new javax.swing.JRadioButton();
+        MealRadioButton6 = new javax.swing.JRadioButton();
+        RCheckBox1 = new javax.swing.JCheckBox();
+        ReturnFlightsButton1 = new javax.swing.JButton();
+        ContinueFlightsButton1 = new javax.swing.JButton();
+        BottomInstructionBookingLabel2 = new javax.swing.JLabel();
+        PaymentShow = new javax.swing.JPanel();
+        PaymentWalletAnimation = new javax.swing.JLabel();
+        NextNLabel = new javax.swing.JButton();
+        BackNLabel = new javax.swing.JButton();
+        TotalAmountLabel = new javax.swing.JLabel();
+        TotalAmountField = new javax.swing.JLabel();
+        FareBreakupPanel = new javax.swing.JPanel();
+        BaseFareLabel = new javax.swing.JLabel();
+        MealChargesLabel = new javax.swing.JLabel();
+        RefundableLabel = new javax.swing.JLabel();
+        RefundableLabel1 = new javax.swing.JLabel();
+        RefundableLabel2 = new javax.swing.JLabel();
+        KidsFareInstruction = new javax.swing.JLabel();
+        FareField1 = new javax.swing.JLabel();
+        FareField2 = new javax.swing.JLabel();
+        FareField3 = new javax.swing.JLabel();
+        FareField4 = new javax.swing.JLabel();
+        FareField5 = new javax.swing.JLabel();
+        FareBreakupLabel = new javax.swing.JLabel();
+        ShowHideLabel = new javax.swing.JLabel();
+        PaymentShow2 = new javax.swing.JPanel();
+        PaymentWalletAnimation1 = new javax.swing.JLabel();
+        NextNLabel1 = new javax.swing.JButton();
+        BackNLabel1 = new javax.swing.JButton();
+        TotalAmountLabel1 = new javax.swing.JLabel();
+        TotalAmountField1 = new javax.swing.JLabel();
+        FareBreakupPanel1 = new javax.swing.JPanel();
+        BaseFareLabel1 = new javax.swing.JLabel();
+        MealChargesLabel1 = new javax.swing.JLabel();
+        RefundableLabel3 = new javax.swing.JLabel();
+        RefundableLabel4 = new javax.swing.JLabel();
+        RefundableLabel5 = new javax.swing.JLabel();
+        RefundableLabel6 = new javax.swing.JLabel();
+        KidsFareInstruction1 = new javax.swing.JLabel();
+        FareField6 = new javax.swing.JLabel();
+        FareField7 = new javax.swing.JLabel();
+        FareField8 = new javax.swing.JLabel();
+        FareField9 = new javax.swing.JLabel();
+        FareField10 = new javax.swing.JLabel();
+        FareField11 = new javax.swing.JLabel();
+        FareBreakupLabel1 = new javax.swing.JLabel();
+        ShowHideLabel1 = new javax.swing.JLabel();
+        PaymentPage = new javax.swing.JPanel();
+        PaymentAnimation = new javax.swing.JLabel();
+        MailSentLabel = new javax.swing.JLabel();
+        BookingCode = new javax.swing.JLabel();
+        PaymentSuccess = new javax.swing.JLabel();
+        ManagePanel = new javax.swing.JPanel();
+        TopPanel3 = new javax.swing.JPanel();
+        MenuLabel3 = new javax.swing.JLabel();
+        LogoLabel3 = new javax.swing.JLabel();
+        Logout3 = new javax.swing.JLabel();
+        Exit3 = new javax.swing.JLabel();
+        LayeredPane3 = new javax.swing.JLayeredPane();
+        IconPanel3 = new javax.swing.JPanel();
+        DashIcon3 = new javax.swing.JLabel();
+        BookIcon3 = new javax.swing.JLabel();
+        ManageIcon3 = new javax.swing.JLabel();
+        ExperienceIcon3 = new javax.swing.JLabel();
+        WhereweFlyIcon3 = new javax.swing.JLabel();
+        HelpIcon3 = new javax.swing.JLabel();
+        SettingsIcon3 = new javax.swing.JLabel();
+        LabelPanel3 = new javax.swing.JPanel();
+        DashboardLabel3 = new javax.swing.JLabel();
+        BookLabel3 = new javax.swing.JLabel();
+        ManageLabel3 = new javax.swing.JLabel();
+        ExperienceLabel3 = new javax.swing.JLabel();
+        WhereweFlyLabel3 = new javax.swing.JLabel();
+        HelpLabel3 = new javax.swing.JLabel();
+        SettingsLabel3 = new javax.swing.JLabel();
+        ContentPanel3 = new javax.swing.JPanel();
+        MHomePanel = new javax.swing.JPanel();
+        RefernceNumberMLabel = new javax.swing.JLabel();
+        RefernceNumberMField = new javax.swing.JTextField();
+        MUnderline = new javax.swing.JSeparator();
+        InstructionMLabel = new javax.swing.JLabel();
+        SearchRefernceLabel = new javax.swing.JLabel();
+        SearchAllLabel = new javax.swing.JLabel();
+        ManageDPanel = new javax.swing.JLabel();
+        ManageBackground = new javax.swing.JLabel();
+        NoRowPanel = new javax.swing.JPanel();
+        NoFlightMSelectedLabel = new javax.swing.JLabel();
+        AstronautM = new javax.swing.JLabel();
+        NoFlightMPanel = new javax.swing.JPanel();
+        NoFlightMLabel = new javax.swing.JLabel();
+        MSearchAllPanel = new javax.swing.JPanel();
+        TableNScrollPane1 = new javax.swing.JScrollPane();
+        FlightMDisplayTable = new javax.swing.JTable();
+        BackMLabel = new javax.swing.JLabel();
+        NextMLabel = new javax.swing.JLabel();
+        MResult1Panel = new javax.swing.JPanel();
+        FlightDetails = new javax.swing.JLabel();
+        ULLabel1 = new javax.swing.JLabel();
+        ULLabel2 = new javax.swing.JLabel();
+        ULLabel3 = new javax.swing.JLabel();
+        ULLabel4 = new javax.swing.JLabel();
+        ULLabel5 = new javax.swing.JLabel();
+        ULLabel6 = new javax.swing.JLabel();
+        Value1 = new javax.swing.JLabel();
+        Value2 = new javax.swing.JLabel();
+        Value3 = new javax.swing.JLabel();
+        Value4 = new javax.swing.JLabel();
+        Value5 = new javax.swing.JLabel();
+        Value6 = new javax.swing.JLabel();
+        DetailsNDisplay = new javax.swing.JPanel();
+        DirectPanel1 = new javax.swing.JPanel();
+        FromDLabel1 = new javax.swing.JLabel();
+        AnimationDLabel1 = new javax.swing.JLabel();
+        ToDLabel1 = new javax.swing.JLabel();
+        IndirectPanel1 = new javax.swing.JPanel();
+        FromILabel1 = new javax.swing.JLabel();
+        AnimationILabel3 = new javax.swing.JLabel();
+        ConnectingILabel1 = new javax.swing.JLabel();
+        AnimationILabel4 = new javax.swing.JLabel();
+        ToILabel1 = new javax.swing.JLabel();
+        SourceLabel1 = new javax.swing.JLabel();
+        DestinationLabel1 = new javax.swing.JLabel();
+        ISLF6 = new javax.swing.JLabel();
+        ISLF7 = new javax.swing.JLabel();
+        ISLF8 = new javax.swing.JLabel();
+        ISLF9 = new javax.swing.JLabel();
+        ISLF10 = new javax.swing.JLabel();
+        S1 = new javax.swing.JLabel();
+        S2 = new javax.swing.JLabel();
+        S3 = new javax.swing.JLabel();
+        S4 = new javax.swing.JLabel();
+        S5 = new javax.swing.JLabel();
+        IDLF6 = new javax.swing.JLabel();
+        IDLF7 = new javax.swing.JLabel();
+        IDLF8 = new javax.swing.JLabel();
+        IDLF9 = new javax.swing.JLabel();
+        IDLF10 = new javax.swing.JLabel();
+        D1 = new javax.swing.JLabel();
+        D2 = new javax.swing.JLabel();
+        D3 = new javax.swing.JLabel();
+        D4 = new javax.swing.JLabel();
+        D5 = new javax.swing.JLabel();
+        BottomInstructionBookingLabel1 = new javax.swing.JLabel();
+        ULLabel7 = new javax.swing.JLabel();
+        ULLabel8 = new javax.swing.JLabel();
+        ULLabel9 = new javax.swing.JLabel();
+        Value7 = new javax.swing.JLabel();
+        Value8 = new javax.swing.JLabel();
+        Value9 = new javax.swing.JLabel();
+        CancelthisFlight = new javax.swing.JButton();
+        BackMFlightButton = new javax.swing.JButton();
+        ExperiencePanel = new javax.swing.JPanel();
+        TopPanel4 = new javax.swing.JPanel();
+        MenuLabel4 = new javax.swing.JLabel();
+        LogoLabel4 = new javax.swing.JLabel();
+        Logout4 = new javax.swing.JLabel();
+        Exit4 = new javax.swing.JLabel();
+        LayeredPane4 = new javax.swing.JLayeredPane();
+        IconPanel4 = new javax.swing.JPanel();
+        DashIcon4 = new javax.swing.JLabel();
+        BookIcon4 = new javax.swing.JLabel();
+        ManageIcon4 = new javax.swing.JLabel();
+        ExperienceIcon4 = new javax.swing.JLabel();
+        WhereweFlyIcon4 = new javax.swing.JLabel();
+        HelpIcon4 = new javax.swing.JLabel();
+        SettingsIcon4 = new javax.swing.JLabel();
+        LabelPanel4 = new javax.swing.JPanel();
+        DashboardLabel4 = new javax.swing.JLabel();
+        BookLabel4 = new javax.swing.JLabel();
+        ManageLabel4 = new javax.swing.JLabel();
+        ExperienceLabel4 = new javax.swing.JLabel();
+        WhereweFlyLabel4 = new javax.swing.JLabel();
+        HelpLabel4 = new javax.swing.JLabel();
+        SettingsLabel4 = new javax.swing.JLabel();
+        ContentPanel4 = new javax.swing.JPanel();
+        EImage1 = new javax.swing.JLabel();
+        EImage2 = new javax.swing.JLabel();
+        EImage3 = new javax.swing.JLabel();
+        FirstLabel = new javax.swing.JLabel();
+        BusinessLabel = new javax.swing.JLabel();
+        EconomyLabel = new javax.swing.JLabel();
+        WhereweFlyPanel = new javax.swing.JPanel();
+        TopPanel5 = new javax.swing.JPanel();
+        MenuLabel5 = new javax.swing.JLabel();
+        LogoLabel5 = new javax.swing.JLabel();
+        Back5 = new javax.swing.JLabel();
+        Logout5 = new javax.swing.JLabel();
+        Exit5 = new javax.swing.JLabel();
+        LayeredPane5 = new javax.swing.JLayeredPane();
+        IconPanel5 = new javax.swing.JPanel();
+        DashIcon5 = new javax.swing.JLabel();
+        BookIcon5 = new javax.swing.JLabel();
+        ManageIcon5 = new javax.swing.JLabel();
+        ExperienceIcon5 = new javax.swing.JLabel();
+        WhereweFlyIcon5 = new javax.swing.JLabel();
+        HelpIcon5 = new javax.swing.JLabel();
+        SettingsIcon5 = new javax.swing.JLabel();
+        LabelPanel5 = new javax.swing.JPanel();
+        DashboardLabel5 = new javax.swing.JLabel();
+        BookLabel5 = new javax.swing.JLabel();
+        ManageLabel5 = new javax.swing.JLabel();
+        ExperienceLabel5 = new javax.swing.JLabel();
+        WhereweFlyLabel5 = new javax.swing.JLabel();
+        HelpLabel5 = new javax.swing.JLabel();
+        SettingsLabel5 = new javax.swing.JLabel();
+        ContentPanel5 = new javax.swing.JPanel();
+        Home5 = new javax.swing.JPanel();
+        InstructionsLabel = new javax.swing.JLabel();
+        CountryLabel1 = new javax.swing.JLabel();
+        CountryPicLabel1 = new javax.swing.JLabel();
+        CountryLabel2 = new javax.swing.JLabel();
+        CountryPicLabel2 = new javax.swing.JLabel();
+        CountryLabel3 = new javax.swing.JLabel();
+        CountryPicLabel3 = new javax.swing.JLabel();
+        CountryLabel4 = new javax.swing.JLabel();
+        CountryPicLabel4 = new javax.swing.JLabel();
+        CountryLabel5 = new javax.swing.JLabel();
+        CountryPicLabel5 = new javax.swing.JLabel();
+        HelpPanel = new javax.swing.JPanel();
+        TopPanel6 = new javax.swing.JPanel();
+        MenuLabel6 = new javax.swing.JLabel();
+        LogoLabel6 = new javax.swing.JLabel();
+        Logout6 = new javax.swing.JLabel();
+        Exit6 = new javax.swing.JLabel();
+        LayeredPane6 = new javax.swing.JLayeredPane();
+        IconPanel6 = new javax.swing.JPanel();
+        DashIcon6 = new javax.swing.JLabel();
+        BookIcon6 = new javax.swing.JLabel();
+        ManageIcon6 = new javax.swing.JLabel();
+        ExperienceIcon6 = new javax.swing.JLabel();
+        WhereweFlyIcon6 = new javax.swing.JLabel();
+        HelpIcon6 = new javax.swing.JLabel();
+        SettingsIcon6 = new javax.swing.JLabel();
+        LabelPanel6 = new javax.swing.JPanel();
+        DashboardLabel6 = new javax.swing.JLabel();
+        BookLabel6 = new javax.swing.JLabel();
+        ManageLabel6 = new javax.swing.JLabel();
+        ExperienceLabel6 = new javax.swing.JLabel();
+        WhereweFlyLabel6 = new javax.swing.JLabel();
+        HelpLabel6 = new javax.swing.JLabel();
+        SettingsLabel6 = new javax.swing.JLabel();
+        ContentPanel6 = new javax.swing.JPanel();
+        Home6 = new javax.swing.JPanel();
+        HelpHeader = new javax.swing.JLabel();
+        QPanel1 = new javax.swing.JPanel();
+        QLabel1 = new javax.swing.JLabel();
+        QPanel2 = new javax.swing.JPanel();
+        QLabel2 = new javax.swing.JLabel();
+        QPanel3 = new javax.swing.JPanel();
+        QLabel3 = new javax.swing.JLabel();
+        QPanel4 = new javax.swing.JPanel();
+        QLabel4 = new javax.swing.JLabel();
+        QPanel5 = new javax.swing.JPanel();
+        QLabel5 = new javax.swing.JLabel();
+        QPanel6 = new javax.swing.JPanel();
+        QLabel6 = new javax.swing.JLabel();
+        QPanel7 = new javax.swing.JPanel();
+        QLabel7 = new javax.swing.JLabel();
+        QPanel8 = new javax.swing.JPanel();
+        QLabel8 = new javax.swing.JLabel();
+        QPanel9 = new javax.swing.JPanel();
+        QLabel9 = new javax.swing.JLabel();
+        QPanel10 = new javax.swing.JPanel();
+        QLabel10 = new javax.swing.JLabel();
+        SettingsPanel = new javax.swing.JPanel();
+        TopPanel7 = new javax.swing.JPanel();
+        MenuLabel7 = new javax.swing.JLabel();
+        LogoLabel7 = new javax.swing.JLabel();
+        Logout7 = new javax.swing.JLabel();
+        Exit7 = new javax.swing.JLabel();
+        LayeredPane7 = new javax.swing.JLayeredPane();
+        IconPanel7 = new javax.swing.JPanel();
+        DashIcon7 = new javax.swing.JLabel();
+        BookIcon7 = new javax.swing.JLabel();
+        ManageIcon7 = new javax.swing.JLabel();
+        ExperienceIcon7 = new javax.swing.JLabel();
+        WhereweFlyIcon7 = new javax.swing.JLabel();
+        HelpIcon7 = new javax.swing.JLabel();
+        SettingsIcon7 = new javax.swing.JLabel();
+        LabelPanel7 = new javax.swing.JPanel();
+        DashboardLabel7 = new javax.swing.JLabel();
+        BookLabel7 = new javax.swing.JLabel();
+        ManageLabel7 = new javax.swing.JLabel();
+        ExperienceLabel7 = new javax.swing.JLabel();
+        WhereweFlyLabel7 = new javax.swing.JLabel();
+        HelpLabel7 = new javax.swing.JLabel();
+        SettingsLabel7 = new javax.swing.JLabel();
+        ContentPanel7 = new javax.swing.JPanel();
+        Panel7_1 = new javax.swing.JPanel();
+        Avatar1 = new javax.swing.JLabel();
+        Password1 = new javax.swing.JLabel();
+        Number1 = new javax.swing.JLabel();
+        DateBirth1 = new javax.swing.JLabel();
+        Country1 = new javax.swing.JLabel();
+        HeaderMenu1 = new javax.swing.JLabel();
+        Save1 = new javax.swing.JLabel();
+        Instructions1 = new javax.swing.JLabel();
+        AvatarPanel = new javax.swing.JPanel();
+        Icon1 = new javax.swing.JRadioButton();
+        Icon2 = new javax.swing.JRadioButton();
+        Icon3 = new javax.swing.JRadioButton();
+        Icon4 = new javax.swing.JRadioButton();
+        Icon5 = new javax.swing.JRadioButton();
+        Icon6 = new javax.swing.JRadioButton();
+        Icon7 = new javax.swing.JRadioButton();
+        Icon8 = new javax.swing.JRadioButton();
+        Icon9 = new javax.swing.JRadioButton();
+        Icon10 = new javax.swing.JRadioButton();
+        Icon11 = new javax.swing.JRadioButton();
+        Icon12 = new javax.swing.JRadioButton();
+        Icon13 = new javax.swing.JRadioButton();
+        Icon14 = new javax.swing.JRadioButton();
+        Icon15 = new javax.swing.JRadioButton();
+        Panel7_2 = new javax.swing.JPanel();
+        Avatar2 = new javax.swing.JLabel();
+        Password2 = new javax.swing.JLabel();
+        Number2 = new javax.swing.JLabel();
+        DateBirth2 = new javax.swing.JLabel();
+        Country2 = new javax.swing.JLabel();
+        HeaderMenu2 = new javax.swing.JLabel();
+        Save2 = new javax.swing.JLabel();
+        Instructions2 = new javax.swing.JLabel();
+        CurrentLabel = new javax.swing.JLabel();
+        CurrentPassword = new javax.swing.JPasswordField();
+        ViewC1 = new javax.swing.JLabel();
+        UL1 = new javax.swing.JLabel();
+        InstructionLabel1 = new javax.swing.JLabel();
+        NewPLabel1 = new javax.swing.JLabel();
+        NewPassword1 = new javax.swing.JPasswordField();
+        ViewP1 = new javax.swing.JLabel();
+        UL2 = new javax.swing.JLabel();
+        NewPLabel2 = new javax.swing.JLabel();
+        NewPassword2 = new javax.swing.JPasswordField();
+        ViewP2 = new javax.swing.JLabel();
+        UL3 = new javax.swing.JLabel();
+        Panel7_3 = new javax.swing.JPanel();
+        Avatar3 = new javax.swing.JLabel();
+        Password3 = new javax.swing.JLabel();
+        Number3 = new javax.swing.JLabel();
+        DateBirth3 = new javax.swing.JLabel();
+        Country3 = new javax.swing.JLabel();
+        HeaderMenu3 = new javax.swing.JLabel();
+        Save3 = new javax.swing.JLabel();
+        Instructions3 = new javax.swing.JLabel();
+        PhoneLabel = new javax.swing.JLabel();
+        PhoneField = new javax.swing.JTextField();
+        UL4 = new javax.swing.JLabel();
+        Panel7_4 = new javax.swing.JPanel();
+        Avatar4 = new javax.swing.JLabel();
+        Password4 = new javax.swing.JLabel();
+        Number4 = new javax.swing.JLabel();
+        DateBirth4 = new javax.swing.JLabel();
+        Country4 = new javax.swing.JLabel();
+        HeaderMenu4 = new javax.swing.JLabel();
+        Save4 = new javax.swing.JLabel();
+        Instructions4 = new javax.swing.JLabel();
+        DOBLabel = new javax.swing.JLabel();
+        NewDOB = new com.toedter.calendar.JDateChooser();
+        Panel7_5 = new javax.swing.JPanel();
+        Avatar5 = new javax.swing.JLabel();
+        Password5 = new javax.swing.JLabel();
+        Number5 = new javax.swing.JLabel();
+        DateBirth5 = new javax.swing.JLabel();
+        Country5 = new javax.swing.JLabel();
+        HeaderMenu5 = new javax.swing.JLabel();
+        Save5 = new javax.swing.JLabel();
+        Instructions5 = new javax.swing.JLabel();
+        CountryLabel = new javax.swing.JLabel();
+        CountryBox = new javax.swing.JComboBox<>();
+
+        NoInternet.setBackground(new java.awt.Color(255, 255, 255));
+        NoInternet.setMinimumSize(new java.awt.Dimension(1200, 650));
+        NoInternet.setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
+        NoInternet.setUndecorated(true);
+
+        javax.swing.GroupLayout NoInternetLayout = new javax.swing.GroupLayout(NoInternet.getContentPane());
+        NoInternet.getContentPane().setLayout(NoInternetLayout);
+        NoInternetLayout.setHorizontalGroup(
+            NoInternetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1200, Short.MAX_VALUE)
+        );
+        NoInternetLayout.setVerticalGroup(
+            NoInternetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 650, Short.MAX_VALUE)
+        );
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1200, 700));
+        setUndecorated(true);
+        setSize(new java.awt.Dimension(1200, 700));
+        getContentPane().setLayout(new java.awt.CardLayout());
+
+        HomePanel.setMaximumSize(new java.awt.Dimension(1200, 700));
+        HomePanel.setMinimumSize(new java.awt.Dimension(1200, 700));
+        HomePanel.setPreferredSize(new java.awt.Dimension(1200, 700));
+
+        TopPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        TopPanel1.setMaximumSize(new java.awt.Dimension(1200, 80));
+        TopPanel1.setMinimumSize(new java.awt.Dimension(1200, 80));
+        TopPanel1.setRequestFocusEnabled(false);
+        TopPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        MenuLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        MenuLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MENUICON.png"))); // NOI18N
+        MenuLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MenuLabel1MouseClicked(evt);
+            }
+        });
+        TopPanel1.add(MenuLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 50, 50));
+
+        LogoLabel1.setFont(new java.awt.Font("Microsoft Tai Le", 1, 36)); // NOI18N
+        LogoLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        LogoLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LogoLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LOGONEW.png"))); // NOI18N
+        TopPanel1.add(LogoLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 300, 80));
+
+        Logout1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Logout1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LOGOUT.png"))); // NOI18N
+        Logout1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Logout1MouseClicked(evt);
+            }
+        });
+        TopPanel1.add(Logout1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 13, 50, 70));
+
+        Exit1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Exit1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ExitFinal.png"))); // NOI18N
+        Exit1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Exit1MouseClicked(evt);
+            }
+        });
+        TopPanel1.add(Exit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1141, 10, 50, 73));
+
+        IconPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        IconPanel1.setMaximumSize(new java.awt.Dimension(110, 620));
+        IconPanel1.setMinimumSize(new java.awt.Dimension(110, 620));
+        IconPanel1.setPreferredSize(new java.awt.Dimension(110, 620));
+
+        DashIcon1.setBackground(new java.awt.Color(102, 102, 102));
+        DashIcon1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DashIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/DASH ICON.png"))); // NOI18N
+        DashIcon1.setOpaque(true);
+
+        BookIcon1.setBackground(new java.awt.Color(51, 51, 51));
+        BookIcon1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BookIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BOOK LOGO.png"))); // NOI18N
+        BookIcon1.setOpaque(true);
+
+        ManageIcon1.setBackground(new java.awt.Color(51, 51, 51));
+        ManageIcon1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ManageIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MANAGEICON.png"))); // NOI18N
+        ManageIcon1.setOpaque(true);
+
+        ExperienceIcon1.setBackground(new java.awt.Color(51, 51, 51));
+        ExperienceIcon1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ExperienceIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/EXPICON.png"))); // NOI18N
+        ExperienceIcon1.setOpaque(true);
+
+        WhereweFlyIcon1.setBackground(new java.awt.Color(51, 51, 51));
+        WhereweFlyIcon1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        WhereweFlyIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/WHEREWEFLYICON.png"))); // NOI18N
+        WhereweFlyIcon1.setOpaque(true);
+
+        HelpIcon1.setBackground(new java.awt.Color(51, 51, 51));
+        HelpIcon1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        HelpIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/HELPICON.png"))); // NOI18N
+        HelpIcon1.setOpaque(true);
+
+        SettingsIcon1.setBackground(new java.awt.Color(51, 51, 51));
+        SettingsIcon1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SettingsIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/SETTINGSICON.png"))); // NOI18N
+        SettingsIcon1.setOpaque(true);
+
+        javax.swing.GroupLayout IconPanel1Layout = new javax.swing.GroupLayout(IconPanel1);
+        IconPanel1.setLayout(IconPanel1Layout);
+        IconPanel1Layout.setHorizontalGroup(
+            IconPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(DashIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(BookIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(ManageIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(ExperienceIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(WhereweFlyIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(HelpIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(SettingsIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        IconPanel1Layout.setVerticalGroup(
+            IconPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(IconPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(DashIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(BookIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ManageIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ExperienceIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(WhereweFlyIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(HelpIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(SettingsIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(120, 120, 120))
+        );
+
+        LabelPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        LabelPanel1.setMaximumSize(new java.awt.Dimension(210, 620));
+        LabelPanel1.setMinimumSize(new java.awt.Dimension(210, 620));
+        LabelPanel1.setPreferredSize(new java.awt.Dimension(210, 620));
+
+        DashboardLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        DashboardLabel1.setFont(new java.awt.Font("Tahoma", 0, 28)); // NOI18N
+        DashboardLabel1.setForeground(new java.awt.Color(102, 153, 255));
+        DashboardLabel1.setText("Dashboard");
+        DashboardLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+
+        BookLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        BookLabel1.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        BookLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        BookLabel1.setText("Book");
+        BookLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        BookLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BookLabel8MouseClicked(evt);
+            }
+        });
+
+        ManageLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        ManageLabel1.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        ManageLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        ManageLabel1.setText("Manage");
+        ManageLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ManageLabel8MouseClicked(evt);
+            }
+        });
+
+        ExperienceLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        ExperienceLabel1.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        ExperienceLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        ExperienceLabel1.setText("Experience");
+        ExperienceLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ExperienceLabel8MouseClicked(evt);
+            }
+        });
+
+        WhereweFlyLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        WhereweFlyLabel1.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        WhereweFlyLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        WhereweFlyLabel1.setText("Where we fly");
+        WhereweFlyLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                WhereweFlyLabel8MouseClicked(evt);
+            }
+        });
+
+        HelpLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        HelpLabel1.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        HelpLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        HelpLabel1.setText("Help");
+        HelpLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HelpLabel8MouseClicked(evt);
+            }
+        });
+
+        SettingsLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        SettingsLabel1.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        SettingsLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        SettingsLabel1.setText("Settings");
+        SettingsLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SettingsLabel8MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout LabelPanel1Layout = new javax.swing.GroupLayout(LabelPanel1);
+        LabelPanel1.setLayout(LabelPanel1Layout);
+        LabelPanel1Layout.setHorizontalGroup(
+            LabelPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LabelPanel1Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addGroup(LabelPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(DashboardLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BookLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ManageLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ExperienceLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(WhereweFlyLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(HelpLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SettingsLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        LabelPanel1Layout.setVerticalGroup(
+            LabelPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LabelPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(DashboardLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(BookLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ManageLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ExperienceLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(WhereweFlyLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(HelpLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(SettingsLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(120, 120, 120))
+        );
+
+        ContentPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        ContentPanel1.setMaximumSize(new java.awt.Dimension(900, 620));
+        ContentPanel1.setMinimumSize(new java.awt.Dimension(900, 620));
+        ContentPanel1.setPreferredSize(new java.awt.Dimension(900, 620));
+        ContentPanel1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                ContentPanel1FocusGained(evt);
+            }
+        });
+        ContentPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ContentPanel1MouseClicked(evt);
+            }
+        });
+        ContentPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Avatar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Avatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Avatars/L16.png"))); // NOI18N
+        ContentPanel1.add(Avatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, -1, -1));
+
+        WelcomeLabel1.setFont(new java.awt.Font("Arial", 1, 26)); // NOI18N
+        WelcomeLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        WelcomeLabel1.setText("Welcome");
+        ContentPanel1.add(WelcomeLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 190, -1));
+
+        FullNameTLabel.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        FullNameTLabel.setForeground(new java.awt.Color(102, 102, 102));
+        FullNameTLabel.setText("Full Name:");
+        ContentPanel1.add(FullNameTLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 120, 100, 20));
+
+        FullNameBLabel.setFont(new java.awt.Font("Arial", 0, 32)); // NOI18N
+        FullNameBLabel.setText("Saksham Chauhan");
+        ContentPanel1.add(FullNameBLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 140, 500, -1));
+
+        EmailTLabel.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        EmailTLabel.setForeground(new java.awt.Color(102, 102, 102));
+        EmailTLabel.setText("Email:");
+        ContentPanel1.add(EmailTLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 205, 100, 20));
+
+        EmailBLabel.setFont(new java.awt.Font("Arial", 0, 32)); // NOI18N
+        EmailBLabel.setText("adidrcool@gmail.com");
+        ContentPanel1.add(EmailBLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 225, 500, -1));
+
+        MobileTLabel.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        MobileTLabel.setForeground(new java.awt.Color(102, 102, 102));
+        MobileTLabel.setText("Mobile Number:");
+        ContentPanel1.add(MobileTLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 290, 140, 20));
+
+        MobileBLabel.setFont(new java.awt.Font("Arial", 0, 32)); // NOI18N
+        MobileBLabel.setText("9999065051");
+        ContentPanel1.add(MobileBLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 310, 500, -1));
+
+        DOBTLabel.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        DOBTLabel.setForeground(new java.awt.Color(102, 102, 102));
+        DOBTLabel.setText("Date of Birth:");
+        ContentPanel1.add(DOBTLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 375, 140, 20));
+
+        DOBBLabel.setFont(new java.awt.Font("Arial", 0, 32)); // NOI18N
+        DOBBLabel.setText("03/12/2000");
+        ContentPanel1.add(DOBBLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 395, 500, 45));
+
+        InfotainmentPanel.setBackground(new java.awt.Color(255, 255, 255));
+        InfotainmentPanel.setLayout(new java.awt.CardLayout());
+
+        FlightsDisplay.setBackground(new java.awt.Color(243, 243, 243));
+        FlightsDisplay.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        UpcomingFlightsLabel.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        UpcomingFlightsLabel.setText("Upcoming Flights:");
+        FlightsDisplay.add(UpcomingFlightsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+
+        TableNScrollPane.setBackground(new java.awt.Color(255, 255, 255));
+        TableNScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        TableNScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        TableNScrollPane.setOpaque(false);
+
+        FlightNDisplayTable.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        FlightNDisplayTable.getTableHeader().setDefaultRenderer(new NewTableRender());
+        FlightNDisplayTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Reference Number", "Departure Airport", "Arrival Airport", "Departure Date", "Departure Time", "Class", "Meal"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        FlightNDisplayTable.setGridColor(new java.awt.Color(91, 107, 114));
+        FlightNDisplayTable.setOpaque(false);
+        FlightNDisplayTable.setRowHeight(37);
+        FlightNDisplayTable.setRowMargin(2);
+        FlightNDisplayTable.setRowSelectionAllowed(false);
+        FlightNDisplayTable.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        FlightNDisplayTable.setShowVerticalLines(false);
+        FlightNDisplayTable.getTableHeader().setPreferredSize( new Dimension(0,32));
+        FlightNDisplayTable.getTableHeader().setResizingAllowed(false);
+        FlightNDisplayTable.getTableHeader().setReorderingAllowed(false);
+        TableNScrollPane.setViewportView(FlightNDisplayTable);
+        if (FlightNDisplayTable.getColumnModel().getColumnCount() > 0) {
+            FlightNDisplayTable.getColumnModel().getColumn(0).setResizable(false);
+            FlightNDisplayTable.getColumnModel().getColumn(0).setPreferredWidth(80);
+            FlightNDisplayTable.getColumnModel().getColumn(1).setResizable(false);
+            FlightNDisplayTable.getColumnModel().getColumn(1).setPreferredWidth(75);
+            FlightNDisplayTable.getColumnModel().getColumn(2).setResizable(false);
+            FlightNDisplayTable.getColumnModel().getColumn(2).setPreferredWidth(75);
+            FlightNDisplayTable.getColumnModel().getColumn(3).setResizable(false);
+            FlightNDisplayTable.getColumnModel().getColumn(3).setPreferredWidth(50);
+            FlightNDisplayTable.getColumnModel().getColumn(4).setResizable(false);
+            FlightNDisplayTable.getColumnModel().getColumn(4).setPreferredWidth(50);
+            FlightNDisplayTable.getColumnModel().getColumn(5).setResizable(false);
+            FlightNDisplayTable.getColumnModel().getColumn(5).setPreferredWidth(40);
+            FlightNDisplayTable.getColumnModel().getColumn(6).setResizable(false);
+            FlightNDisplayTable.getColumnModel().getColumn(6).setPreferredWidth(50);
+        }
+
+        FlightsDisplay.add(TableNScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 1030, 70));
+
+        InfotainmentPanel.add(FlightsDisplay, "FLIGHTS");
+
+        TipsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        TipsLabel.setBackground(new java.awt.Color(248, 248, 248));
+        TipsLabel.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        TipsLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        TipsLabel.setText("<html><body> <ul> <li>Use the menu to naigate through the app and for booking of flights, refer to the Booking tab of the menu. <li>Did not like the deafult avatar? No worries, you can change that and update various other settings in the settings tab of the menu. </ul> </body> </html> ");
+        TipsLabel.setMinimumSize(new java.awt.Dimension(1090, 80));
+        TipsLabel.setOpaque(true);
+        TipsLabel.setPreferredSize(new java.awt.Dimension(1090, 80));
+        TipsPanel.add(TipsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 1090, 80));
+
+        InfotainmentPanel.add(TipsPanel, "TIPS");
+
+        ContentPanel1.add(InfotainmentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 1090, 120));
+
+        LayeredPane1.setLayer(IconPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        LayeredPane1.setLayer(LabelPanel1, javax.swing.JLayeredPane.PALETTE_LAYER);
+        LayeredPane1.setLayer(ContentPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout LayeredPane1Layout = new javax.swing.GroupLayout(LayeredPane1);
+        LayeredPane1.setLayout(LayeredPane1Layout);
+        LayeredPane1Layout.setHorizontalGroup(
+            LayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(IconPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(LayeredPane1Layout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addComponent(ContentPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1090, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(LayeredPane1Layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(LabelPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        LayeredPane1Layout.setVerticalGroup(
+            LayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(IconPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(ContentPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(LabelPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        javax.swing.GroupLayout HomePanelLayout = new javax.swing.GroupLayout(HomePanel);
+        HomePanel.setLayout(HomePanelLayout);
+        HomePanelLayout.setHorizontalGroup(
+            HomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HomePanelLayout.createSequentialGroup()
+                .addComponent(LayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(TopPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        HomePanelLayout.setVerticalGroup(
+            HomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HomePanelLayout.createSequentialGroup()
+                .addComponent(TopPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(LayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        getContentPane().add(HomePanel, "CARD1");
+
+        BookPanel.setMaximumSize(new java.awt.Dimension(1200, 700));
+        BookPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        TopPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        TopPanel2.setMaximumSize(new java.awt.Dimension(1200, 80));
+        TopPanel2.setMinimumSize(new java.awt.Dimension(1200, 80));
+        TopPanel2.setRequestFocusEnabled(false);
+        TopPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        MenuLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        MenuLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MENUICON.png"))); // NOI18N
+        MenuLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MenuLabel2MouseClicked(evt);
+            }
+        });
+        TopPanel2.add(MenuLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 50, 50));
+
+        LogoLabel2.setFont(new java.awt.Font("Microsoft Tai Le", 1, 36)); // NOI18N
+        LogoLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        LogoLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LogoLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LOGONEW.png"))); // NOI18N
+        TopPanel2.add(LogoLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 300, 80));
+
+        Logout2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Logout2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LOGOUT.png"))); // NOI18N
+        Logout2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Logout2MouseClicked(evt);
+            }
+        });
+        TopPanel2.add(Logout2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 13, 50, 70));
+
+        Exit2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Exit2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ExitFinal.png"))); // NOI18N
+        Exit2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Exit2MouseClicked(evt);
+            }
+        });
+        TopPanel2.add(Exit2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1141, 10, 50, 73));
+
+        BookPanel.add(TopPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 80));
+
+        IconPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        IconPanel2.setMaximumSize(new java.awt.Dimension(110, 620));
+        IconPanel2.setMinimumSize(new java.awt.Dimension(110, 620));
+        IconPanel2.setPreferredSize(new java.awt.Dimension(110, 620));
+
+        DashIcon2.setBackground(new java.awt.Color(51, 51, 51));
+        DashIcon2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DashIcon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/DASH ICON.png"))); // NOI18N
+        DashIcon2.setOpaque(true);
+
+        BookIcon2.setBackground(new java.awt.Color(51, 51, 51));
+        BookIcon2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BookIcon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BOOK LOGO.png"))); // NOI18N
+        BookIcon2.setOpaque(true);
+
+        ManageIcon2.setBackground(new java.awt.Color(51, 51, 51));
+        ManageIcon2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ManageIcon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MANAGEICON.png"))); // NOI18N
+        ManageIcon2.setOpaque(true);
+
+        ExperienceIcon2.setBackground(new java.awt.Color(51, 51, 51));
+        ExperienceIcon2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ExperienceIcon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/EXPICON.png"))); // NOI18N
+        ExperienceIcon2.setOpaque(true);
+
+        WhereweFlyIcon2.setBackground(new java.awt.Color(51, 51, 51));
+        WhereweFlyIcon2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        WhereweFlyIcon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/WHEREWEFLYICON.png"))); // NOI18N
+        WhereweFlyIcon2.setOpaque(true);
+
+        HelpIcon2.setBackground(new java.awt.Color(51, 51, 51));
+        HelpIcon2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        HelpIcon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/HELPICON.png"))); // NOI18N
+        HelpIcon2.setOpaque(true);
+
+        SettingsIcon2.setBackground(new java.awt.Color(51, 51, 51));
+        SettingsIcon2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SettingsIcon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/SETTINGSICON.png"))); // NOI18N
+        SettingsIcon2.setOpaque(true);
+
+        javax.swing.GroupLayout IconPanel2Layout = new javax.swing.GroupLayout(IconPanel2);
+        IconPanel2.setLayout(IconPanel2Layout);
+        IconPanel2Layout.setHorizontalGroup(
+            IconPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(DashIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(BookIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(ManageIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(ExperienceIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(WhereweFlyIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(HelpIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(SettingsIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        IconPanel2Layout.setVerticalGroup(
+            IconPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(IconPanel2Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(DashIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(BookIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ManageIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ExperienceIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(WhereweFlyIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(HelpIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(SettingsIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(120, 120, 120))
+        );
+
+        LabelPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        LabelPanel2.setMaximumSize(new java.awt.Dimension(210, 620));
+        LabelPanel2.setMinimumSize(new java.awt.Dimension(210, 620));
+        LabelPanel2.setPreferredSize(new java.awt.Dimension(210, 620));
+
+        DashboardLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        DashboardLabel2.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        DashboardLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        DashboardLabel2.setText("Dashboard");
+        DashboardLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        DashboardLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DashboardLabel8MouseClicked(evt);
+            }
+        });
+
+        BookLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        BookLabel2.setFont(new java.awt.Font("Tahoma", 0, 28)); // NOI18N
+        BookLabel2.setForeground(new java.awt.Color(102, 153, 255));
+        BookLabel2.setText("Book");
+        BookLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+
+        ManageLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        ManageLabel2.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        ManageLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        ManageLabel2.setText("Manage");
+        ManageLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ManageLabel8MouseClicked(evt);
+            }
+        });
+
+        ExperienceLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        ExperienceLabel2.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        ExperienceLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        ExperienceLabel2.setText("Experience");
+        ExperienceLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ExperienceLabel8MouseClicked(evt);
+            }
+        });
+
+        WhereweFlyLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        WhereweFlyLabel2.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        WhereweFlyLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        WhereweFlyLabel2.setText("Where we fly");
+        WhereweFlyLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                WhereweFlyLabel8MouseClicked(evt);
+            }
+        });
+
+        HelpLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        HelpLabel2.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        HelpLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        HelpLabel2.setText("Help");
+        HelpLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HelpLabel8MouseClicked(evt);
+            }
+        });
+
+        SettingsLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        SettingsLabel2.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        SettingsLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        SettingsLabel2.setText("Settings");
+        SettingsLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SettingsLabel8MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout LabelPanel2Layout = new javax.swing.GroupLayout(LabelPanel2);
+        LabelPanel2.setLayout(LabelPanel2Layout);
+        LabelPanel2Layout.setHorizontalGroup(
+            LabelPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LabelPanel2Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addGroup(LabelPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(DashboardLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BookLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ManageLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ExperienceLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(WhereweFlyLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(HelpLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SettingsLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        LabelPanel2Layout.setVerticalGroup(
+            LabelPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LabelPanel2Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(DashboardLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(BookLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ManageLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ExperienceLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(WhereweFlyLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(HelpLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(SettingsLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(120, 120, 120))
+        );
+
+        ContentPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        ContentPanel2.setMaximumSize(new java.awt.Dimension(1090, 620));
+        ContentPanel2.setMinimumSize(new java.awt.Dimension(1090, 620));
+        ContentPanel2.setPreferredSize(new java.awt.Dimension(1090, 620));
+        ContentPanel2.setRequestFocusEnabled(false);
+        ContentPanel2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                ContentPanel2FocusGained(evt);
+            }
+        });
+        ContentPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ContentPanel2MouseClicked(evt);
+            }
+        });
+        ContentPanel2.setLayout(new java.awt.CardLayout());
+
+        Home2.setBackground(new java.awt.Color(241, 241, 241));
+        Home2.setMaximumSize(new java.awt.Dimension(1090, 620));
+        Home2.setMinimumSize(new java.awt.Dimension(1090, 620));
+        Home2.setPreferredSize(new java.awt.Dimension(1090, 620));
+        Home2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Header1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        Header1.setText("Departure Airport");
+        Home2.add(Header1, new org.netbeans.lib.awtextra.AbsoluteConstraints(74, 194, -1, -1));
+
+        Country1Combo.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        Country1Combo.setMaximumRowCount(6);
+        Country1Combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amsterdam                                     AMS", "Bahrain                                             BAH", "Beijing                                              PEK", "Brisbane                                          BNE", "Cairo                                                  CAI", "Cape Town                                      CPT", "Dammam                                        DMM", "Delhi                                                 DEL", "Dubai                                               DXB", "Durban                                             DUR", "Frankfurt                                           FRA", "Johannesburg                                  JNB", "Los Angeles                                     LAX", "London                                             LHR", "Mauritius                                          MRU", "Medina                                            MED", "Mexico City                                     MEX", "Munich                                             MUC", "Muscat                                             MCT", "New York                                          JFK", "Paris                                                CDG", "Santiago                                           SCL", "São Paulo                                        GRU", "Shanghai                                         PVG", "Singapore                                         SIN" }));
+        Country1Combo.setSelectedIndex(7);
+        Country1Combo.setBorder(null);
+        Home2.add(Country1Combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 208, 300, 37));
+
+        Header2.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        Header2.setText("Arrival Airport");
+        Home2.add(Header2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 194, -1, -1));
+
+        Country2Combo.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        Country2Combo.setMaximumRowCount(6);
+        Country2Combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amsterdam                                     AMS", "Bahrain                                             BAH", "Beijing                                              PEK", "Brisbane                                          BNE", "Cairo                                                  CAI", "Cape Town                                      CPT", "Dammam                                        DMM", "Delhi                                                 DEL", "Dubai                                               DXB", "Durban                                             DUR", "Frankfurt                                           FRA", "Johannesburg                                  JNB", "Los Angeles                                     LAX", "London                                             LHR", "Mauritius                                          MRU", "Medina                                            MED", "Mexico City                                     MEX", "Munich                                             MUC", "Muscat                                             MCT", "New York                                          JFK", "Paris                                                CDG", "Santiago                                           SCL", "São Paulo                                        GRU", "Shanghai                                         PVG", "Singapore                                         SIN" }));
+        Country2Combo.setBorder(null);
+        Home2.add(Country2Combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(394, 208, 300, 37));
+
+        Header3.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        Header3.setText("Departing");
+        Home2.add(Header3, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 194, -1, -1));
+
+        DepartingDate.setBackground(new java.awt.Color(255, 255, 255));
+        DepartingDate.setDateFormatString("dd.MM.yyyy");
+        DepartingDate.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        DepartingDate.setIcon(new javax.swing.ImageIcon("C:\\Users\\Saksham\\Downloads\\CalenderIcon.png"));
+        Home2.add(DepartingDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(722, 210, 140, 34));
+
+        Hyphen.setBackground(new java.awt.Color(0, 0, 0));
+        Hyphen.setForeground(new java.awt.Color(0, 0, 0));
+        Hyphen.setOpaque(true);
+        Home2.add(Hyphen, new org.netbeans.lib.awtextra.AbsoluteConstraints(867, 225, 7, -1));
+
+        Header4.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        Header4.setText("Returning");
+        Home2.add(Header4, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 194, -1, -1));
+
+        ReturningDate.setBackground(new java.awt.Color(255, 255, 255));
+        ReturningDate.setDateFormatString("dd.MM.yyyy");
+        ReturningDate.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        ReturningDate.setIcon(new javax.swing.ImageIcon("C:\\Users\\Saksham\\Downloads\\CalenderIcon.png"));
+        Home2.add(ReturningDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 210, 140, 34));
+
+        Header5.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        Header5.setText("Class");
+        Home2.add(Header5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 277, -1, -1));
+
+        AdultsLabel.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        AdultsLabel.setText("Adults:");
+        Home2.add(AdultsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 295, 55, 30));
+
+        AMinus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AMinus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/IconMinus.png"))); // NOI18N
+        AMinus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AMinusMouseClicked(evt);
+            }
+        });
+        Home2.add(AMinus, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 295, 20, 30));
+
+        ATextField.setEditable(false);
+        ATextField.setBackground(new java.awt.Color(255, 255, 255));
+        ATextField.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        ATextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ATextField.setText("1");
+        ATextField.setBorder(null);
+        Home2.add(ATextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 297, 35, 25));
+        Home2.add(FieldUnderline1, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 323, 35, 2));
+
+        APlus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        APlus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/IconPlus.png"))); // NOI18N
+        APlus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                APlusMouseClicked(evt);
+            }
+        });
+        Home2.add(APlus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 295, 20, 30));
+
+        VerticalLine.setBackground(new java.awt.Color(160, 160, 160));
+        VerticalLine.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        VerticalLine.setOpaque(true);
+        Home2.add(VerticalLine, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 300, 2, 27));
+
+        KidsLabel.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        KidsLabel.setText("Kids:");
+        Home2.add(KidsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 295, 40, 30));
+
+        KMinus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        KMinus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/IconMinus.png"))); // NOI18N
+        KMinus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                KMinusMouseClicked(evt);
+            }
+        });
+        Home2.add(KMinus, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 295, 20, 30));
+
+        KTextField.setEditable(false);
+        KTextField.setBackground(new java.awt.Color(255, 255, 255));
+        KTextField.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        KTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        KTextField.setText("0");
+        KTextField.setBorder(null);
+        Home2.add(KTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(303, 297, 35, 25));
+        Home2.add(FieldUnderline2, new org.netbeans.lib.awtextra.AbsoluteConstraints(303, 323, 35, 2));
+
+        KPlus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        KPlus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/IconPlus.png"))); // NOI18N
+        KPlus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                KPlusMouseClicked(evt);
+            }
+        });
+        Home2.add(KPlus, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 295, 20, 30));
+
+        Header6.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        Header6.setText("Passengers");
+        Home2.add(Header6, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 277, -1, -1));
+
+        ClassCombo.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        ClassCombo.setMaximumRowCount(6);
+        ClassCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Economy", "Business", "First" }));
+        ClassCombo.setToolTipText("");
+        ClassCombo.setBorder(null);
+        ClassCombo.setOpaque(false);
+        Home2.add(ClassCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(394, 290, 300, 37));
+
+        SearchFlights.setBackground(new java.awt.Color(198, 12, 48));
+        SearchFlights.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
+        SearchFlights.setForeground(new java.awt.Color(255, 255, 255));
+        SearchFlights.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SearchFlights.setText("Search flights");
+        SearchFlights.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        SearchFlights.setOpaque(true);
+        SearchFlights.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SearchFlightsMouseClicked(evt);
+            }
+        });
+        Home2.add(SearchFlights, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 274, 300, 50));
+
+        FlexibilityCheckbox.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        FlexibilityCheckbox.setText("My dates are flexible. [ +3 days ] ");
+        FlexibilityCheckbox.setOpaque(false);
+        Home2.add(FlexibilityCheckbox, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 345, 300, 25));
+
+        BookingInstruction.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        BookingInstruction.setText("Please note: You can book a maximum of nine passengers per booking.");
+        Home2.add(BookingInstruction, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 345, 630, 25));
+
+        InstructionsBookFlights.setBackground(new java.awt.Color(241, 241, 241));
+        InstructionsBookFlights.setColumns(20);
+        InstructionsBookFlights.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        InstructionsBookFlights.setLineWrap(true);
+        InstructionsBookFlights.setRows(5);
+        InstructionsBookFlights.setText(">> Search for flights with Alpha Airlines. Choose where you’re flying from and where you’d like to fly to, select your dates, your class of\n     travel and the number of passengers on your trip. Then choose from daily and weekly flights in the Alpha network.  \n\n>> We’ve made booking tickets online easy and secure. Trust us to bring you safely to your destination and try our flight search to  \n     book a flight now.  ");
+        InstructionsBookFlights.setWrapStyleWord(true);
+        InstructionsBookFlights.setBorder(null);
+        InstructionsBookFlights.setMaximumSize(new java.awt.Dimension(990, 130));
+        InstructionsBookFlights.setMinimumSize(new java.awt.Dimension(990, 130));
+        InstructionsBookFlights.setPreferredSize(new java.awt.Dimension(990, 130));
+        Home2.add(InstructionsBookFlights, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, -1, -1));
+
+        BackgroundPic1.setBackground(new java.awt.Color(241, 241, 241));
+        BackgroundPic1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BookFlightBackground.jpeg"))); // NOI18N
+        BackgroundPic1.setText("jLabel2");
+        BackgroundPic1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        BackgroundPic1.setMaximumSize(new java.awt.Dimension(1090, 620));
+        BackgroundPic1.setMinimumSize(new java.awt.Dimension(1090, 620));
+        BackgroundPic1.setOpaque(true);
+        BackgroundPic1.setPreferredSize(new java.awt.Dimension(1090, 620));
+        Home2.add(BackgroundPic1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        ContentPanel2.add(Home2, "HOME");
+
+        Result.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        DisplayPanel.setLayout(new java.awt.CardLayout());
+
+        TableScrollPane.setBorder(null);
+        TableScrollPane.setOpaque(false);
+
+        FlightDisplayTable.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        FlightDisplayTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Flight Code", "Departure Airport", "Arrival Airport", "Departure Date", "Departure Time", "ETA", "Arrival Date"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        FlightDisplayTable.setGridColor(new java.awt.Color(91, 107, 114));
+        FlightDisplayTable.setOpaque(false);
+        FlightDisplayTable.setRowHeight(30);
+        FlightDisplayTable.setRowMargin(2);
+        FlightDisplayTable.setSelectionBackground(new java.awt.Color(169, 141, 131));
+        FlightDisplayTable.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        FlightDisplayTable.setShowVerticalLines(false);
+        FlightDisplayTable.getTableHeader().setReorderingAllowed(false);
+        FlightDisplayTable.getTableHeader().setPreferredSize( new Dimension(0,45));
+        TableScrollPane.setViewportView(FlightDisplayTable);
+        if (FlightDisplayTable.getColumnModel().getColumnCount() > 0) {
+            FlightDisplayTable.getColumnModel().getColumn(0).setResizable(false);
+            FlightDisplayTable.getColumnModel().getColumn(0).setPreferredWidth(90);
+            FlightDisplayTable.getColumnModel().getColumn(1).setResizable(false);
+            FlightDisplayTable.getColumnModel().getColumn(1).setPreferredWidth(75);
+            FlightDisplayTable.getColumnModel().getColumn(2).setResizable(false);
+            FlightDisplayTable.getColumnModel().getColumn(2).setPreferredWidth(75);
+            FlightDisplayTable.getColumnModel().getColumn(3).setResizable(false);
+            FlightDisplayTable.getColumnModel().getColumn(3).setPreferredWidth(50);
+            FlightDisplayTable.getColumnModel().getColumn(4).setResizable(false);
+            FlightDisplayTable.getColumnModel().getColumn(4).setPreferredWidth(50);
+            FlightDisplayTable.getColumnModel().getColumn(5).setResizable(false);
+            FlightDisplayTable.getColumnModel().getColumn(5).setPreferredWidth(40);
+            FlightDisplayTable.getColumnModel().getColumn(6).setResizable(false);
+            FlightDisplayTable.getColumnModel().getColumn(6).setPreferredWidth(50);
+        }
+        FlightDisplayTable.getTableHeader().setDefaultRenderer(new TableHeaderMyRender());
+
+        javax.swing.GroupLayout TablePanelLayout = new javax.swing.GroupLayout(TablePanel);
+        TablePanel.setLayout(TablePanelLayout);
+        TablePanelLayout.setHorizontalGroup(
+            TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(TableScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
+        );
+        TablePanelLayout.setVerticalGroup(
+            TablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(TableScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+        );
+
+        DisplayPanel.add(TablePanel, "TablePanel");
+
+        NoResultLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/NoFlightsImage.png"))); // NOI18N
+        NoResultLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        javax.swing.GroupLayout NoResultPanelLayout = new javax.swing.GroupLayout(NoResultPanel);
+        NoResultPanel.setLayout(NoResultPanelLayout);
+        NoResultPanelLayout.setHorizontalGroup(
+            NoResultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(NoResultLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        NoResultPanelLayout.setVerticalGroup(
+            NoResultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(NoResultLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        DisplayPanel.add(NoResultPanel, "NoResultPanel");
+
+        NoFlightSelected.setBackground(new java.awt.Color(255, 255, 255));
+        NoFlightSelected.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Astronaut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/NoRowSelected.png"))); // NOI18N
+        NoFlightSelected.add(Astronaut, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 30, 520, -1));
+
+        NoFlightSelectedLabel.setFont(new java.awt.Font("Arial", 0, 21)); // NOI18N
+        NoFlightSelectedLabel.setForeground(new java.awt.Color(47, 62, 91));
+        NoFlightSelectedLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        NoFlightSelectedLabel.setText("<html><body align = \"center\"><h1>\nNO FLIGHT SELECTED</h1>\nTo continue, please select a row.\n</body>\n</html>");
+        NoFlightSelected.add(NoFlightSelectedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 22, 410, 190));
+
+        DisplayPanel.add(NoFlightSelected, "NoFlightPanel");
+
+        Result.add(DisplayPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 240, 850, 250));
+
+        BackLabel.setFont(new java.awt.Font("Arial", 0, 23)); // NOI18N
+        BackLabel.setForeground(new java.awt.Color(255, 255, 255));
+        BackLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BackLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/WBackIcon.png"))); // NOI18N
+        BackLabel.setText("BACK\n");
+        BackLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BackLabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BackLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BackLabelMouseExited(evt);
+            }
+        });
+        Result.add(BackLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 520, 150, 40));
+
+        NextLabel.setBackground(new java.awt.Color(51, 51, 51));
+        NextLabel.setFont(new java.awt.Font("Arial", 0, 23)); // NOI18N
+        NextLabel.setForeground(new java.awt.Color(255, 255, 255));
+        NextLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        NextLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/WNextIcon.png"))); // NOI18N
+        NextLabel.setText("NEXT");
+        NextLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NextLabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                NextLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                NextLabelMouseExited(evt);
+            }
+        });
+        Result.add(NextLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 520, 150, 40));
+
+        BackgroundPic2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/SearchResult.jpg"))); // NOI18N
+        Result.add(BackgroundPic2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, -1));
+
+        ContentPanel2.add(Result, "RESULT");
+
+        Result2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        ResultDisplayPanel.setOpaque(false);
+        ResultDisplayPanel.setLayout(new java.awt.CardLayout());
+
+        MainR2Panel.setOpaque(false);
+        MainR2Panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        DepartureFlightsTableLabel.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        DepartureFlightsTableLabel.setForeground(new java.awt.Color(255, 255, 255));
+        DepartureFlightsTableLabel.setText("Departure Flights:");
+        MainR2Panel.add(DepartureFlightsTableLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 20));
+
+        ArrivalFlightsTableLabel.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        ArrivalFlightsTableLabel.setForeground(new java.awt.Color(255, 255, 255));
+        ArrivalFlightsTableLabel.setText("Return Flights:");
+        MainR2Panel.add(ArrivalFlightsTableLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 245, 150, 20));
+
+        DisplayPanel1.setLayout(new java.awt.CardLayout());
+
+        TablePanel1.setPreferredSize(new java.awt.Dimension(850, 200));
+
+        TableScrollPane1.setBorder(null);
+        TableScrollPane1.setOpaque(false);
+
+        FlightDisplayTable1.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        FlightDisplayTable1.getTableHeader().setDefaultRenderer(new TableHeaderMyRender());
+        FlightDisplayTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Flight Code", "Departure Airport", "Arrival Airport", "Departure Date", "Departure Time", "ETA", "Arrival Date"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        FlightDisplayTable1.setGridColor(new java.awt.Color(91, 107, 114));
+        FlightDisplayTable1.setOpaque(false);
+        FlightDisplayTable1.setRowHeight(30);
+        FlightDisplayTable1.setRowMargin(2);
+        FlightDisplayTable1.setSelectionBackground(new java.awt.Color(178, 150, 140));
+        FlightDisplayTable1.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        FlightDisplayTable1.setShowVerticalLines(false);
+        FlightDisplayTable1.getTableHeader().setReorderingAllowed(false);
+        FlightDisplayTable1.getTableHeader().setPreferredSize( new Dimension(0,45));
+        TableScrollPane1.setViewportView(FlightDisplayTable1);
+        if (FlightDisplayTable1.getColumnModel().getColumnCount() > 0) {
+            FlightDisplayTable1.getColumnModel().getColumn(0).setResizable(false);
+            FlightDisplayTable1.getColumnModel().getColumn(0).setPreferredWidth(90);
+            FlightDisplayTable1.getColumnModel().getColumn(1).setResizable(false);
+            FlightDisplayTable1.getColumnModel().getColumn(1).setPreferredWidth(75);
+            FlightDisplayTable1.getColumnModel().getColumn(2).setResizable(false);
+            FlightDisplayTable1.getColumnModel().getColumn(2).setPreferredWidth(75);
+            FlightDisplayTable1.getColumnModel().getColumn(3).setResizable(false);
+            FlightDisplayTable1.getColumnModel().getColumn(3).setPreferredWidth(50);
+            FlightDisplayTable1.getColumnModel().getColumn(4).setResizable(false);
+            FlightDisplayTable1.getColumnModel().getColumn(4).setPreferredWidth(50);
+            FlightDisplayTable1.getColumnModel().getColumn(5).setResizable(false);
+            FlightDisplayTable1.getColumnModel().getColumn(5).setPreferredWidth(40);
+            FlightDisplayTable1.getColumnModel().getColumn(6).setResizable(false);
+            FlightDisplayTable1.getColumnModel().getColumn(6).setPreferredWidth(50);
+        }
+
+        javax.swing.GroupLayout TablePanel1Layout = new javax.swing.GroupLayout(TablePanel1);
+        TablePanel1.setLayout(TablePanel1Layout);
+        TablePanel1Layout.setHorizontalGroup(
+            TablePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(TableScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
+        );
+        TablePanel1Layout.setVerticalGroup(
+            TablePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(TableScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        );
+
+        DisplayPanel1.add(TablePanel1, "TablePanel");
+
+        NoFlightSelected1.setBackground(new java.awt.Color(255, 255, 255));
+        NoFlightSelected1.setPreferredSize(new java.awt.Dimension(850, 200));
+        NoFlightSelected1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Astronaut1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/NoRowSelected.png"))); // NOI18N
+        NoFlightSelected1.add(Astronaut1, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 0, 520, -1));
+
+        NoFlightSelectedLabel1.setFont(new java.awt.Font("Arial", 0, 21)); // NOI18N
+        NoFlightSelectedLabel1.setForeground(new java.awt.Color(47, 62, 91));
+        NoFlightSelectedLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        NoFlightSelectedLabel1.setText("<html><body align = \"center\"><h1>\nNO FLIGHT SELECTED</h1>\nTo continue, please select a row.\n</body>\n</html>");
+        NoFlightSelected1.add(NoFlightSelectedLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 6, 410, 190));
+
+        DisplayPanel1.add(NoFlightSelected1, "NoFlightPanel");
+
+        MainR2Panel.add(DisplayPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 25, 850, 200));
+
+        DisplayPanel2.setLayout(new java.awt.CardLayout());
+
+        TableScrollPane2.setBorder(null);
+        TableScrollPane2.setOpaque(false);
+
+        FlightDisplayTable2.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        FlightDisplayTable2.getTableHeader().setDefaultRenderer(new TableHeaderMyRender());
+        FlightDisplayTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Flight Code", "Departure Airport", "Arrival Airport", "Departure Date", "Departure Time", "ETA", "Arrival Date"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        FlightDisplayTable2.setGridColor(new java.awt.Color(91, 107, 114));
+        FlightDisplayTable2.setOpaque(false);
+        FlightDisplayTable2.setRowHeight(30);
+        FlightDisplayTable2.setRowMargin(2);
+        FlightDisplayTable2.setSelectionBackground(new java.awt.Color(169, 141, 131));
+        FlightDisplayTable2.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        FlightDisplayTable2.setShowVerticalLines(false);
+        FlightDisplayTable2.getTableHeader().setReorderingAllowed(false);
+        FlightDisplayTable2.getTableHeader().setPreferredSize( new Dimension(0,45));
+        TableScrollPane2.setViewportView(FlightDisplayTable2);
+        if (FlightDisplayTable2.getColumnModel().getColumnCount() > 0) {
+            FlightDisplayTable2.getColumnModel().getColumn(0).setResizable(false);
+            FlightDisplayTable2.getColumnModel().getColumn(0).setPreferredWidth(90);
+            FlightDisplayTable2.getColumnModel().getColumn(1).setResizable(false);
+            FlightDisplayTable2.getColumnModel().getColumn(1).setPreferredWidth(75);
+            FlightDisplayTable2.getColumnModel().getColumn(2).setResizable(false);
+            FlightDisplayTable2.getColumnModel().getColumn(2).setPreferredWidth(75);
+            FlightDisplayTable2.getColumnModel().getColumn(3).setResizable(false);
+            FlightDisplayTable2.getColumnModel().getColumn(3).setPreferredWidth(50);
+            FlightDisplayTable2.getColumnModel().getColumn(4).setResizable(false);
+            FlightDisplayTable2.getColumnModel().getColumn(4).setPreferredWidth(50);
+            FlightDisplayTable2.getColumnModel().getColumn(5).setResizable(false);
+            FlightDisplayTable2.getColumnModel().getColumn(5).setPreferredWidth(40);
+            FlightDisplayTable2.getColumnModel().getColumn(6).setResizable(false);
+            FlightDisplayTable2.getColumnModel().getColumn(6).setPreferredWidth(50);
+        }
+
+        javax.swing.GroupLayout TablePanel2Layout = new javax.swing.GroupLayout(TablePanel2);
+        TablePanel2.setLayout(TablePanel2Layout);
+        TablePanel2Layout.setHorizontalGroup(
+            TablePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(TableScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
+        );
+        TablePanel2Layout.setVerticalGroup(
+            TablePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(TableScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        );
+
+        DisplayPanel2.add(TablePanel2, "TablePanel");
+
+        NoFlightSelected2.setBackground(new java.awt.Color(255, 255, 255));
+        NoFlightSelected2.setPreferredSize(new java.awt.Dimension(850, 200));
+        NoFlightSelected2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Astronaut2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/NoRowSelected.png"))); // NOI18N
+        NoFlightSelected2.add(Astronaut2, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 0, 520, -1));
+
+        NoFlightSelectedLabel2.setFont(new java.awt.Font("Arial", 0, 21)); // NOI18N
+        NoFlightSelectedLabel2.setForeground(new java.awt.Color(47, 62, 91));
+        NoFlightSelectedLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        NoFlightSelectedLabel2.setText("<html><body align = \"center\"><h1>\nNO FLIGHT SELECTED</h1>\nTo continue, please select a row.\n</body>\n</html>");
+        NoFlightSelected2.add(NoFlightSelectedLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 6, 410, 190));
+
+        DisplayPanel2.add(NoFlightSelected2, "NoFlightPanel");
+
+        MainR2Panel.add(DisplayPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 850, 200));
+
+        ResultDisplayPanel.add(MainR2Panel, "MAIN2W");
+
+        NoFlightR2Panel.setBackground(new java.awt.Color(255, 255, 255));
+        NoFlightR2Panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        NoFlightR2Label.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        NoFlightR2Label.setForeground(new java.awt.Color(7, 105, 185));
+        NoFlightR2Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        NoFlightR2Label.setText("No flights available arrival and departure date. Please try changing the filters.");
+        NoFlightR2Panel.add(NoFlightR2Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 437, 550, 30));
+
+        NoFlightR2Image.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        NoFlightR2Image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/NoFlight.png"))); // NOI18N
+        NoFlightR2Image.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        NoFlightR2Panel.add(NoFlightR2Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 470));
+
+        ResultDisplayPanel.add(NoFlightR2Panel, "NOFLIGHTS2W");
+
+        Result2.add(ResultDisplayPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 55, 850, 470));
+
+        Back2WLabel.setFont(new java.awt.Font("Arial", 0, 23)); // NOI18N
+        Back2WLabel.setForeground(new java.awt.Color(255, 255, 255));
+        Back2WLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Back2WLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/WBackIcon.png"))); // NOI18N
+        Back2WLabel.setText("BACK\n");
+        Back2WLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Back2WLabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Back2WLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Back2WLabelMouseExited(evt);
+            }
+        });
+        Result2.add(Back2WLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 540, 150, 40));
+
+        Next2WLabel.setBackground(new java.awt.Color(51, 51, 51));
+        Next2WLabel.setFont(new java.awt.Font("Arial", 0, 23)); // NOI18N
+        Next2WLabel.setForeground(new java.awt.Color(255, 255, 255));
+        Next2WLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Next2WLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/WNextIcon.png"))); // NOI18N
+        Next2WLabel.setText("NEXT");
+        Next2WLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Next2WLabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Next2WLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Next2WLabelMouseExited(evt);
+            }
+        });
+        Result2.add(Next2WLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 540, 150, 40));
+
+        SearchBackground2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/SearchResult2.jpg"))); // NOI18N
+        Result2.add(SearchBackground2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        ContentPanel2.add(Result2, "RESULT2");
+
+        Confimation.setBackground(new java.awt.Color(255, 255, 255));
+        Confimation.setMaximumSize(new java.awt.Dimension(1090, 620));
+        Confimation.setMinimumSize(new java.awt.Dimension(1090, 620));
+        Confimation.setPreferredSize(new java.awt.Dimension(1090, 620));
+        Confimation.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        ConfirmationHeading.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        ConfirmationHeading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ConfirmationHeading.setText("Review Your Flight");
+        Confimation.add(ConfirmationHeading, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 15, 390, 40));
+
+        FlightCodeLabel.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        FlightCodeLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        FlightCodeLabel.setText("Flight Code:");
+        Confimation.add(FlightCodeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, 100, 20));
+
+        FlightCodeField.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        FlightCodeField.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        FlightCodeField.setText("AMI00AMSMRU10");
+        Confimation.add(FlightCodeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 150, 20));
+
+        FlightClassLabel.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        FlightClassLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        FlightClassLabel.setText("Class:");
+        Confimation.add(FlightClassLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, 100, 20));
+
+        FlightClassField.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        FlightClassField.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        FlightClassField.setText("Economy");
+        Confimation.add(FlightClassField, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, 150, 20));
+
+        FlightPassengersField.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        FlightPassengersField.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        FlightPassengersField.setText("9");
+        Confimation.add(FlightPassengersField, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 140, 150, 20));
+
+        FlightPassengersLabel.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        FlightPassengersLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        FlightPassengersLabel.setText("Passengers:");
+        Confimation.add(FlightPassengersLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, 100, 20));
+
+        DetailsDisplay.setLayout(new java.awt.CardLayout());
+
+        DirectPanel.setBackground(new java.awt.Color(255, 255, 255));
+        DirectPanel.setMaximumSize(new java.awt.Dimension(1090, 250));
+        DirectPanel.setMinimumSize(new java.awt.Dimension(1090, 250));
+        DirectPanel.setPreferredSize(new java.awt.Dimension(1090, 70));
+        DirectPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        FromDLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        FromDLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        FromDLabel.setText("<html>\n<body align=\"center\">\n<font size = \"6\">Delhi</font>\n<br>\n<font size = \"4\">(DEL)</font>\n</body>\n</html>");
+        DirectPanel.add(FromDLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 10, 150, 60));
+
+        AnimationDLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FlyingAnimation.gif"))); // NOI18N
+        DirectPanel.add(AnimationDLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 10, -1, -1));
+
+        ToDLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ToDLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ToDLabel.setText("<html>\n<body align=\"center\">\n<font size = \"6\">Dubai</font>\n<br>\n<font size = \"4\">(DXB)</font>\n</body>\n</html>");
+        DirectPanel.add(ToDLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(685, 10, 150, 60));
+
+        DetailsDisplay.add(DirectPanel, "DIRECT");
+
+        IndirectPanel.setBackground(new java.awt.Color(255, 255, 255));
+        IndirectPanel.setMaximumSize(new java.awt.Dimension(1090, 250));
+        IndirectPanel.setMinimumSize(new java.awt.Dimension(1090, 250));
+        IndirectPanel.setPreferredSize(new java.awt.Dimension(1090, 70));
+        IndirectPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        FromILabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        FromILabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        FromILabel.setText("<html>\n<body align=\"center\">\n<font size = \"6\">Delhi</font>\n<br>\n<font size = \"4\">(DEL)</font>\n</body>\n</html>");
+        IndirectPanel.add(FromILabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 150, 60));
+
+        AnimationILabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FlyingAnimation.gif"))); // NOI18N
+        IndirectPanel.add(AnimationILabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
+
+        ConnectingILabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ConnectingILabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ConnectingILabel.setText("<html>\n<body align=\"center\">\n<font size = \"6\">Dubai</font>\n<br>\n<font size = \"4\">(DXB)</font>\n</body>\n</html>");
+        IndirectPanel.add(ConnectingILabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 150, 60));
+
+        AnimationILabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FlyingAnimation.gif"))); // NOI18N
+        IndirectPanel.add(AnimationILabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 10, -1, -1));
+
+        ToILabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ToILabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ToILabel.setText("<html>\n<body align=\"center\">\n<font size = \"6\">Dubai</font>\n<br>\n<font size = \"4\">(DXB)</font>\n</body>\n</html>");
+        IndirectPanel.add(ToILabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, 150, 60));
+
+        DetailsDisplay.add(IndirectPanel, "INDIRECT");
+
+        Confimation.add(DetailsDisplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 1090, 70));
+
+        SourceLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        SourceLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SourceLabel.setText("Source");
+        Confimation.add(SourceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 250, 150, 20));
+
+        DestinationLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        DestinationLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DestinationLabel.setText("Destination");
+        Confimation.add(DestinationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(675, 250, 150, 20));
+
+        ISLF1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISLF1.setText("Date:");
+        Confimation.add(ISLF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 80, 20));
+
+        ISLF2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISLF2.setText("Time:");
+        Confimation.add(ISLF2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 305, 80, 20));
+
+        ISLF3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISLF3.setText("Airport:");
+        Confimation.add(ISLF3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 80, 20));
+
+        ISLF4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISLF4.setText("City:");
+        Confimation.add(ISLF4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 355, 80, 20));
+
+        ISLF5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISLF5.setText("Country:");
+        Confimation.add(ISLF5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 380, 80, 20));
+
+        ISL1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISL1.setText("2020-05-20");
+        Confimation.add(ISL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, 340, 20));
+
+        ISL2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISL2.setText("12:00 Hrs");
+        Confimation.add(ISL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 305, 340, 20));
+
+        ISL3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISL3.setText("Indira Ghandhi International Airport");
+        Confimation.add(ISL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, 340, 20));
+
+        ISL4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISL4.setText("Delhi");
+        Confimation.add(ISL4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 355, 340, 20));
+
+        ISL5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISL5.setText("India");
+        Confimation.add(ISL5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, 340, 20));
+
+        IDLF1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDLF1.setText("Date:");
+        Confimation.add(IDLF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 280, 80, 20));
+
+        IDLF2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDLF2.setText("Time:");
+        Confimation.add(IDLF2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 305, 80, 20));
+
+        IDLF3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDLF3.setText("Airport:");
+        Confimation.add(IDLF3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 330, 80, 20));
+
+        IDLF4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDLF4.setText("City:");
+        Confimation.add(IDLF4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 355, 80, 20));
+
+        IDLF5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDLF5.setText("Country:");
+        Confimation.add(IDLF5, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 380, 80, 20));
+
+        IDL1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDL1.setText("2020-05-20");
+        Confimation.add(IDL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 280, 340, 20));
+
+        IDL2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDL2.setText("12:00 Hrs");
+        Confimation.add(IDL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 305, 340, 20));
+
+        IDL3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDL3.setText("2020-05-20");
+        Confimation.add(IDL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 330, 340, 20));
+
+        IDL4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDL4.setText("2020-05-20");
+        Confimation.add(IDL4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 355, 340, 20));
+
+        IDL5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDL5.setText("2020-05-20");
+        Confimation.add(IDL5, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 380, 340, 20));
+
+        RCheckBox.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        RCheckBox.setText("Do you wish to make your flight Refundable?");
+        RCheckBox.setOpaque(false);
+        Confimation.add(RCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 430, 490, 20));
+
+        MealsLabel.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        MealsLabel.setText("<html><b>Meals:");
+        Confimation.add(MealsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 465, 80, 20));
+
+        InclusiveRadioButton.setBackground(new java.awt.Color(255, 255, 255));
+        MealButtonGroup.add(InclusiveRadioButton);
+        InclusiveRadioButton.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        InclusiveRadioButton.setText("Inclusive");
+        InclusiveRadioButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                InclusiveRadioButtonMouseClicked(evt);
+            }
+        });
+        Confimation.add(InclusiveRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 460, 220, 30));
+
+        ExclusiveRadioButton.setBackground(new java.awt.Color(255, 255, 255));
+        MealButtonGroup.add(ExclusiveRadioButton);
+        ExclusiveRadioButton.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        ExclusiveRadioButton.setSelected(true);
+        ExclusiveRadioButton.setText("Exclusive");
+        ExclusiveRadioButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ExclusiveRadioButtonMouseClicked(evt);
+            }
+        });
+        Confimation.add(ExclusiveRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 460, 220, 30));
+
+        MealTypeLabel.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        MealTypeLabel.setText("Type:");
+        Confimation.add(MealTypeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 500, 80, 20));
+
+        MealRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
+        TypeButtonGroup.add(MealRadioButton1);
+        MealRadioButton1.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        MealRadioButton1.setSelected(true);
+        MealRadioButton1.setText("Vegeterian Meal");
+        Confimation.add(MealRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 495, 220, 30));
+
+        MealRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
+        TypeButtonGroup.add(MealRadioButton2);
+        MealRadioButton2.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        MealRadioButton2.setText("Non-Vegeterian Meal");
+        Confimation.add(MealRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 495, 220, 30));
+
+        ReturnFlightsButton.setBackground(new java.awt.Color(255, 255, 255));
+        ReturnFlightsButton.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        ReturnFlightsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BBackIcon.png"))); // NOI18N
+        ReturnFlightsButton.setText("BACK");
+        ReturnFlightsButton.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        ReturnFlightsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReturnFlightsButtonActionPerformed(evt);
+            }
+        });
+        Confimation.add(ReturnFlightsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 540, 160, 40));
+
+        ContinueFlightsButton.setBackground(new java.awt.Color(255, 255, 255));
+        ContinueFlightsButton.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        ContinueFlightsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BNextIcon.png"))); // NOI18N
+        ContinueFlightsButton.setText("CONTINUE");
+        ContinueFlightsButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ContinueFlightsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ContinueFlightsButtonActionPerformed(evt);
+            }
+        });
+        Confimation.add(ContinueFlightsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 540, 160, 40));
+
+        BottomInstructionBookingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BottomInstructionBookingLabel.setText("*If your flight has a connecting flight, then ETA/Arrival time includes 1-2 hours of Overlay Period. This period can be used to explore Dubai airport and its amenities.\n\n");
+        BottomInstructionBookingLabel.setOpaque(true);
+        Confimation.add(BottomInstructionBookingLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 600, 1090, 20));
+
+        ContentPanel2.add(Confimation, "CONFIRMATION");
+
+        Confirmation2ScrollPane.setBorder(null);
+        Confirmation2ScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        Confirmation2ScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        Confirmation2.setBackground(new java.awt.Color(255, 255, 255));
+        Confirmation2.setMaximumSize(new java.awt.Dimension(1090, 1170));
+        Confirmation2.setMinimumSize(new java.awt.Dimension(1090, 1170));
+        Confirmation2.setPreferredSize(new java.awt.Dimension(1090, 1170));
+        Confirmation2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        ConfirmationHeading1.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        ConfirmationHeading1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ConfirmationHeading1.setText("Review Your Flight");
+        Confirmation2.add(ConfirmationHeading1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 15, 390, 40));
+
+        FlightClassLabel1.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        FlightClassLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        FlightClassLabel1.setText("Class:");
+        Confirmation2.add(FlightClassLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, 100, 20));
+
+        FlightClassField1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        FlightClassField1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        FlightClassField1.setText("Economy");
+        Confirmation2.add(FlightClassField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 150, 20));
+
+        FlightPassengersLabel1.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        FlightPassengersLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        FlightPassengersLabel1.setText("Passengers:");
+        Confirmation2.add(FlightPassengersLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, 100, 20));
+
+        FlightPassengersField1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        FlightPassengersField1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        FlightPassengersField1.setText("9");
+        Confirmation2.add(FlightPassengersField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, 150, 20));
+
+        FirstFlight.setBackground(new java.awt.Color(245, 245, 245));
+        FirstFlight.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        FlightCodeLabel1.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        FlightCodeLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        FlightCodeLabel1.setText("Flight Code:");
+        FirstFlight.add(FlightCodeLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, 100, 20));
+
+        FlightCodeField1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        FlightCodeField1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        FlightCodeField1.setText("AMI00AMSMRU10");
+        FirstFlight.add(FlightCodeField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 150, 20));
+
+        DetailsDisplay1.setOpaque(false);
+        DetailsDisplay1.setLayout(new java.awt.CardLayout());
+
+        DirectPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        DirectPanel2.setMaximumSize(new java.awt.Dimension(1090, 250));
+        DirectPanel2.setMinimumSize(new java.awt.Dimension(1090, 250));
+        DirectPanel2.setOpaque(false);
+        DirectPanel2.setPreferredSize(new java.awt.Dimension(1090, 70));
+        DirectPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        FromDLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        FromDLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        FromDLabel2.setText("<html>\n<body align=\"center\">\n<font size = \"6\">Delhi</font>\n<br>\n<font size = \"4\">(DEL)</font>\n</body>\n</html>");
+        DirectPanel2.add(FromDLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 0, 150, 70));
+
+        AnimationDLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FlyingAnimation.gif"))); // NOI18N
+        DirectPanel2.add(AnimationDLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 0, -1, 70));
+
+        ToDLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ToDLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ToDLabel2.setText("<html>\n<body align=\"center\">\n<font size = \"6\">Dubai</font>\n<br>\n<font size = \"4\">(DXB)</font>\n</body>\n</html>");
+        DirectPanel2.add(ToDLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(685, 0, 150, 70));
+
+        DetailsDisplay1.add(DirectPanel2, "DIRECT");
+
+        IndirectPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        IndirectPanel2.setMaximumSize(new java.awt.Dimension(1090, 250));
+        IndirectPanel2.setMinimumSize(new java.awt.Dimension(1090, 250));
+        IndirectPanel2.setOpaque(false);
+        IndirectPanel2.setPreferredSize(new java.awt.Dimension(1090, 70));
+        IndirectPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        FromILabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        FromILabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        FromILabel2.setText("<html>\n<body align=\"center\">\n<font size = \"6\">Delhi</font>\n<br>\n<font size = \"4\">(DEL)</font>\n</body>\n</html>");
+        IndirectPanel2.add(FromILabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 150, 70));
+
+        AnimationILabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FlyingAnimation.gif"))); // NOI18N
+        IndirectPanel2.add(AnimationILabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, -1, 70));
+
+        ConnectingILabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ConnectingILabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ConnectingILabel2.setText("<html>\n<body align=\"center\">\n<font size = \"6\">Dubai</font>\n<br>\n<font size = \"4\">(DXB)</font>\n</body>\n</html>");
+        IndirectPanel2.add(ConnectingILabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 150, 70));
+
+        AnimationILabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FlyingAnimation.gif"))); // NOI18N
+        IndirectPanel2.add(AnimationILabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, -1, 70));
+
+        ToILabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ToILabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ToILabel2.setText("<html>\n<body align=\"center\">\n<font size = \"6\">Dubai</font>\n<br>\n<font size = \"4\">(DXB)</font>\n</body>\n</html>");
+        IndirectPanel2.add(ToILabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 0, 150, 70));
+
+        DetailsDisplay1.add(IndirectPanel2, "INDIRECT");
+
+        FirstFlight.add(DetailsDisplay1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 1030, 70));
+
+        SourceLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        SourceLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SourceLabel2.setText("Source");
+        FirstFlight.add(SourceLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 150, 150, 20));
+
+        DestinationLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        DestinationLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DestinationLabel2.setText("Destination");
+        FirstFlight.add(DestinationLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(675, 150, 150, 20));
+
+        IDLF11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDLF11.setText("Airport:");
+        FirstFlight.add(IDLF11, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 230, 80, 20));
+
+        IDLF12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDLF12.setText("Date:");
+        FirstFlight.add(IDLF12, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 180, 80, 20));
+
+        IDLF13.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDLF13.setText("Time:");
+        FirstFlight.add(IDLF13, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 205, 80, 20));
+
+        IDLF14.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDLF14.setText("Country:");
+        FirstFlight.add(IDLF14, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 280, 80, 20));
+
+        IDLF15.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDLF15.setText("City:");
+        FirstFlight.add(IDLF15, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 255, 80, 20));
+
+        ISLF11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISLF11.setText("Airport:");
+        FirstFlight.add(ISLF11, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 80, 20));
+
+        ISLF12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISLF12.setText("City:");
+        FirstFlight.add(ISLF12, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 255, 80, 20));
+
+        ISLF13.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISLF13.setText("Date:");
+        FirstFlight.add(ISLF13, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 80, 20));
+
+        ISLF14.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISLF14.setText("Time:");
+        FirstFlight.add(ISLF14, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 205, 80, 20));
+
+        ISLF15.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISLF15.setText("Country:");
+        FirstFlight.add(ISLF15, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 80, 20));
+
+        S2W1_1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        S2W1_1.setText("2020-05-20");
+        FirstFlight.add(S2W1_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, 340, 20));
+
+        S2W1_2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        S2W1_2.setText("12:00 Hrs");
+        FirstFlight.add(S2W1_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 205, 340, 20));
+
+        S2W1_3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        S2W1_3.setText("Indira Ghandhi International Airport");
+        FirstFlight.add(S2W1_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, 340, 20));
+
+        S2W1_4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        S2W1_4.setText("Delhi");
+        FirstFlight.add(S2W1_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 255, 340, 20));
+
+        S2W1_5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        S2W1_5.setText("India");
+        FirstFlight.add(S2W1_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, 340, 20));
+
+        D2W1_1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        D2W1_1.setText("2020-05-20");
+        FirstFlight.add(D2W1_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 180, 340, 20));
+
+        D2W1_2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        D2W1_2.setText("12:00 Hrs");
+        FirstFlight.add(D2W1_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 205, 340, 20));
+
+        D2W1_3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        D2W1_3.setText("2020-05-20");
+        FirstFlight.add(D2W1_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 230, 340, 20));
+
+        D2W1_4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        D2W1_4.setText("2020-05-20");
+        FirstFlight.add(D2W1_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 255, 340, 20));
+
+        D2W1_5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        D2W1_5.setText("2020-05-20");
+        FirstFlight.add(D2W1_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 280, 340, 20));
+
+        MealsLabel1.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        MealsLabel1.setText("<html><b>Meals:");
+        FirstFlight.add(MealsLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 325, 80, 20));
+
+        InclusiveRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
+        Meal1.add(InclusiveRadioButton1);
+        InclusiveRadioButton1.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        InclusiveRadioButton1.setText("Inclusive");
+        InclusiveRadioButton1.setOpaque(false);
+        InclusiveRadioButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                InclusiveRadioButton1MouseClicked(evt);
+            }
+        });
+        FirstFlight.add(InclusiveRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, 220, 30));
+
+        ExclusiveRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
+        Meal1.add(ExclusiveRadioButton1);
+        ExclusiveRadioButton1.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        ExclusiveRadioButton1.setSelected(true);
+        ExclusiveRadioButton1.setText("Exclusive");
+        ExclusiveRadioButton1.setOpaque(false);
+        ExclusiveRadioButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ExclusiveRadioButton1MouseClicked(evt);
+            }
+        });
+        FirstFlight.add(ExclusiveRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 320, 220, 30));
+
+        MealTypeLabel1.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        MealTypeLabel1.setText("Type:");
+        FirstFlight.add(MealTypeLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 365, 80, 20));
+
+        MealRadioButton3.setBackground(new java.awt.Color(255, 255, 255));
+        Type1.add(MealRadioButton3);
+        MealRadioButton3.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        MealRadioButton3.setSelected(true);
+        MealRadioButton3.setText("Vegeterian Meal");
+        MealRadioButton3.setOpaque(false);
+        FirstFlight.add(MealRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, 220, 30));
+
+        MealRadioButton4.setBackground(new java.awt.Color(255, 255, 255));
+        Type1.add(MealRadioButton4);
+        MealRadioButton4.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        MealRadioButton4.setText("Non-Vegeterian Meal");
+        MealRadioButton4.setOpaque(false);
+        FirstFlight.add(MealRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 360, 220, 30));
+
+        Confirmation2.add(FirstFlight, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 1090, 420));
+
+        SecondFlight.setBackground(new java.awt.Color(245, 245, 245));
+        SecondFlight.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        FlightCodeLabel2.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        FlightCodeLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        FlightCodeLabel2.setText("Flight Code:");
+        SecondFlight.add(FlightCodeLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, 100, 20));
+
+        FlightCodeField2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        FlightCodeField2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        FlightCodeField2.setText("AMI00AMSMRU10");
+        SecondFlight.add(FlightCodeField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 150, 20));
+
+        DetailsDisplay2.setOpaque(false);
+        DetailsDisplay2.setLayout(new java.awt.CardLayout());
+
+        DirectPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        DirectPanel3.setMaximumSize(new java.awt.Dimension(1090, 250));
+        DirectPanel3.setMinimumSize(new java.awt.Dimension(1090, 250));
+        DirectPanel3.setOpaque(false);
+        DirectPanel3.setPreferredSize(new java.awt.Dimension(1090, 70));
+        DirectPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        FromDLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        FromDLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        FromDLabel3.setText("<html>\n<body align=\"center\">\n<font size = \"6\">Delhi</font>\n<br>\n<font size = \"4\">(DEL)</font>\n</body>\n</html>");
+        DirectPanel3.add(FromDLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 0, 150, 70));
+
+        AnimationDLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FlyingAnimation.gif"))); // NOI18N
+        DirectPanel3.add(AnimationDLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 0, -1, 70));
+
+        ToDLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ToDLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ToDLabel3.setText("<html>\n<body align=\"center\">\n<font size = \"6\">Dubai</font>\n<br>\n<font size = \"4\">(DXB)</font>\n</body>\n</html>");
+        DirectPanel3.add(ToDLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(685, 0, 150, 70));
+
+        DetailsDisplay2.add(DirectPanel3, "DIRECT");
+
+        IndirectPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        IndirectPanel3.setMaximumSize(new java.awt.Dimension(1090, 250));
+        IndirectPanel3.setMinimumSize(new java.awt.Dimension(1090, 250));
+        IndirectPanel3.setOpaque(false);
+        IndirectPanel3.setPreferredSize(new java.awt.Dimension(1090, 70));
+        IndirectPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        FromILabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        FromILabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        FromILabel3.setText("<html>\n<body align=\"center\">\n<font size = \"6\">Delhi</font>\n<br>\n<font size = \"4\">(DEL)</font>\n</body>\n</html>");
+        IndirectPanel3.add(FromILabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 150, 70));
+
+        AnimationILabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FlyingAnimation.gif"))); // NOI18N
+        IndirectPanel3.add(AnimationILabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, -1, 70));
+
+        ConnectingILabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ConnectingILabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ConnectingILabel3.setText("<html>\n<body align=\"center\">\n<font size = \"6\">Dubai</font>\n<br>\n<font size = \"4\">(DXB)</font>\n</body>\n</html>");
+        IndirectPanel3.add(ConnectingILabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 150, 70));
+
+        AnimationILabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FlyingAnimation.gif"))); // NOI18N
+        IndirectPanel3.add(AnimationILabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, -1, 70));
+
+        ToILabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ToILabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ToILabel3.setText("<html>\n<body align=\"center\">\n<font size = \"6\">Dubai</font>\n<br>\n<font size = \"4\">(DXB)</font>\n</body>\n</html>");
+        IndirectPanel3.add(ToILabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 0, 150, 70));
+
+        DetailsDisplay2.add(IndirectPanel3, "INDIRECT");
+
+        SecondFlight.add(DetailsDisplay2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 1030, 70));
+
+        SourceLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        SourceLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SourceLabel3.setText("Source");
+        SecondFlight.add(SourceLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 150, 150, 20));
+
+        DestinationLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        DestinationLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DestinationLabel3.setText("Destination");
+        SecondFlight.add(DestinationLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(675, 150, 150, 20));
+
+        IDLF16.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDLF16.setText("Airport:");
+        SecondFlight.add(IDLF16, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 230, 80, 20));
+
+        IDLF17.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDLF17.setText("Date:");
+        SecondFlight.add(IDLF17, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 180, 80, 20));
+
+        IDLF18.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDLF18.setText("Time:");
+        SecondFlight.add(IDLF18, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 205, 80, 20));
+
+        IDLF19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDLF19.setText("Country:");
+        SecondFlight.add(IDLF19, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 280, 80, 20));
+
+        IDLF20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDLF20.setText("City:");
+        SecondFlight.add(IDLF20, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 255, 80, 20));
+
+        ISLF16.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISLF16.setText("Airport:");
+        SecondFlight.add(ISLF16, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 80, 20));
+
+        ISLF17.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISLF17.setText("City:");
+        SecondFlight.add(ISLF17, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 255, 80, 20));
+
+        ISLF18.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISLF18.setText("Date:");
+        SecondFlight.add(ISLF18, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 80, 20));
+
+        ISLF19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISLF19.setText("Time:");
+        SecondFlight.add(ISLF19, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 205, 80, 20));
+
+        ISLF20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISLF20.setText("Country:");
+        SecondFlight.add(ISLF20, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 80, 20));
+
+        S2W1_6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        S2W1_6.setText("2020-05-20");
+        SecondFlight.add(S2W1_6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, 340, 20));
+
+        S2W1_7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        S2W1_7.setText("12:00 Hrs");
+        SecondFlight.add(S2W1_7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 205, 340, 20));
+
+        S2W1_8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        S2W1_8.setText("Indira Ghandhi International Airport");
+        SecondFlight.add(S2W1_8, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, 340, 20));
+
+        S2W1_9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        S2W1_9.setText("Delhi");
+        SecondFlight.add(S2W1_9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 255, 340, 20));
+
+        S2W1_10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        S2W1_10.setText("India");
+        SecondFlight.add(S2W1_10, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, 340, 20));
+
+        D2W1_6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        D2W1_6.setText("2020-05-20");
+        SecondFlight.add(D2W1_6, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 180, 340, 20));
+
+        D2W1_7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        D2W1_7.setText("12:00 Hrs");
+        SecondFlight.add(D2W1_7, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 205, 340, 20));
+
+        D2W1_8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        D2W1_8.setText("2020-05-20");
+        SecondFlight.add(D2W1_8, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 230, 340, 20));
+
+        D2W1_9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        D2W1_9.setText("2020-05-20");
+        SecondFlight.add(D2W1_9, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 255, 340, 20));
+
+        D2W1_10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        D2W1_10.setText("2020-05-20");
+        SecondFlight.add(D2W1_10, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 280, 340, 20));
+
+        MealsLabel2.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        MealsLabel2.setText("<html><b>Meals:");
+        SecondFlight.add(MealsLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 325, 80, 20));
+
+        InclusiveRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
+        Meal2.add(InclusiveRadioButton2);
+        InclusiveRadioButton2.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        InclusiveRadioButton2.setText("Inclusive");
+        InclusiveRadioButton2.setOpaque(false);
+        InclusiveRadioButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                InclusiveRadioButton2MouseClicked(evt);
+            }
+        });
+        SecondFlight.add(InclusiveRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, 220, 30));
+
+        ExclusiveRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
+        Meal2.add(ExclusiveRadioButton2);
+        ExclusiveRadioButton2.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        ExclusiveRadioButton2.setSelected(true);
+        ExclusiveRadioButton2.setText("Exclusive");
+        ExclusiveRadioButton2.setOpaque(false);
+        ExclusiveRadioButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ExclusiveRadioButton2MouseClicked(evt);
+            }
+        });
+        SecondFlight.add(ExclusiveRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 320, 220, 30));
+
+        MealTypeLabel2.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        MealTypeLabel2.setText("Type:");
+        SecondFlight.add(MealTypeLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 365, 80, 20));
+
+        MealRadioButton5.setBackground(new java.awt.Color(255, 255, 255));
+        Type2.add(MealRadioButton5);
+        MealRadioButton5.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        MealRadioButton5.setSelected(true);
+        MealRadioButton5.setText("Vegeterian Meal");
+        MealRadioButton5.setOpaque(false);
+        SecondFlight.add(MealRadioButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, 220, 30));
+
+        MealRadioButton6.setBackground(new java.awt.Color(255, 255, 255));
+        Type2.add(MealRadioButton6);
+        MealRadioButton6.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        MealRadioButton6.setText("Non-Vegeterian Meal");
+        MealRadioButton6.setOpaque(false);
+        SecondFlight.add(MealRadioButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 360, 220, 30));
+
+        Confirmation2.add(SecondFlight, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 600, 1090, 420));
+
+        RCheckBox1.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        RCheckBox1.setText("Do you wish to make your flight Refundable?");
+        RCheckBox1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        RCheckBox1.setOpaque(false);
+        Confirmation2.add(RCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 1040, 490, 20));
+
+        ReturnFlightsButton1.setBackground(new java.awt.Color(255, 255, 255));
+        ReturnFlightsButton1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        ReturnFlightsButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BBackIcon.png"))); // NOI18N
+        ReturnFlightsButton1.setText("BACK");
+        ReturnFlightsButton1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        ReturnFlightsButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReturnFlightsButton1ActionPerformed(evt);
+            }
+        });
+        Confirmation2.add(ReturnFlightsButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 1080, 160, 40));
+
+        ContinueFlightsButton1.setBackground(new java.awt.Color(255, 255, 255));
+        ContinueFlightsButton1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        ContinueFlightsButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BNextIcon.png"))); // NOI18N
+        ContinueFlightsButton1.setText("CONTINUE");
+        ContinueFlightsButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ContinueFlightsButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ContinueFlightsButton1ActionPerformed(evt);
+            }
+        });
+        Confirmation2.add(ContinueFlightsButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 1080, 160, 40));
+
+        BottomInstructionBookingLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BottomInstructionBookingLabel2.setText("*If your flight has a connecting flight, then ETA/Arrival time includes 1-2 hours of Overlay Period. This period can be used to explore Dubai airport and its amenities.\n\n");
+        BottomInstructionBookingLabel2.setOpaque(true);
+        Confirmation2.add(BottomInstructionBookingLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1150, 1090, 20));
+
+        Confirmation2ScrollPane.setViewportView(Confirmation2);
+
+        ContentPanel2.add(Confirmation2ScrollPane, "CONFIRMATION2");
+
+        PaymentShow.setBackground(new java.awt.Color(224, 243, 255));
+        PaymentShow.setMinimumSize(new java.awt.Dimension(1090, 620));
+        PaymentShow.setPreferredSize(new java.awt.Dimension(1090, 620));
+        PaymentShow.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        PaymentWalletAnimation.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        PaymentWalletAnimation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/PaymentDisplay.gif"))); // NOI18N
+        PaymentShow.add(PaymentWalletAnimation, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, 390, 220));
+
+        NextNLabel.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
+        NextNLabel.setForeground(new java.awt.Color(4, 87, 165));
+        NextNLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BLNextIcon.png"))); // NOI18N
+        NextNLabel.setText("PAY NOW");
+        NextNLabel.setToolTipText("Click here to confirm the booking.");
+        NextNLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        NextNLabel.setIconTextGap(6);
+        NextNLabel.setOpaque(false);
+        NextNLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NextNLabelActionPerformed(evt);
+            }
+        });
+        PaymentShow.add(NextNLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 540, 170, 40));
+
+        BackNLabel.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
+        BackNLabel.setForeground(new java.awt.Color(4, 87, 165));
+        BackNLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BLBackIcon.png"))); // NOI18N
+        BackNLabel.setText("BACK");
+        BackNLabel.setToolTipText("Click here to go back to search flights.");
+        BackNLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        BackNLabel.setIconTextGap(6);
+        BackNLabel.setOpaque(false);
+        BackNLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackNLabelActionPerformed(evt);
+            }
+        });
+        PaymentShow.add(BackNLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 540, 160, 40));
+
+        TotalAmountLabel.setFont(new java.awt.Font("Arial", 0, 19)); // NOI18N
+        TotalAmountLabel.setText("Total Amount to be paid:");
+        PaymentShow.add(TotalAmountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, 210, 30));
+
+        TotalAmountField.setFont(new java.awt.Font("Arial", 0, 19)); // NOI18N
+        TotalAmountField.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        TotalAmountField.setText("Rs 25,000");
+        TotalAmountField.setToolTipText("");
+        PaymentShow.add(TotalAmountField, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 250, 170, 30));
+
+        FareBreakupPanel.setOpaque(false);
+        FareBreakupPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BaseFareLabel.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        BaseFareLabel.setText("Base Fare:");
+        FareBreakupPanel.add(BaseFareLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 15, 170, 20));
+
+        MealChargesLabel.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        MealChargesLabel.setText("Meal Charges:");
+        FareBreakupPanel.add(MealChargesLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, 170, 20));
+
+        RefundableLabel.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        RefundableLabel.setText("Cancellation Charges:");
+        FareBreakupPanel.add(RefundableLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 75, 170, 20));
+
+        RefundableLabel1.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        RefundableLabel1.setText("Class Charges:");
+        FareBreakupPanel.add(RefundableLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 105, 170, 20));
+
+        RefundableLabel2.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        RefundableLabel2.setText("Passengers:");
+        FareBreakupPanel.add(RefundableLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 135, 170, 20));
+
+        KidsFareInstruction.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        KidsFareInstruction.setText("Ticket for kid gets 30% off on the base fare. (Age: 2-13)");
+        FareBreakupPanel.add(KidsFareInstruction, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 360, 15));
+
+        FareField1.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        FareField1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        FareField1.setText("25,000");
+        FareBreakupPanel.add(FareField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 15, 190, 20));
+
+        FareField2.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        FareField2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        FareField2.setText("25,000");
+        FareBreakupPanel.add(FareField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 45, 190, 20));
+
+        FareField3.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        FareField3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        FareField3.setText("25,000");
+        FareBreakupPanel.add(FareField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 75, 190, 20));
+
+        FareField4.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        FareField4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        FareField4.setText("25,000");
+        FareBreakupPanel.add(FareField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 105, 190, 20));
+
+        FareField5.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        FareField5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        FareField5.setText("25,000");
+        FareBreakupPanel.add(FareField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 135, 190, 20));
+
+        PaymentShow.add(FareBreakupPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 310, 380, 190));
+
+        FareBreakupLabel.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        FareBreakupLabel.setText("Fare Breakup:");
+        FareBreakupLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FareBreakupLabelMouseClicked(evt);
+            }
+        });
+        PaymentShow.add(FareBreakupLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 290, 200, 20));
+
+        ShowHideLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        ShowHideLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/IconDown.png"))); // NOI18N
+        ShowHideLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FareBreakupLabelMouseClicked(evt);
+            }
+        });
+        PaymentShow.add(ShowHideLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 290, 180, 20));
+
+        ContentPanel2.add(PaymentShow, "SHOW");
+
+        PaymentShow2.setBackground(new java.awt.Color(224, 243, 255));
+        PaymentShow2.setMinimumSize(new java.awt.Dimension(1090, 620));
+        PaymentShow2.setPreferredSize(new java.awt.Dimension(1090, 620));
+        PaymentShow2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        PaymentWalletAnimation1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        PaymentWalletAnimation1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/PaymentDisplay.gif"))); // NOI18N
+        PaymentShow2.add(PaymentWalletAnimation1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 390, 220));
+
+        NextNLabel1.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
+        NextNLabel1.setForeground(new java.awt.Color(4, 87, 165));
+        NextNLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BLNextIcon.png"))); // NOI18N
+        NextNLabel1.setText("PAY NOW");
+        NextNLabel1.setToolTipText("Click here to confirm the booking.");
+        NextNLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        NextNLabel1.setIconTextGap(6);
+        NextNLabel1.setOpaque(false);
+        NextNLabel1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NextNLabel1ActionPerformed(evt);
+            }
+        });
+        PaymentShow2.add(NextNLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 540, 170, 40));
+
+        BackNLabel1.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
+        BackNLabel1.setForeground(new java.awt.Color(4, 87, 165));
+        BackNLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BLBackIcon.png"))); // NOI18N
+        BackNLabel1.setText("BACK");
+        BackNLabel1.setToolTipText("Click here to go back to search flights.");
+        BackNLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        BackNLabel1.setIconTextGap(6);
+        BackNLabel1.setOpaque(false);
+        BackNLabel1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackNLabel1ActionPerformed(evt);
+            }
+        });
+        PaymentShow2.add(BackNLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 540, 160, 40));
+
+        TotalAmountLabel1.setFont(new java.awt.Font("Arial", 0, 19)); // NOI18N
+        TotalAmountLabel1.setText("Total Amount to be paid:");
+        PaymentShow2.add(TotalAmountLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 210, 30));
+
+        TotalAmountField1.setFont(new java.awt.Font("Arial", 0, 19)); // NOI18N
+        TotalAmountField1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        TotalAmountField1.setText("Rs 25,000");
+        TotalAmountField1.setToolTipText("");
+        PaymentShow2.add(TotalAmountField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 240, 170, 30));
+
+        FareBreakupPanel1.setOpaque(false);
+        FareBreakupPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BaseFareLabel1.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        BaseFareLabel1.setText("Base Fare:");
+        FareBreakupPanel1.add(BaseFareLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 15, 170, 20));
+
+        MealChargesLabel1.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        MealChargesLabel1.setText("Meal Charges:");
+        FareBreakupPanel1.add(MealChargesLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, 170, 20));
+
+        RefundableLabel3.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        RefundableLabel3.setText("Cancellation Charges:");
+        FareBreakupPanel1.add(RefundableLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 75, 170, 20));
+
+        RefundableLabel4.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        RefundableLabel4.setText("Class Charges:");
+        FareBreakupPanel1.add(RefundableLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 105, 170, 20));
+
+        RefundableLabel5.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        RefundableLabel5.setText("Passengers:");
+        FareBreakupPanel1.add(RefundableLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 135, 170, 20));
+
+        RefundableLabel6.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        RefundableLabel6.setText("Return Flight:");
+        FareBreakupPanel1.add(RefundableLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 165, 170, 20));
+
+        KidsFareInstruction1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        KidsFareInstruction1.setText("Ticket for kid gets 30% off on the base fare. (Age: 2-13)");
+        FareBreakupPanel1.add(KidsFareInstruction1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 360, 15));
+
+        FareField6.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        FareField6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        FareField6.setText("25,000");
+        FareBreakupPanel1.add(FareField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 15, 190, 20));
+
+        FareField7.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        FareField7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        FareField7.setText("25,000");
+        FareBreakupPanel1.add(FareField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 45, 190, 20));
+
+        FareField8.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        FareField8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        FareField8.setText("25,000");
+        FareBreakupPanel1.add(FareField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 75, 190, 20));
+
+        FareField9.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        FareField9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        FareField9.setText("25,000");
+        FareBreakupPanel1.add(FareField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 105, 190, 20));
+
+        FareField10.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        FareField10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        FareField10.setText("25,000");
+        FareBreakupPanel1.add(FareField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 135, 190, 20));
+
+        FareField11.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
+        FareField11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        FareField11.setText("Total Fare x 2");
+        FareBreakupPanel1.add(FareField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 165, 190, 20));
+
+        PaymentShow2.add(FareBreakupPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, 380, 220));
+
+        FareBreakupLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        FareBreakupLabel1.setText("Fare Breakup:");
+        FareBreakupLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FareBreakupLabel1MouseClicked(evt);
+            }
+        });
+        PaymentShow2.add(FareBreakupLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 280, 200, 20));
+
+        ShowHideLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        ShowHideLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/IconDown.png"))); // NOI18N
+        ShowHideLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FareBreakupLabel1MouseClicked(evt);
+            }
+        });
+        PaymentShow2.add(ShowHideLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 280, 180, 20));
+
+        ContentPanel2.add(PaymentShow2, "SHOW2");
+
+        PaymentPage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        PaymentAnimation.setBackground(new java.awt.Color(227, 60, 47));
+        PaymentAnimation.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        PaymentAnimation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/PaymentGifN.gif"))); // NOI18N
+        PaymentAnimation.setOpaque(true);
+        PaymentPage.add(PaymentAnimation, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 620));
+
+        MailSentLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        MailSentLabel.setText("<html><body align = \"center\">A mail has been sent to your email containing booking confirmation.\n");
+        PaymentPage.add(MailSentLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(403, 430, 290, 50));
+
+        BookingCode.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        BookingCode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BookingCode.setText("<html><body align = \"center\">Your booking code is: AMI00AMSDEL123-B1234\n");
+        PaymentPage.add(BookingCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, 310, 70));
+
+        PaymentSuccess.setBackground(new java.awt.Color(227, 60, 47));
+        PaymentSuccess.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        PaymentSuccess.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/PaymentSuccessful.png"))); // NOI18N
+        PaymentSuccess.setOpaque(true);
+        PaymentPage.add(PaymentSuccess, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 620));
+
+        ContentPanel2.add(PaymentPage, "PAYMENT");
+
+        LayeredPane2.setLayer(IconPanel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        LayeredPane2.setLayer(LabelPanel2, javax.swing.JLayeredPane.PALETTE_LAYER);
+        LayeredPane2.setLayer(ContentPanel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout LayeredPane2Layout = new javax.swing.GroupLayout(LayeredPane2);
+        LayeredPane2.setLayout(LayeredPane2Layout);
+        LayeredPane2Layout.setHorizontalGroup(
+            LayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LayeredPane2Layout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addComponent(ContentPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(LayeredPane2Layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(LabelPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(IconPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        LayeredPane2Layout.setVerticalGroup(
+            LayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(ContentPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(LabelPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(IconPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        BookPanel.add(LayeredPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 1200, 620));
+
+        getContentPane().add(BookPanel, "CARD2");
+
+        ManagePanel.setMaximumSize(new java.awt.Dimension(1200, 700));
+        ManagePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        TopPanel3.setBackground(new java.awt.Color(51, 51, 51));
+        TopPanel3.setMaximumSize(new java.awt.Dimension(1200, 80));
+        TopPanel3.setMinimumSize(new java.awt.Dimension(1200, 80));
+        TopPanel3.setPreferredSize(new java.awt.Dimension(1200, 80));
+        TopPanel3.setRequestFocusEnabled(false);
+        TopPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        MenuLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        MenuLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MENUICON.png"))); // NOI18N
+        MenuLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MenuLabel3MouseClicked(evt);
+            }
+        });
+        TopPanel3.add(MenuLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 50, 50));
+
+        LogoLabel3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 36)); // NOI18N
+        LogoLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        LogoLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LogoLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LOGONEW.png"))); // NOI18N
+        TopPanel3.add(LogoLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 300, 80));
+
+        Logout3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Logout3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LOGOUT.png"))); // NOI18N
+        Logout3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Logout3MouseClicked(evt);
+            }
+        });
+        TopPanel3.add(Logout3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 13, 50, 70));
+
+        Exit3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Exit3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ExitFinal.png"))); // NOI18N
+        Exit3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Exit3MouseClicked(evt);
+            }
+        });
+        TopPanel3.add(Exit3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1141, 10, 50, 73));
+
+        ManagePanel.add(TopPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, -1));
+
+        LayeredPane3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        IconPanel3.setBackground(new java.awt.Color(51, 51, 51));
+        IconPanel3.setMaximumSize(new java.awt.Dimension(110, 620));
+        IconPanel3.setMinimumSize(new java.awt.Dimension(110, 620));
+        IconPanel3.setPreferredSize(new java.awt.Dimension(110, 620));
+
+        DashIcon3.setBackground(new java.awt.Color(51, 51, 51));
+        DashIcon3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DashIcon3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/DASH ICON.png"))); // NOI18N
+        DashIcon3.setOpaque(true);
+
+        BookIcon3.setBackground(new java.awt.Color(51, 51, 51));
+        BookIcon3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BookIcon3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BOOK LOGO.png"))); // NOI18N
+        BookIcon3.setOpaque(true);
+
+        ManageIcon3.setBackground(new java.awt.Color(51, 51, 51));
+        ManageIcon3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ManageIcon3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MANAGEICON.png"))); // NOI18N
+        ManageIcon3.setOpaque(true);
+
+        ExperienceIcon3.setBackground(new java.awt.Color(51, 51, 51));
+        ExperienceIcon3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ExperienceIcon3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/EXPICON.png"))); // NOI18N
+        ExperienceIcon3.setOpaque(true);
+
+        WhereweFlyIcon3.setBackground(new java.awt.Color(51, 51, 51));
+        WhereweFlyIcon3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        WhereweFlyIcon3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/WHEREWEFLYICON.png"))); // NOI18N
+        WhereweFlyIcon3.setOpaque(true);
+
+        HelpIcon3.setBackground(new java.awt.Color(51, 51, 51));
+        HelpIcon3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        HelpIcon3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/HELPICON.png"))); // NOI18N
+        HelpIcon3.setOpaque(true);
+
+        SettingsIcon3.setBackground(new java.awt.Color(51, 51, 51));
+        SettingsIcon3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SettingsIcon3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/SETTINGSICON.png"))); // NOI18N
+        SettingsIcon3.setOpaque(true);
+
+        javax.swing.GroupLayout IconPanel3Layout = new javax.swing.GroupLayout(IconPanel3);
+        IconPanel3.setLayout(IconPanel3Layout);
+        IconPanel3Layout.setHorizontalGroup(
+            IconPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(DashIcon3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(BookIcon3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(ManageIcon3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(ExperienceIcon3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(WhereweFlyIcon3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(HelpIcon3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(SettingsIcon3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        IconPanel3Layout.setVerticalGroup(
+            IconPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(IconPanel3Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(DashIcon3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(BookIcon3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ManageIcon3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ExperienceIcon3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(WhereweFlyIcon3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(HelpIcon3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(SettingsIcon3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(120, 120, 120))
+        );
+
+        LayeredPane3.add(IconPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 620));
+
+        LabelPanel3.setBackground(new java.awt.Color(51, 51, 51));
+        LabelPanel3.setMaximumSize(new java.awt.Dimension(210, 620));
+        LabelPanel3.setMinimumSize(new java.awt.Dimension(210, 620));
+        LabelPanel3.setPreferredSize(new java.awt.Dimension(210, 620));
+
+        DashboardLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        DashboardLabel3.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        DashboardLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        DashboardLabel3.setText("Dashboard");
+        DashboardLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        DashboardLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DashboardLabel8MouseClicked(evt);
+            }
+        });
+
+        BookLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        BookLabel3.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        BookLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        BookLabel3.setText("Book");
+        BookLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        BookLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BookLabel8MouseClicked(evt);
+            }
+        });
+
+        ManageLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        ManageLabel3.setFont(new java.awt.Font("Tahoma", 0, 28)); // NOI18N
+        ManageLabel3.setForeground(new java.awt.Color(102, 153, 255));
+        ManageLabel3.setText("Manage");
+
+        ExperienceLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        ExperienceLabel3.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        ExperienceLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        ExperienceLabel3.setText("Experience");
+        ExperienceLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ExperienceLabel8MouseClicked(evt);
+            }
+        });
+
+        WhereweFlyLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        WhereweFlyLabel3.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        WhereweFlyLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        WhereweFlyLabel3.setText("Where we fly");
+        WhereweFlyLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                WhereweFlyLabel8MouseClicked(evt);
+            }
+        });
+
+        HelpLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        HelpLabel3.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        HelpLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        HelpLabel3.setText("Help");
+        HelpLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HelpLabel8MouseClicked(evt);
+            }
+        });
+
+        SettingsLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        SettingsLabel3.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        SettingsLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        SettingsLabel3.setText("Settings");
+        SettingsLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SettingsLabel8MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout LabelPanel3Layout = new javax.swing.GroupLayout(LabelPanel3);
+        LabelPanel3.setLayout(LabelPanel3Layout);
+        LabelPanel3Layout.setHorizontalGroup(
+            LabelPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LabelPanel3Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addGroup(LabelPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(DashboardLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BookLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ManageLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ExperienceLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(WhereweFlyLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(HelpLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SettingsLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        LabelPanel3Layout.setVerticalGroup(
+            LabelPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LabelPanel3Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(DashboardLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(BookLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ManageLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ExperienceLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(WhereweFlyLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(HelpLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(SettingsLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(120, 120, 120))
+        );
+
+        LayeredPane3.setLayer(LabelPanel3, javax.swing.JLayeredPane.PALETTE_LAYER);
+        LayeredPane3.add(LabelPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 210, 620));
+
+        ContentPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        ContentPanel3.setMaximumSize(new java.awt.Dimension(900, 620));
+        ContentPanel3.setMinimumSize(new java.awt.Dimension(900, 620));
+        ContentPanel3.setPreferredSize(new java.awt.Dimension(900, 620));
+        ContentPanel3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                ContentPanel3FocusGained(evt);
+            }
+        });
+        ContentPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ContentPanel3MouseClicked(evt);
+            }
+        });
+        ContentPanel3.setLayout(new java.awt.CardLayout());
+
+        MHomePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        RefernceNumberMLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        RefernceNumberMLabel.setText("Refernce Number:");
+        MHomePanel.add(RefernceNumberMLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, -1, 20));
+
+        RefernceNumberMField.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        RefernceNumberMField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        RefernceNumberMField.setBorder(null);
+        RefernceNumberMField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                RefernceNumberMFieldKeyPressed(evt);
+            }
+        });
+        MHomePanel.add(RefernceNumberMField, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 235, 280, 40));
+        MHomePanel.add(MUnderline, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 275, 280, 2));
+
+        InstructionMLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        InstructionMLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        InstructionMLabel.setText("Invalid Reference Number");
+        MHomePanel.add(InstructionMLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 470, 280, -1));
+
+        SearchRefernceLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        SearchRefernceLabel.setForeground(new java.awt.Color(255, 255, 255));
+        SearchRefernceLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SearchRefernceLabel.setText("SEARCH");
+        SearchRefernceLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SearchRefernceLabelMouseClicked(evt);
+            }
+        });
+        MHomePanel.add(SearchRefernceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 318, 280, 47));
+
+        SearchAllLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        SearchAllLabel.setForeground(new java.awt.Color(255, 255, 255));
+        SearchAllLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SearchAllLabel.setText("SHOW ALL");
+        SearchAllLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SearchAllLabelMouseClicked(evt);
+            }
+        });
+        MHomePanel.add(SearchAllLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 405, 280, 47));
+
+        ManageDPanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ManagePanel.png"))); // NOI18N
+        MHomePanel.add(ManageDPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 150, 350, 370));
+
+        ManageBackground.setFont(new java.awt.Font("Tahoma", 3, 100)); // NOI18N
+        ManageBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ManageBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ManageBackground.png"))); // NOI18N
+        MHomePanel.add(ManageBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 620));
+
+        ContentPanel3.add(MHomePanel, "HOME");
+
+        NoRowPanel.setBackground(new java.awt.Color(255, 255, 255));
+        NoRowPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        NoFlightMSelectedLabel.setFont(new java.awt.Font("Arial", 0, 25)); // NOI18N
+        NoFlightMSelectedLabel.setForeground(new java.awt.Color(47, 62, 91));
+        NoFlightMSelectedLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        NoFlightMSelectedLabel.setText("<html><body align = \"center\"><font size = \"30\"><b> NO FLIGHT SELECTED </b></font><br> To continue, please select a row. </body> </html>");
+        NoRowPanel.add(NoFlightMSelectedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 190, 480, 190));
+
+        AstronautM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/NoRowMSelected.png"))); // NOI18N
+        NoRowPanel.add(AstronautM, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 620));
+
+        ContentPanel3.add(NoRowPanel, "NOROW");
+
+        NoFlightMLabel.setBackground(new java.awt.Color(255, 255, 255));
+        NoFlightMLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        NoFlightMLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/NoFlight.png"))); // NOI18N
+        NoFlightMLabel.setOpaque(true);
+
+        javax.swing.GroupLayout NoFlightMPanelLayout = new javax.swing.GroupLayout(NoFlightMPanel);
+        NoFlightMPanel.setLayout(NoFlightMPanelLayout);
+        NoFlightMPanelLayout.setHorizontalGroup(
+            NoFlightMPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(NoFlightMLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+        );
+        NoFlightMPanelLayout.setVerticalGroup(
+            NoFlightMPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(NoFlightMLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
+        );
+
+        ContentPanel3.add(NoFlightMPanel, "NOFLIGHT");
+
+        MSearchAllPanel.setBackground(new java.awt.Color(255, 255, 255));
+        MSearchAllPanel.setMaximumSize(new java.awt.Dimension(1090, 620));
+        MSearchAllPanel.setMinimumSize(new java.awt.Dimension(1090, 620));
+        MSearchAllPanel.setPreferredSize(new java.awt.Dimension(1090, 620));
+        MSearchAllPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        TableNScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        TableNScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        TableNScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        TableNScrollPane1.setOpaque(false);
+
+        FlightMDisplayTable.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        FlightMDisplayTable.getTableHeader().setDefaultRenderer(new NewTableRender2());
+        FlightMDisplayTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Flight Reference", "Departure Airport", "Arrival Airport", "Departure Date", "Departure Time", "Class", "Meal"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        FlightMDisplayTable.setGridColor(new java.awt.Color(91, 107, 114));
+        FlightMDisplayTable.setOpaque(false);
+        FlightMDisplayTable.setRowHeight(37);
+        FlightMDisplayTable.setRowMargin(2);
+        FlightMDisplayTable.setSelectionBackground(new java.awt.Color(230, 230, 230));
+        FlightMDisplayTable.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        FlightMDisplayTable.setShowVerticalLines(false);
+        FlightMDisplayTable.getTableHeader().setPreferredSize( new Dimension(0,32));
+        FlightMDisplayTable.getTableHeader().setResizingAllowed(false);
+        FlightMDisplayTable.getTableHeader().setReorderingAllowed(false);
+        TableNScrollPane1.setViewportView(FlightMDisplayTable);
+        if (FlightMDisplayTable.getColumnModel().getColumnCount() > 0) {
+            FlightMDisplayTable.getColumnModel().getColumn(0).setResizable(false);
+            FlightMDisplayTable.getColumnModel().getColumn(0).setPreferredWidth(100);
+            FlightMDisplayTable.getColumnModel().getColumn(1).setResizable(false);
+            FlightMDisplayTable.getColumnModel().getColumn(1).setPreferredWidth(75);
+            FlightMDisplayTable.getColumnModel().getColumn(2).setResizable(false);
+            FlightMDisplayTable.getColumnModel().getColumn(2).setPreferredWidth(75);
+            FlightMDisplayTable.getColumnModel().getColumn(3).setResizable(false);
+            FlightMDisplayTable.getColumnModel().getColumn(3).setPreferredWidth(50);
+            FlightMDisplayTable.getColumnModel().getColumn(4).setResizable(false);
+            FlightMDisplayTable.getColumnModel().getColumn(4).setPreferredWidth(50);
+            FlightMDisplayTable.getColumnModel().getColumn(5).setResizable(false);
+            FlightMDisplayTable.getColumnModel().getColumn(5).setPreferredWidth(40);
+            FlightMDisplayTable.getColumnModel().getColumn(6).setResizable(false);
+            FlightMDisplayTable.getColumnModel().getColumn(6).setPreferredWidth(50);
+        }
+
+        MSearchAllPanel.add(TableNScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 45, 1000, 450));
+
+        BackMLabel.setFont(new java.awt.Font("Arial", 0, 23)); // NOI18N
+        BackMLabel.setForeground(new java.awt.Color(51, 51, 51));
+        BackMLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BackMLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BBackIcon.png"))); // NOI18N
+        BackMLabel.setText("BACK\n");
+        BackMLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BackMLabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BackMLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BackMLabelMouseExited(evt);
+            }
+        });
+        MSearchAllPanel.add(BackMLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 520, 150, 40));
+
+        NextMLabel.setBackground(new java.awt.Color(51, 51, 51));
+        NextMLabel.setFont(new java.awt.Font("Arial", 0, 23)); // NOI18N
+        NextMLabel.setForeground(new java.awt.Color(51, 51, 51));
+        NextMLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        NextMLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BNextIcon.png"))); // NOI18N
+        NextMLabel.setText("NEXT");
+        NextMLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NextMLabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                NextMLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                NextMLabelMouseExited(evt);
+            }
+        });
+        MSearchAllPanel.add(NextMLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 520, 150, 40));
+
+        ContentPanel3.add(MSearchAllPanel, "SEARCHALL");
+
+        MResult1Panel.setBackground(new java.awt.Color(255, 255, 255));
+        MResult1Panel.setMaximumSize(new java.awt.Dimension(1090, 620));
+        MResult1Panel.setMinimumSize(new java.awt.Dimension(1090, 620));
+        MResult1Panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        FlightDetails.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        FlightDetails.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        FlightDetails.setText("Flight Details");
+        MResult1Panel.add(FlightDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 15, 390, 40));
+
+        ULLabel1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        ULLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ULLabel1.setText("Booking Refernce:");
+        MResult1Panel.add(ULLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 140, 20));
+
+        ULLabel2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        ULLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ULLabel2.setText("Class:");
+        MResult1Panel.add(ULLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 140, 20));
+
+        ULLabel3.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        ULLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ULLabel3.setText("Amount paid:");
+        MResult1Panel.add(ULLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 140, 20));
+
+        ULLabel4.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        ULLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ULLabel4.setText("Passengers:");
+        MResult1Panel.add(ULLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, 100, 20));
+
+        ULLabel5.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        ULLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ULLabel5.setText("Adult(s):");
+        MResult1Panel.add(ULLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 110, 100, 20));
+
+        ULLabel6.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        ULLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ULLabel6.setText("Kid(s):");
+        MResult1Panel.add(ULLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 140, 100, 20));
+
+        Value1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        Value1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        Value1.setText("AMI00AMSMRU10-B1");
+        MResult1Panel.add(Value1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 220, 20));
+
+        Value2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        Value2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        Value2.setText("Economy");
+        MResult1Panel.add(Value2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, 220, 20));
+
+        Value3.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        Value3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        Value3.setText("Rs. 15,789.00");
+        MResult1Panel.add(Value3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, 220, 20));
+
+        Value4.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        Value4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        Value4.setText("9");
+        MResult1Panel.add(Value4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 80, 150, 20));
+
+        Value5.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        Value5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        Value5.setText("5");
+        MResult1Panel.add(Value5, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 110, 150, 20));
+
+        Value6.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        Value6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        Value6.setText("4");
+        MResult1Panel.add(Value6, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 140, 150, 20));
+
+        DetailsNDisplay.setLayout(new java.awt.CardLayout());
+
+        DirectPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        DirectPanel1.setMaximumSize(new java.awt.Dimension(1090, 250));
+        DirectPanel1.setMinimumSize(new java.awt.Dimension(1090, 250));
+        DirectPanel1.setPreferredSize(new java.awt.Dimension(1090, 70));
+        DirectPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        FromDLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        FromDLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        FromDLabel1.setText("<html>\n<body align=\"center\">\n<font size = \"6\">Delhi</font>\n<br>\n<font size = \"4\">(DEL)</font>\n</body>\n</html>");
+        DirectPanel1.add(FromDLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 10, 150, 60));
+
+        AnimationDLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FlyingAnimation.gif"))); // NOI18N
+        DirectPanel1.add(AnimationDLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 10, -1, -1));
+
+        ToDLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ToDLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ToDLabel1.setText("<html>\n<body align=\"center\">\n<font size = \"6\">Dubai</font>\n<br>\n<font size = \"4\">(DXB)</font>\n</body>\n</html>");
+        DirectPanel1.add(ToDLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(685, 10, 150, 60));
+
+        DetailsNDisplay.add(DirectPanel1, "DIRECT");
+
+        IndirectPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        IndirectPanel1.setMaximumSize(new java.awt.Dimension(1090, 250));
+        IndirectPanel1.setMinimumSize(new java.awt.Dimension(1090, 250));
+        IndirectPanel1.setPreferredSize(new java.awt.Dimension(1090, 70));
+        IndirectPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        FromILabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        FromILabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        FromILabel1.setText("<html>\n<body align=\"center\">\n<font size = \"6\">Delhi</font>\n<br>\n<font size = \"4\">(DEL)</font>\n</body>\n</html>");
+        IndirectPanel1.add(FromILabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 150, 60));
+
+        AnimationILabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FlyingAnimation.gif"))); // NOI18N
+        IndirectPanel1.add(AnimationILabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
+
+        ConnectingILabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ConnectingILabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ConnectingILabel1.setText("<html>\n<body align=\"center\">\n<font size = \"6\">Dubai</font>\n<br>\n<font size = \"4\">(DXB)</font>\n</body>\n</html>");
+        IndirectPanel1.add(ConnectingILabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 150, 60));
+
+        AnimationILabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FlyingAnimation.gif"))); // NOI18N
+        IndirectPanel1.add(AnimationILabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 10, -1, -1));
+
+        ToILabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ToILabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ToILabel1.setText("<html>\n<body align=\"center\">\n<font size = \"6\">Dubai</font>\n<br>\n<font size = \"4\">(DXB)</font>\n</body>\n</html>");
+        IndirectPanel1.add(ToILabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, 150, 60));
+
+        DetailsNDisplay.add(IndirectPanel1, "INDIRECT");
+
+        MResult1Panel.add(DetailsNDisplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 1090, 70));
+
+        SourceLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        SourceLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SourceLabel1.setText("Source");
+        MResult1Panel.add(SourceLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 260, 150, 20));
+
+        DestinationLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        DestinationLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DestinationLabel1.setText("Destination");
+        MResult1Panel.add(DestinationLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(675, 260, 150, 20));
+
+        ISLF6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISLF6.setText("Date:");
+        MResult1Panel.add(ISLF6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 80, 20));
+
+        ISLF7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISLF7.setText("Time:");
+        MResult1Panel.add(ISLF7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 315, 80, 20));
+
+        ISLF8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISLF8.setText("Airport:");
+        MResult1Panel.add(ISLF8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, 80, 20));
+
+        ISLF9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISLF9.setText("City:");
+        MResult1Panel.add(ISLF9, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 365, 80, 20));
+
+        ISLF10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ISLF10.setText("Country:");
+        MResult1Panel.add(ISLF10, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, 80, 20));
+
+        S1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        S1.setText("2020-05-20");
+        MResult1Panel.add(S1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 340, 20));
+
+        S2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        S2.setText("12:00 Hrs");
+        MResult1Panel.add(S2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 315, 340, 20));
+
+        S3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        S3.setText("Indira Ghandhi International Airport");
+        MResult1Panel.add(S3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, 340, 20));
+
+        S4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        S4.setText("Delhi");
+        MResult1Panel.add(S4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 365, 340, 20));
+
+        S5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        S5.setText("India");
+        MResult1Panel.add(S5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, 340, 20));
+
+        IDLF6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDLF6.setText("Date:");
+        MResult1Panel.add(IDLF6, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 290, 80, 20));
+
+        IDLF7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDLF7.setText("Time:");
+        MResult1Panel.add(IDLF7, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 315, 80, 20));
+
+        IDLF8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDLF8.setText("Airport:");
+        MResult1Panel.add(IDLF8, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 340, 80, 20));
+
+        IDLF9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDLF9.setText("City:");
+        MResult1Panel.add(IDLF9, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 365, 80, 20));
+
+        IDLF10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        IDLF10.setText("Country:");
+        MResult1Panel.add(IDLF10, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 390, 80, 20));
+
+        D1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        D1.setText("2020-05-20");
+        MResult1Panel.add(D1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 290, 340, 20));
+
+        D2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        D2.setText("12:00 Hrs");
+        MResult1Panel.add(D2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 315, 340, 20));
+
+        D3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        D3.setText("2020-05-20");
+        MResult1Panel.add(D3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 340, 340, 20));
+
+        D4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        D4.setText("2020-05-20");
+        MResult1Panel.add(D4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 365, 340, 20));
+
+        D5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        D5.setText("2020-05-20");
+        MResult1Panel.add(D5, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 390, 340, 20));
+
+        BottomInstructionBookingLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BottomInstructionBookingLabel1.setText("*If your flight has a connecting flight, then ETA/Arrival time includes 1-2 hours of Overlay Period. This period can be used to explore Dubai airport and its amenities.\n\n");
+        BottomInstructionBookingLabel1.setOpaque(true);
+        MResult1Panel.add(BottomInstructionBookingLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 600, 1090, 20));
+
+        ULLabel7.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        ULLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ULLabel7.setText("Refund Status:");
+        MResult1Panel.add(ULLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 430, 150, 20));
+
+        ULLabel8.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        ULLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ULLabel8.setText("Meal Status:");
+        MResult1Panel.add(ULLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 460, 150, 20));
+
+        ULLabel9.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        ULLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ULLabel9.setText("Type of Meal:");
+        MResult1Panel.add(ULLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 490, 150, 20));
+
+        Value7.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        Value7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Value7.setText("9");
+        MResult1Panel.add(Value7, new org.netbeans.lib.awtextra.AbsoluteConstraints(545, 430, 150, 20));
+
+        Value8.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        Value8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Value8.setText("Included");
+        MResult1Panel.add(Value8, new org.netbeans.lib.awtextra.AbsoluteConstraints(545, 460, 150, 20));
+
+        Value9.setBackground(new java.awt.Color(102, 255, 102));
+        Value9.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        Value9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Value9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/TypeofMeal.png"))); // NOI18N
+        Value9.setOpaque(true);
+        MResult1Panel.add(Value9, new org.netbeans.lib.awtextra.AbsoluteConstraints(605, 485, 30, 30));
+
+        CancelthisFlight.setBackground(new java.awt.Color(255, 255, 255));
+        CancelthisFlight.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        CancelthisFlight.setText("Cancel this Flight?");
+        CancelthisFlight.setBorder(null);
+        CancelthisFlight.setOpaque(false);
+        CancelthisFlight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelthisFlightActionPerformed(evt);
+            }
+        });
+        MResult1Panel.add(CancelthisFlight, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 535, 200, 40));
+
+        BackMFlightButton.setBackground(new java.awt.Color(255, 255, 255));
+        BackMFlightButton.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        BackMFlightButton.setText("Back");
+        BackMFlightButton.setBorder(null);
+        BackMFlightButton.setOpaque(false);
+        BackMFlightButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackMFlightButtonActionPerformed(evt);
+            }
+        });
+        MResult1Panel.add(BackMFlightButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 535, 190, 40));
+
+        ContentPanel3.add(MResult1Panel, "RESULT");
+
+        LayeredPane3.add(ContentPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 1090, -1));
+
+        ManagePanel.add(LayeredPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 1200, 620));
+
+        getContentPane().add(ManagePanel, "CARD3");
+
+        ExperiencePanel.setMaximumSize(new java.awt.Dimension(1200, 700));
+        ExperiencePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        TopPanel4.setBackground(new java.awt.Color(51, 51, 51));
+        TopPanel4.setMaximumSize(new java.awt.Dimension(1200, 80));
+        TopPanel4.setMinimumSize(new java.awt.Dimension(1200, 80));
+        TopPanel4.setPreferredSize(new java.awt.Dimension(1200, 80));
+        TopPanel4.setRequestFocusEnabled(false);
+        TopPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        MenuLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        MenuLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MENUICON.png"))); // NOI18N
+        MenuLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MenuLabel4MouseClicked(evt);
+            }
+        });
+        TopPanel4.add(MenuLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 50, 50));
+
+        LogoLabel4.setFont(new java.awt.Font("Microsoft Tai Le", 1, 36)); // NOI18N
+        LogoLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        LogoLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LogoLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LOGONEW.png"))); // NOI18N
+        TopPanel4.add(LogoLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 300, 80));
+
+        Logout4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Logout4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LOGOUT.png"))); // NOI18N
+        Logout4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Logout4MouseClicked(evt);
+            }
+        });
+        TopPanel4.add(Logout4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 13, 50, 70));
+
+        Exit4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Exit4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ExitFinal.png"))); // NOI18N
+        Exit4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Exit4MouseClicked(evt);
+            }
+        });
+        TopPanel4.add(Exit4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1141, 10, 50, 73));
+
+        ExperiencePanel.add(TopPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, -1));
+
+        LayeredPane4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        IconPanel4.setBackground(new java.awt.Color(51, 51, 51));
+        IconPanel4.setMaximumSize(new java.awt.Dimension(110, 620));
+        IconPanel4.setMinimumSize(new java.awt.Dimension(110, 620));
+        IconPanel4.setPreferredSize(new java.awt.Dimension(110, 620));
+
+        DashIcon4.setBackground(new java.awt.Color(51, 51, 51));
+        DashIcon4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DashIcon4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/DASH ICON.png"))); // NOI18N
+        DashIcon4.setOpaque(true);
+
+        BookIcon4.setBackground(new java.awt.Color(51, 51, 51));
+        BookIcon4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BookIcon4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BOOK LOGO.png"))); // NOI18N
+        BookIcon4.setOpaque(true);
+
+        ManageIcon4.setBackground(new java.awt.Color(51, 51, 51));
+        ManageIcon4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ManageIcon4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MANAGEICON.png"))); // NOI18N
+        ManageIcon4.setOpaque(true);
+
+        ExperienceIcon4.setBackground(new java.awt.Color(51, 51, 51));
+        ExperienceIcon4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ExperienceIcon4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/EXPICON.png"))); // NOI18N
+        ExperienceIcon4.setOpaque(true);
+
+        WhereweFlyIcon4.setBackground(new java.awt.Color(51, 51, 51));
+        WhereweFlyIcon4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        WhereweFlyIcon4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/WHEREWEFLYICON.png"))); // NOI18N
+        WhereweFlyIcon4.setOpaque(true);
+
+        HelpIcon4.setBackground(new java.awt.Color(51, 51, 51));
+        HelpIcon4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        HelpIcon4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/HELPICON.png"))); // NOI18N
+        HelpIcon4.setOpaque(true);
+
+        SettingsIcon4.setBackground(new java.awt.Color(51, 51, 51));
+        SettingsIcon4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SettingsIcon4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/SETTINGSICON.png"))); // NOI18N
+        SettingsIcon4.setOpaque(true);
+
+        javax.swing.GroupLayout IconPanel4Layout = new javax.swing.GroupLayout(IconPanel4);
+        IconPanel4.setLayout(IconPanel4Layout);
+        IconPanel4Layout.setHorizontalGroup(
+            IconPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(DashIcon4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(BookIcon4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(ManageIcon4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(ExperienceIcon4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(WhereweFlyIcon4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(HelpIcon4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(SettingsIcon4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        IconPanel4Layout.setVerticalGroup(
+            IconPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(IconPanel4Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(DashIcon4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(BookIcon4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ManageIcon4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ExperienceIcon4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(WhereweFlyIcon4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(HelpIcon4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(SettingsIcon4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(120, 120, 120))
+        );
+
+        LayeredPane4.add(IconPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 620));
+
+        LabelPanel4.setBackground(new java.awt.Color(51, 51, 51));
+        LabelPanel4.setMaximumSize(new java.awt.Dimension(210, 620));
+        LabelPanel4.setMinimumSize(new java.awt.Dimension(210, 620));
+        LabelPanel4.setPreferredSize(new java.awt.Dimension(210, 620));
+
+        DashboardLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        DashboardLabel4.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        DashboardLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        DashboardLabel4.setText("Dashboard");
+        DashboardLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        DashboardLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DashboardLabel8MouseClicked(evt);
+            }
+        });
+
+        BookLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        BookLabel4.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        BookLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        BookLabel4.setText("Book");
+        BookLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        BookLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BookLabel8MouseClicked(evt);
+            }
+        });
+
+        ManageLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        ManageLabel4.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        ManageLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        ManageLabel4.setText("Manage");
+        ManageLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ManageLabel8MouseClicked(evt);
+            }
+        });
+
+        ExperienceLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        ExperienceLabel4.setFont(new java.awt.Font("Tahoma", 0, 28)); // NOI18N
+        ExperienceLabel4.setForeground(new java.awt.Color(102, 153, 255));
+        ExperienceLabel4.setText("Experience");
+
+        WhereweFlyLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        WhereweFlyLabel4.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        WhereweFlyLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        WhereweFlyLabel4.setText("Where we fly");
+        WhereweFlyLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                WhereweFlyLabel8MouseClicked(evt);
+            }
+        });
+
+        HelpLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        HelpLabel4.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        HelpLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        HelpLabel4.setText("Help");
+        HelpLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HelpLabel8MouseClicked(evt);
+            }
+        });
+
+        SettingsLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        SettingsLabel4.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        SettingsLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        SettingsLabel4.setText("Settings");
+        SettingsLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SettingsLabel8MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout LabelPanel4Layout = new javax.swing.GroupLayout(LabelPanel4);
+        LabelPanel4.setLayout(LabelPanel4Layout);
+        LabelPanel4Layout.setHorizontalGroup(
+            LabelPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LabelPanel4Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addGroup(LabelPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(DashboardLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BookLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ManageLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ExperienceLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(WhereweFlyLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(HelpLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SettingsLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        LabelPanel4Layout.setVerticalGroup(
+            LabelPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LabelPanel4Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(DashboardLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(BookLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ManageLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ExperienceLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(WhereweFlyLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(HelpLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(SettingsLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(120, 120, 120))
+        );
+
+        LayeredPane4.setLayer(LabelPanel4, javax.swing.JLayeredPane.PALETTE_LAYER);
+        LayeredPane4.add(LabelPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 210, 620));
+
+        ContentPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        ContentPanel4.setMaximumSize(new java.awt.Dimension(900, 620));
+        ContentPanel4.setMinimumSize(new java.awt.Dimension(900, 620));
+        ContentPanel4.setPreferredSize(new java.awt.Dimension(900, 620));
+        ContentPanel4.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                ContentPanel4FocusGained(evt);
+            }
+        });
+        ContentPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ContentPanel4MouseClicked(evt);
+            }
+        });
+        ContentPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        EImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/EXPPIC1.jpg"))); // NOI18N
+        EImage1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EImage1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EImage1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                EImage1MouseExited(evt);
+            }
+        });
+        ContentPanel4.add(EImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 490, 170));
+
+        EImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/EXPPIC2.jpg"))); // NOI18N
+        EImage2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BusinessLabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BusinessLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BusinessLabelMouseExited(evt);
+            }
+        });
+        ContentPanel4.add(EImage2, new org.netbeans.lib.awtextra.AbsoluteConstraints(555, 225, 490, 170));
+
+        EImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/EXPPIC3.jpg"))); // NOI18N
+        EImage3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EconomyLabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EconomyLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                EconomyLabelMouseExited(evt);
+            }
+        });
+        ContentPanel4.add(EImage3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 490, 170));
+
+        FirstLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        FirstLabel.setText("<html><body align = \"center\">\n<font size = \"7\">First Class</font><br>\nFly First Class and arrive inspired. Slide the privacy doors closed, choose your entertainment and unwind in your own world.\n</body>\n</html>\n");
+        FirstLabel.setOpaque(true);
+        FirstLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EImage1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EImage1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                EImage1MouseExited(evt);
+            }
+        });
+        ContentPanel4.add(FirstLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 515, 130));
+
+        BusinessLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BusinessLabel.setText("<html><body align = \"center\">\n<font size = \"7\">Business Class</font><br>\nRemix business with pleasure when you fly Business Class. Whether you’re <br>travelling for work or play, cultivate your passions on your journey.\n</body>\n</html>\n");
+        BusinessLabel.setOpaque(true);
+        BusinessLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BusinessLabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BusinessLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BusinessLabelMouseExited(evt);
+            }
+        });
+        ContentPanel4.add(BusinessLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 245, 515, 130));
+
+        EconomyLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        EconomyLabel.setText("<html><body align = \"center\">\n<font size = \"7\">Economy Class</font><br>\nIt’s Economy Class that feels like an upgrade. Sit back in comfort, and lose yourself <br>\n in the latest films and TV shows.\n</body>\n</html>\n");
+        EconomyLabel.setOpaque(true);
+        EconomyLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EconomyLabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EconomyLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                EconomyLabelMouseExited(evt);
+            }
+        });
+        ContentPanel4.add(EconomyLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 430, 515, 130));
+
+        LayeredPane4.add(ContentPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 1090, -1));
+
+        ExperiencePanel.add(LayeredPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 1200, 620));
+
+        getContentPane().add(ExperiencePanel, "CARD4");
+
+        WhereweFlyPanel.setMaximumSize(new java.awt.Dimension(1200, 700));
+        WhereweFlyPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        TopPanel5.setBackground(new java.awt.Color(51, 51, 51));
+        TopPanel5.setMaximumSize(new java.awt.Dimension(1200, 80));
+        TopPanel5.setMinimumSize(new java.awt.Dimension(1200, 80));
+        TopPanel5.setPreferredSize(new java.awt.Dimension(1200, 80));
+        TopPanel5.setRequestFocusEnabled(false);
+        TopPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        MenuLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        MenuLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MENUICON.png"))); // NOI18N
+        MenuLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MenuLabel5MouseClicked(evt);
+            }
+        });
+        TopPanel5.add(MenuLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 50, 50));
+
+        LogoLabel5.setFont(new java.awt.Font("Microsoft Tai Le", 1, 36)); // NOI18N
+        LogoLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        LogoLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LogoLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LOGONEW.png"))); // NOI18N
+        TopPanel5.add(LogoLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 300, 80));
+
+        Back5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Back5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BACKSMALLICON.png"))); // NOI18N
+        Back5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Back5MouseClicked(evt);
+            }
+        });
+        TopPanel5.add(Back5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1007, 7, 50, 70));
+
+        Logout5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Logout5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LOGOUT.png"))); // NOI18N
+        Logout5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Logout5MouseClicked(evt);
+            }
+        });
+        TopPanel5.add(Logout5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 13, 50, 70));
+
+        Exit5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Exit5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ExitFinal.png"))); // NOI18N
+        Exit5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Exit5MouseClicked(evt);
+            }
+        });
+        TopPanel5.add(Exit5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1141, 10, 50, 73));
+
+        WhereweFlyPanel.add(TopPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, -1));
+
+        LayeredPane5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        IconPanel5.setBackground(new java.awt.Color(51, 51, 51));
+        IconPanel5.setMaximumSize(new java.awt.Dimension(110, 620));
+        IconPanel5.setMinimumSize(new java.awt.Dimension(110, 620));
+        IconPanel5.setPreferredSize(new java.awt.Dimension(110, 620));
+
+        DashIcon5.setBackground(new java.awt.Color(51, 51, 51));
+        DashIcon5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DashIcon5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/DASH ICON.png"))); // NOI18N
+        DashIcon5.setOpaque(true);
+
+        BookIcon5.setBackground(new java.awt.Color(51, 51, 51));
+        BookIcon5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BookIcon5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BOOK LOGO.png"))); // NOI18N
+        BookIcon5.setOpaque(true);
+
+        ManageIcon5.setBackground(new java.awt.Color(51, 51, 51));
+        ManageIcon5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ManageIcon5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MANAGEICON.png"))); // NOI18N
+        ManageIcon5.setOpaque(true);
+
+        ExperienceIcon5.setBackground(new java.awt.Color(51, 51, 51));
+        ExperienceIcon5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ExperienceIcon5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/EXPICON.png"))); // NOI18N
+        ExperienceIcon5.setOpaque(true);
+
+        WhereweFlyIcon5.setBackground(new java.awt.Color(51, 51, 51));
+        WhereweFlyIcon5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        WhereweFlyIcon5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/WHEREWEFLYICON.png"))); // NOI18N
+        WhereweFlyIcon5.setOpaque(true);
+
+        HelpIcon5.setBackground(new java.awt.Color(51, 51, 51));
+        HelpIcon5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        HelpIcon5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/HELPICON.png"))); // NOI18N
+        HelpIcon5.setOpaque(true);
+
+        SettingsIcon5.setBackground(new java.awt.Color(51, 51, 51));
+        SettingsIcon5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SettingsIcon5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/SETTINGSICON.png"))); // NOI18N
+        SettingsIcon5.setOpaque(true);
+
+        javax.swing.GroupLayout IconPanel5Layout = new javax.swing.GroupLayout(IconPanel5);
+        IconPanel5.setLayout(IconPanel5Layout);
+        IconPanel5Layout.setHorizontalGroup(
+            IconPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(DashIcon5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(BookIcon5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(ManageIcon5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(ExperienceIcon5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(WhereweFlyIcon5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(HelpIcon5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(SettingsIcon5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        IconPanel5Layout.setVerticalGroup(
+            IconPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(IconPanel5Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(DashIcon5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(BookIcon5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ManageIcon5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ExperienceIcon5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(WhereweFlyIcon5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(HelpIcon5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(SettingsIcon5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(120, 120, 120))
+        );
+
+        LayeredPane5.add(IconPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 620));
+
+        LabelPanel5.setBackground(new java.awt.Color(51, 51, 51));
+        LabelPanel5.setMaximumSize(new java.awt.Dimension(210, 620));
+        LabelPanel5.setMinimumSize(new java.awt.Dimension(210, 620));
+        LabelPanel5.setPreferredSize(new java.awt.Dimension(210, 620));
+
+        DashboardLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        DashboardLabel5.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        DashboardLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        DashboardLabel5.setText("Dashboard");
+        DashboardLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        DashboardLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DashboardLabel8MouseClicked(evt);
+            }
+        });
+
+        BookLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        BookLabel5.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        BookLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        BookLabel5.setText("Book");
+        BookLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        BookLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BookLabel8MouseClicked(evt);
+            }
+        });
+
+        ManageLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        ManageLabel5.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        ManageLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        ManageLabel5.setText("Manage");
+        ManageLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ManageLabel8MouseClicked(evt);
+            }
+        });
+
+        ExperienceLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        ExperienceLabel5.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        ExperienceLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        ExperienceLabel5.setText("Experience");
+        ExperienceLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ExperienceLabel8MouseClicked(evt);
+            }
+        });
+
+        WhereweFlyLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        WhereweFlyLabel5.setFont(new java.awt.Font("Tahoma", 0, 28)); // NOI18N
+        WhereweFlyLabel5.setForeground(new java.awt.Color(102, 153, 255));
+        WhereweFlyLabel5.setText("Where we fly");
+
+        HelpLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        HelpLabel5.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        HelpLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        HelpLabel5.setText("Help");
+        HelpLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HelpLabel8MouseClicked(evt);
+            }
+        });
+
+        SettingsLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        SettingsLabel5.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        SettingsLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        SettingsLabel5.setText("Settings");
+        SettingsLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SettingsLabel8MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout LabelPanel5Layout = new javax.swing.GroupLayout(LabelPanel5);
+        LabelPanel5.setLayout(LabelPanel5Layout);
+        LabelPanel5Layout.setHorizontalGroup(
+            LabelPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LabelPanel5Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addGroup(LabelPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(WhereweFlyLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DashboardLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BookLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ManageLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ExperienceLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(HelpLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SettingsLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        LabelPanel5Layout.setVerticalGroup(
+            LabelPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LabelPanel5Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(DashboardLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(BookLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ManageLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ExperienceLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(WhereweFlyLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(HelpLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(SettingsLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(120, 120, 120))
+        );
+
+        LayeredPane5.setLayer(LabelPanel5, javax.swing.JLayeredPane.PALETTE_LAYER);
+        LayeredPane5.add(LabelPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 210, 620));
+
+        ContentPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        ContentPanel5.setMaximumSize(new java.awt.Dimension(1090, 620));
+        ContentPanel5.setMinimumSize(new java.awt.Dimension(1090, 620));
+        ContentPanel5.setPreferredSize(new java.awt.Dimension(1090, 620));
+        ContentPanel5.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                ContentPanel5FocusGained(evt);
+            }
+        });
+        ContentPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ContentPanel5MouseClicked(evt);
+            }
+        });
+        ContentPanel5.setLayout(new java.awt.CardLayout());
+
+        Home5.setBackground(new java.awt.Color(255, 255, 255));
+        Home5.setMaximumSize(new java.awt.Dimension(1090, 620));
+        Home5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        InstructionsLabel.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        InstructionsLabel.setText("*Click on the shown labels to view available destinations. ");
+        Home5.add(InstructionsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 600, 380, 20));
+
+        CountryLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        CountryLabel1.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
+        CountryLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CountryLabel1.setText("America's");
+        CountryLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        CountryLabel1.setOpaque(true);
+        CountryLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CountryPicLabel1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                CountryLabel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                CountryLabel1MouseExited(evt);
+            }
+        });
+        Home5.add(CountryLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 100));
+
+        CountryPicLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        CountryPicLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CountryPicLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Country/ZAmerica.png"))); // NOI18N
+        CountryPicLabel1.setOpaque(true);
+        CountryPicLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CountryPicLabel1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                CountryLabel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                CountryLabel1MouseExited(evt);
+            }
+        });
+        Home5.add(CountryPicLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 210, 520));
+
+        CountryLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        CountryLabel2.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
+        CountryLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CountryLabel2.setText("Africa");
+        CountryLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        CountryLabel2.setOpaque(true);
+        CountryLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CountryLabel2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                CountryLabel2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                CountryLabel2MouseExited(evt);
+            }
+        });
+        Home5.add(CountryLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 180, 100));
+
+        CountryPicLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        CountryPicLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CountryPicLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Country/ZAfrica.png"))); // NOI18N
+        CountryPicLabel2.setOpaque(true);
+        CountryPicLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CountryLabel2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                CountryLabel2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                CountryLabel2MouseExited(evt);
+            }
+        });
+        Home5.add(CountryPicLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 180, 520));
+
+        CountryLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        CountryLabel3.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
+        CountryLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CountryLabel3.setText("Asia and Pacific");
+        CountryLabel3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        CountryLabel3.setOpaque(true);
+        CountryLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CountryPicLabel3MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                CountryPicLabel3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                CountryPicLabel3MouseExited(evt);
+            }
+        });
+        Home5.add(CountryLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 360, 100));
+
+        CountryPicLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        CountryPicLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CountryPicLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Country/ZAsia.png"))); // NOI18N
+        CountryPicLabel3.setOpaque(true);
+        CountryPicLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CountryPicLabel3MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                CountryPicLabel3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                CountryPicLabel3MouseExited(evt);
+            }
+        });
+        Home5.add(CountryPicLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, 360, 520));
+
+        CountryLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        CountryLabel4.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
+        CountryLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CountryLabel4.setText("Middle East");
+        CountryLabel4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        CountryLabel4.setOpaque(true);
+        CountryLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CountryLabel4MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                CountryLabel4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                CountryLabel4MouseExited(evt);
+            }
+        });
+        Home5.add(CountryLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, 150, 100));
+
+        CountryPicLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        CountryPicLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CountryPicLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Country/ZMiddleEast.png"))); // NOI18N
+        CountryPicLabel4.setOpaque(true);
+        CountryPicLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CountryLabel4MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                CountryLabel4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                CountryLabel4MouseExited(evt);
+            }
+        });
+        Home5.add(CountryPicLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 100, 150, 520));
+
+        CountryLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        CountryLabel5.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
+        CountryLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CountryLabel5.setText("Europe");
+        CountryLabel5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        CountryLabel5.setOpaque(true);
+        CountryLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CountryPicLabel5MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                CountryPicLabel5MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                CountryPicLabel5MouseExited(evt);
+            }
+        });
+        Home5.add(CountryLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 0, 190, 100));
+
+        CountryPicLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        CountryPicLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        CountryPicLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Country/ZEurope.png"))); // NOI18N
+        CountryPicLabel5.setOpaque(true);
+        CountryPicLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CountryPicLabel5MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                CountryPicLabel5MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                CountryPicLabel5MouseExited(evt);
+            }
+        });
+        Home5.add(CountryPicLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 100, 190, 520));
+
+        ContentPanel5.add(Home5, "HOME5");
+
+        LayeredPane5.add(ContentPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 1090, -1));
+
+        WhereweFlyPanel.add(LayeredPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 1200, 620));
+
+        getContentPane().add(WhereweFlyPanel, "CARD5");
+
+        HelpPanel.setMaximumSize(new java.awt.Dimension(1200, 700));
+        HelpPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        TopPanel6.setBackground(new java.awt.Color(51, 51, 51));
+        TopPanel6.setMaximumSize(new java.awt.Dimension(1200, 80));
+        TopPanel6.setMinimumSize(new java.awt.Dimension(1200, 80));
+        TopPanel6.setPreferredSize(new java.awt.Dimension(1200, 80));
+        TopPanel6.setRequestFocusEnabled(false);
+        TopPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        MenuLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        MenuLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MENUICON.png"))); // NOI18N
+        MenuLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MenuLabel6MouseClicked(evt);
+            }
+        });
+        TopPanel6.add(MenuLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 50, 50));
+
+        LogoLabel6.setFont(new java.awt.Font("Microsoft Tai Le", 1, 36)); // NOI18N
+        LogoLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        LogoLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LogoLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LOGONEW.png"))); // NOI18N
+        TopPanel6.add(LogoLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 300, 80));
+
+        Logout6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Logout6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LOGOUT.png"))); // NOI18N
+        Logout6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Logout6MouseClicked(evt);
+            }
+        });
+        TopPanel6.add(Logout6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 13, 50, 65));
+
+        Exit6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Exit6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ExitFinal.png"))); // NOI18N
+        Exit6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Exit6MouseClicked(evt);
+            }
+        });
+        TopPanel6.add(Exit6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1141, 10, 50, 65));
+
+        HelpPanel.add(TopPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, -1));
+
+        LayeredPane6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        IconPanel6.setBackground(new java.awt.Color(51, 51, 51));
+        IconPanel6.setMaximumSize(new java.awt.Dimension(110, 620));
+        IconPanel6.setMinimumSize(new java.awt.Dimension(110, 620));
+        IconPanel6.setPreferredSize(new java.awt.Dimension(110, 620));
+
+        DashIcon6.setBackground(new java.awt.Color(51, 51, 51));
+        DashIcon6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DashIcon6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/DASH ICON.png"))); // NOI18N
+        DashIcon6.setOpaque(true);
+
+        BookIcon6.setBackground(new java.awt.Color(51, 51, 51));
+        BookIcon6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BookIcon6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BOOK LOGO.png"))); // NOI18N
+        BookIcon6.setOpaque(true);
+
+        ManageIcon6.setBackground(new java.awt.Color(51, 51, 51));
+        ManageIcon6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ManageIcon6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MANAGEICON.png"))); // NOI18N
+        ManageIcon6.setOpaque(true);
+
+        ExperienceIcon6.setBackground(new java.awt.Color(51, 51, 51));
+        ExperienceIcon6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ExperienceIcon6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/EXPICON.png"))); // NOI18N
+        ExperienceIcon6.setOpaque(true);
+
+        WhereweFlyIcon6.setBackground(new java.awt.Color(51, 51, 51));
+        WhereweFlyIcon6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        WhereweFlyIcon6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/WHEREWEFLYICON.png"))); // NOI18N
+        WhereweFlyIcon6.setOpaque(true);
+
+        HelpIcon6.setBackground(new java.awt.Color(51, 51, 51));
+        HelpIcon6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        HelpIcon6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/HELPICON.png"))); // NOI18N
+        HelpIcon6.setOpaque(true);
+
+        SettingsIcon6.setBackground(new java.awt.Color(51, 51, 51));
+        SettingsIcon6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SettingsIcon6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/SETTINGSICON.png"))); // NOI18N
+        SettingsIcon6.setOpaque(true);
+
+        javax.swing.GroupLayout IconPanel6Layout = new javax.swing.GroupLayout(IconPanel6);
+        IconPanel6.setLayout(IconPanel6Layout);
+        IconPanel6Layout.setHorizontalGroup(
+            IconPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(DashIcon6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(BookIcon6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(ManageIcon6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(ExperienceIcon6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(WhereweFlyIcon6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(HelpIcon6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(SettingsIcon6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        IconPanel6Layout.setVerticalGroup(
+            IconPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(IconPanel6Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(DashIcon6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(BookIcon6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ManageIcon6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ExperienceIcon6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(WhereweFlyIcon6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(HelpIcon6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(SettingsIcon6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(120, 120, 120))
+        );
+
+        LayeredPane6.add(IconPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 620));
+
+        LabelPanel6.setBackground(new java.awt.Color(51, 51, 51));
+        LabelPanel6.setMaximumSize(new java.awt.Dimension(210, 620));
+        LabelPanel6.setMinimumSize(new java.awt.Dimension(210, 620));
+        LabelPanel6.setPreferredSize(new java.awt.Dimension(210, 620));
+
+        DashboardLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        DashboardLabel6.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        DashboardLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        DashboardLabel6.setText("Dashboard");
+        DashboardLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        DashboardLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DashboardLabel8MouseClicked(evt);
+            }
+        });
+
+        BookLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        BookLabel6.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        BookLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        BookLabel6.setText("Book");
+        BookLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        BookLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BookLabel8MouseClicked(evt);
+            }
+        });
+
+        ManageLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        ManageLabel6.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        ManageLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        ManageLabel6.setText("Manage");
+        ManageLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ManageLabel8MouseClicked(evt);
+            }
+        });
+
+        ExperienceLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        ExperienceLabel6.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        ExperienceLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        ExperienceLabel6.setText("Experience");
+        ExperienceLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ExperienceLabel8MouseClicked(evt);
+            }
+        });
+
+        WhereweFlyLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        WhereweFlyLabel6.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        WhereweFlyLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        WhereweFlyLabel6.setText("Where we fly");
+        WhereweFlyLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                WhereweFlyLabel8MouseClicked(evt);
+            }
+        });
+
+        HelpLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        HelpLabel6.setFont(new java.awt.Font("Tahoma", 0, 28)); // NOI18N
+        HelpLabel6.setForeground(new java.awt.Color(102, 153, 255));
+        HelpLabel6.setText("Help");
+
+        SettingsLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        SettingsLabel6.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        SettingsLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        SettingsLabel6.setText("Settings");
+        SettingsLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SettingsLabel8MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout LabelPanel6Layout = new javax.swing.GroupLayout(LabelPanel6);
+        LabelPanel6.setLayout(LabelPanel6Layout);
+        LabelPanel6Layout.setHorizontalGroup(
+            LabelPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LabelPanel6Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addGroup(LabelPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(WhereweFlyLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DashboardLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BookLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ManageLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ExperienceLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(HelpLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SettingsLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        LabelPanel6Layout.setVerticalGroup(
+            LabelPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LabelPanel6Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(DashboardLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(BookLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ManageLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ExperienceLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(WhereweFlyLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(HelpLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(SettingsLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(120, 120, 120))
+        );
+
+        LayeredPane6.setLayer(LabelPanel6, javax.swing.JLayeredPane.PALETTE_LAYER);
+        LayeredPane6.add(LabelPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 210, 620));
+
+        ContentPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        ContentPanel6.setMaximumSize(new java.awt.Dimension(900, 620));
+        ContentPanel6.setMinimumSize(new java.awt.Dimension(900, 620));
+        ContentPanel6.setPreferredSize(new java.awt.Dimension(900, 620));
+        ContentPanel6.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                ContentPanel6FocusGained(evt);
+            }
+        });
+        ContentPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ContentPanel6MouseClicked(evt);
+            }
+        });
+
+        Home6.setBackground(new java.awt.Color(246, 246, 246));
+        Home6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        HelpHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/HelpTop.jpg"))); // NOI18N
+        HelpHeader.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        Home6.add(HelpHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 130));
+
+        QPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        QPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        QLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        QLabel1.setFont(new java.awt.Font("Microsoft JhengHei", 0, 24)); // NOI18N
+        QLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        QLabel1.setText("<html><body align = \"center\">\nBaggage<br>allowances");
+        QLabel1.setOpaque(true);
+        QLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                QLabel1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                QLabel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                QLabel1MouseExited(evt);
+            }
+        });
+        QPanel1.add(QLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 80));
+
+        Home6.add(QPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 300, 100));
+
+        QPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        QPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        QLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        QLabel2.setFont(new java.awt.Font("Microsoft JhengHei", 0, 24)); // NOI18N
+        QLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        QLabel2.setText("<html><body align = \"center\">\nBaggage policies<br>and rules");
+        QLabel2.setOpaque(true);
+        QLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                QLabel2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                QLabel2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                QLabel2MouseExited(evt);
+            }
+        });
+        QPanel2.add(QLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 80));
+
+        Home6.add(QPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 140, 300, 100));
+
+        QPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        QPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        QLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        QLabel3.setFont(new java.awt.Font("Microsoft JhengHei", 0, 24)); // NOI18N
+        QLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        QLabel3.setText("<html><body align = \"center\">Excess<br>Baggage");
+        QLabel3.setOpaque(true);
+        QLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                QLabel3MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                QLabel3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                QLabel3MouseExited(evt);
+            }
+        });
+        QPanel3.add(QLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 80));
+
+        Home6.add(QPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 140, 300, 100));
+
+        QPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        QPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        QLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        QLabel4.setFont(new java.awt.Font("Microsoft JhengHei", 0, 24)); // NOI18N
+        QLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        QLabel4.setText("<html><body align = \"center\">Lost or Delayed<br>Baggage");
+        QLabel4.setOpaque(true);
+        QLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                QLabel4MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                QLabel4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                QLabel4MouseExited(evt);
+            }
+        });
+        QPanel4.add(QLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 80));
+
+        Home6.add(QPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 300, 100));
+
+        QPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        QPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        QLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        QLabel5.setFont(new java.awt.Font("Microsoft JhengHei", 0, 24)); // NOI18N
+        QLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        QLabel5.setText("<html><body align = \"center\">Flight certificate<br>requests ");
+        QLabel5.setOpaque(true);
+        QLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                QLabel5MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                QLabel5MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                QLabel5MouseExited(evt);
+            }
+        });
+        QPanel5.add(QLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 80));
+
+        Home6.add(QPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 260, 300, 100));
+
+        QPanel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        QPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        QLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        QLabel6.setFont(new java.awt.Font("Microsoft JhengHei", 0, 24)); // NOI18N
+        QLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        QLabel6.setText("<html><body align = \"center\">On board<br>services");
+        QLabel6.setOpaque(true);
+        QLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                QLabel6MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                QLabel6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                QLabel6MouseExited(evt);
+            }
+        });
+        QPanel6.add(QLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 80));
+
+        Home6.add(QPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 260, 300, 100));
+
+        QPanel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        QPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        QLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        QLabel7.setFont(new java.awt.Font("Microsoft JhengHei", 0, 24)); // NOI18N
+        QLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        QLabel7.setText("<html><body align = \"center\">Special assistance<br>and requests ");
+        QLabel7.setOpaque(true);
+        QLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                QLabel7MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                QLabel7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                QLabel7MouseExited(evt);
+            }
+        });
+        QPanel7.add(QLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 80));
+
+        Home6.add(QPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 300, 100));
+
+        QPanel8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        QPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        QLabel8.setBackground(new java.awt.Color(255, 255, 255));
+        QLabel8.setFont(new java.awt.Font("Microsoft JhengHei", 0, 24)); // NOI18N
+        QLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        QLabel8.setText("<html><body align = \"center\">Travel<br>advisory ");
+        QLabel8.setOpaque(true);
+        QLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                QLabel8MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                QLabel8MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                QLabel8MouseExited(evt);
+            }
+        });
+        QPanel8.add(QLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 80));
+
+        Home6.add(QPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 380, 300, 100));
+
+        QPanel9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        QPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        QLabel9.setBackground(new java.awt.Color(255, 255, 255));
+        QLabel9.setFont(new java.awt.Font("Microsoft JhengHei", 0, 24)); // NOI18N
+        QLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        QLabel9.setText("<html><body align = \"center\">Cancelling<br>booking  ");
+        QLabel9.setOpaque(true);
+        QLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                QLabel9MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                QLabel9MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                QLabel9MouseExited(evt);
+            }
+        });
+        QPanel9.add(QLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 80));
+
+        Home6.add(QPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 380, 300, 100));
+
+        QPanel10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        QPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        QLabel10.setBackground(new java.awt.Color(255, 255, 255));
+        QLabel10.setFont(new java.awt.Font("Microsoft JhengHei", 0, 24)); // NOI18N
+        QLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        QLabel10.setText("<html><body align = \"center\">Refunds and<br>Travel vouchers  ");
+        QLabel10.setOpaque(true);
+        QLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                QLabel10MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                QLabel10MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                QLabel10MouseExited(evt);
+            }
+        });
+        QPanel10.add(QLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 80));
+
+        Home6.add(QPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 500, 300, 100));
+
+        javax.swing.GroupLayout ContentPanel6Layout = new javax.swing.GroupLayout(ContentPanel6);
+        ContentPanel6.setLayout(ContentPanel6Layout);
+        ContentPanel6Layout.setHorizontalGroup(
+            ContentPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Home6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        ContentPanel6Layout.setVerticalGroup(
+            ContentPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Home6, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
+        );
+
+        LayeredPane6.add(ContentPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 1090, -1));
+
+        HelpPanel.add(LayeredPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 1200, 620));
+
+        getContentPane().add(HelpPanel, "CARD6");
+
+        SettingsPanel.setMaximumSize(new java.awt.Dimension(1200, 700));
+        SettingsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        TopPanel7.setBackground(new java.awt.Color(51, 51, 51));
+        TopPanel7.setMaximumSize(new java.awt.Dimension(1200, 80));
+        TopPanel7.setMinimumSize(new java.awt.Dimension(1200, 80));
+        TopPanel7.setPreferredSize(new java.awt.Dimension(1200, 80));
+        TopPanel7.setRequestFocusEnabled(false);
+        TopPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        MenuLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        MenuLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MENUICON.png"))); // NOI18N
+        MenuLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MenuLabel7MouseClicked(evt);
+            }
+        });
+        TopPanel7.add(MenuLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 50, 50));
+
+        LogoLabel7.setFont(new java.awt.Font("Microsoft Tai Le", 1, 36)); // NOI18N
+        LogoLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        LogoLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LogoLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LOGONEW.png"))); // NOI18N
+        TopPanel7.add(LogoLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 300, 80));
+
+        Logout7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Logout7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LOGOUT.png"))); // NOI18N
+        Logout7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Logout7MouseClicked(evt);
+            }
+        });
+        TopPanel7.add(Logout7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 13, 50, 70));
+
+        Exit7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Exit7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ExitFinal.png"))); // NOI18N
+        Exit7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Exit7MouseClicked(evt);
+            }
+        });
+        TopPanel7.add(Exit7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1141, 10, 50, 73));
+
+        SettingsPanel.add(TopPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, -1));
+
+        LayeredPane7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        IconPanel7.setBackground(new java.awt.Color(51, 51, 51));
+        IconPanel7.setMaximumSize(new java.awt.Dimension(110, 620));
+        IconPanel7.setMinimumSize(new java.awt.Dimension(110, 620));
+        IconPanel7.setPreferredSize(new java.awt.Dimension(110, 620));
+
+        DashIcon7.setBackground(new java.awt.Color(51, 51, 51));
+        DashIcon7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DashIcon7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/DASH ICON.png"))); // NOI18N
+        DashIcon7.setOpaque(true);
+
+        BookIcon7.setBackground(new java.awt.Color(51, 51, 51));
+        BookIcon7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BookIcon7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BOOK LOGO.png"))); // NOI18N
+        BookIcon7.setOpaque(true);
+
+        ManageIcon7.setBackground(new java.awt.Color(51, 51, 51));
+        ManageIcon7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ManageIcon7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MANAGEICON.png"))); // NOI18N
+        ManageIcon7.setOpaque(true);
+
+        ExperienceIcon7.setBackground(new java.awt.Color(51, 51, 51));
+        ExperienceIcon7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ExperienceIcon7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/EXPICON.png"))); // NOI18N
+        ExperienceIcon7.setOpaque(true);
+
+        WhereweFlyIcon7.setBackground(new java.awt.Color(51, 51, 51));
+        WhereweFlyIcon7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        WhereweFlyIcon7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/WHEREWEFLYICON.png"))); // NOI18N
+        WhereweFlyIcon7.setOpaque(true);
+
+        HelpIcon7.setBackground(new java.awt.Color(51, 51, 51));
+        HelpIcon7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        HelpIcon7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/HELPICON.png"))); // NOI18N
+        HelpIcon7.setOpaque(true);
+
+        SettingsIcon7.setBackground(new java.awt.Color(51, 51, 51));
+        SettingsIcon7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SettingsIcon7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/SETTINGSICON.png"))); // NOI18N
+        SettingsIcon7.setOpaque(true);
+
+        javax.swing.GroupLayout IconPanel7Layout = new javax.swing.GroupLayout(IconPanel7);
+        IconPanel7.setLayout(IconPanel7Layout);
+        IconPanel7Layout.setHorizontalGroup(
+            IconPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(DashIcon7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(BookIcon7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(ManageIcon7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(ExperienceIcon7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(WhereweFlyIcon7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(HelpIcon7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(SettingsIcon7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        IconPanel7Layout.setVerticalGroup(
+            IconPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(IconPanel7Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(DashIcon7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(BookIcon7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ManageIcon7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ExperienceIcon7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(WhereweFlyIcon7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(HelpIcon7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(SettingsIcon7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(120, 120, 120))
+        );
+
+        LayeredPane7.add(IconPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 620));
+
+        LabelPanel7.setBackground(new java.awt.Color(51, 51, 51));
+        LabelPanel7.setMaximumSize(new java.awt.Dimension(210, 620));
+        LabelPanel7.setMinimumSize(new java.awt.Dimension(210, 620));
+        LabelPanel7.setPreferredSize(new java.awt.Dimension(210, 620));
+
+        DashboardLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        DashboardLabel7.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        DashboardLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        DashboardLabel7.setText("Dashboard");
+        DashboardLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        DashboardLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DashboardLabel8MouseClicked(evt);
+            }
+        });
+
+        BookLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        BookLabel7.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        BookLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        BookLabel7.setText("Book");
+        BookLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        BookLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BookLabel8MouseClicked(evt);
+            }
+        });
+
+        ManageLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        ManageLabel7.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        ManageLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        ManageLabel7.setText("Manage");
+        ManageLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ManageLabel8MouseClicked(evt);
+            }
+        });
+
+        ExperienceLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        ExperienceLabel7.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        ExperienceLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        ExperienceLabel7.setText("Experience");
+        ExperienceLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ExperienceLabel8MouseClicked(evt);
+            }
+        });
+
+        WhereweFlyLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        WhereweFlyLabel7.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        WhereweFlyLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        WhereweFlyLabel7.setText("Where we fly");
+        WhereweFlyLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                WhereweFlyLabel8MouseClicked(evt);
+            }
+        });
+
+        HelpLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        HelpLabel7.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        HelpLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        HelpLabel7.setText("Help");
+        HelpLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HelpLabel8MouseClicked(evt);
+            }
+        });
+
+        SettingsLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        SettingsLabel7.setFont(new java.awt.Font("Tahoma", 0, 28)); // NOI18N
+        SettingsLabel7.setForeground(new java.awt.Color(102, 153, 255));
+        SettingsLabel7.setText("Settings");
+
+        javax.swing.GroupLayout LabelPanel7Layout = new javax.swing.GroupLayout(LabelPanel7);
+        LabelPanel7.setLayout(LabelPanel7Layout);
+        LabelPanel7Layout.setHorizontalGroup(
+            LabelPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LabelPanel7Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addGroup(LabelPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(WhereweFlyLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DashboardLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BookLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ManageLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ExperienceLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(HelpLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SettingsLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        LabelPanel7Layout.setVerticalGroup(
+            LabelPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LabelPanel7Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(DashboardLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(BookLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ManageLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(ExperienceLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(WhereweFlyLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(HelpLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(SettingsLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(120, 120, 120))
+        );
+
+        LayeredPane7.setLayer(LabelPanel7, javax.swing.JLayeredPane.PALETTE_LAYER);
+        LayeredPane7.add(LabelPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 210, 620));
+
+        ContentPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        ContentPanel7.setMaximumSize(new java.awt.Dimension(1090, 620));
+        ContentPanel7.setMinimumSize(new java.awt.Dimension(1090, 620));
+        ContentPanel7.setName(""); // NOI18N
+        ContentPanel7.setPreferredSize(new java.awt.Dimension(1090, 620));
+        ContentPanel7.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                ContentPanel7FocusGained(evt);
+            }
+        });
+        ContentPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ContentPanel7MouseClicked(evt);
+            }
+        });
+        ContentPanel7.setLayout(new java.awt.CardLayout());
+
+        Panel7_1.setBackground(new java.awt.Color(255, 255, 255));
+        Panel7_1.setMaximumSize(new java.awt.Dimension(1090, 620));
+        Panel7_1.setMinimumSize(new java.awt.Dimension(1090, 620));
+        Panel7_1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Avatar1.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
+        Avatar1.setForeground(new java.awt.Color(255, 255, 255));
+        Avatar1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Avatar1.setText("Avatar");
+        Panel7_1.add(Avatar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 18, 209, 50));
+
+        Password1.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
+        Password1.setForeground(new java.awt.Color(51, 51, 51));
+        Password1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Password1.setText("Password");
+        Password1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Password3MouseClicked(evt);
+            }
+        });
+        Panel7_1.add(Password1, new org.netbeans.lib.awtextra.AbsoluteConstraints(231, 18, 209, 50));
+
+        Number1.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
+        Number1.setForeground(new java.awt.Color(51, 51, 51));
+        Number1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Number1.setText("Number");
+        Number1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Number1MouseClicked(evt);
+            }
+        });
+        Panel7_1.add(Number1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 18, 209, 50));
+
+        DateBirth1.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
+        DateBirth1.setForeground(new java.awt.Color(51, 51, 51));
+        DateBirth1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DateBirth1.setText("Date of Birth");
+        DateBirth1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DateBirth5MouseClicked(evt);
+            }
+        });
+        Panel7_1.add(DateBirth1, new org.netbeans.lib.awtextra.AbsoluteConstraints(651, 18, 209, 50));
+
+        Country1.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
+        Country1.setForeground(new java.awt.Color(51, 51, 51));
+        Country1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Country1.setText("Country");
+        Country1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Country4MouseClicked(evt);
+            }
+        });
+        Panel7_1.add(Country1, new org.netbeans.lib.awtextra.AbsoluteConstraints(861, 18, 209, 50));
+
+        HeaderMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/S1.jpg"))); // NOI18N
+        Panel7_1.add(HeaderMenu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+
+        Save1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        Save1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Save1.setText("SAVE");
+        Save1.setToolTipText("Save button");
+        Save1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Save1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Save1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Save1MouseExited(evt);
+            }
+        });
+        Panel7_1.add(Save1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 510, 190, 60));
+
+        Instructions1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        Instructions1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Instructions1.setText("Instructions: Select the desired Avatar and click on the Save button. No change gets updated until save button is pressed.");
+        Panel7_1.add(Instructions1, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 590, 1040, -1));
+
+        AvatarPanel.setBackground(new java.awt.Color(255, 255, 255));
+        AvatarPanel.setMaximumSize(new java.awt.Dimension(1010, 370));
+        AvatarPanel.setMinimumSize(new java.awt.Dimension(1010, 370));
+        AvatarPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        GenderMGroup.add(Icon1);
+        Icon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Avatars/S1.png"))); // NOI18N
+        Icon1.setOpaque(false);
+        Icon1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Icon1MouseClicked(evt);
+            }
+        });
+        AvatarPanel.add(Icon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, -1, -1));
+
+        GenderMGroup.add(Icon2);
+        Icon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Avatars/S2.png"))); // NOI18N
+        Icon2.setOpaque(false);
+        Icon2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Icon2MouseClicked(evt);
+            }
+        });
+        AvatarPanel.add(Icon2, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 0, -1, -1));
+
+        GenderMGroup.add(Icon3);
+        Icon3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Avatars/S3.png"))); // NOI18N
+        Icon3.setOpaque(false);
+        Icon3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Icon3MouseClicked(evt);
+            }
+        });
+        AvatarPanel.add(Icon3, new org.netbeans.lib.awtextra.AbsoluteConstraints(438, 0, -1, -1));
+
+        GenderMGroup.add(Icon4);
+        Icon4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Avatars/S4.png"))); // NOI18N
+        Icon4.setOpaque(false);
+        Icon4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Icon4MouseClicked(evt);
+            }
+        });
+        AvatarPanel.add(Icon4, new org.netbeans.lib.awtextra.AbsoluteConstraints(607, 0, -1, -1));
+
+        GenderMGroup.add(Icon5);
+        Icon5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Avatars/S5.png"))); // NOI18N
+        Icon5.setOpaque(false);
+        Icon5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Icon5MouseClicked(evt);
+            }
+        });
+        AvatarPanel.add(Icon5, new org.netbeans.lib.awtextra.AbsoluteConstraints(776, 0, -1, -1));
+
+        GenderMGroup.add(Icon6);
+        Icon6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Avatars/S6.png"))); // NOI18N
+        Icon6.setOpaque(false);
+        Icon6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Icon6MouseClicked(evt);
+            }
+        });
+        AvatarPanel.add(Icon6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 124, -1, -1));
+
+        GenderMGroup.add(Icon7);
+        Icon7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Avatars/S7.png"))); // NOI18N
+        Icon7.setOpaque(false);
+        Icon7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Icon7MouseClicked(evt);
+            }
+        });
+        AvatarPanel.add(Icon7, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 124, -1, -1));
+
+        GenderMGroup.add(Icon8);
+        Icon8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Avatars/S8.png"))); // NOI18N
+        Icon8.setOpaque(false);
+        Icon8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Icon8MouseClicked(evt);
+            }
+        });
+        AvatarPanel.add(Icon8, new org.netbeans.lib.awtextra.AbsoluteConstraints(438, 124, -1, -1));
+
+        GenderMGroup.add(Icon9);
+        Icon9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Avatars/S9.png"))); // NOI18N
+        Icon9.setOpaque(false);
+        Icon9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Icon9MouseClicked(evt);
+            }
+        });
+        AvatarPanel.add(Icon9, new org.netbeans.lib.awtextra.AbsoluteConstraints(607, 124, -1, -1));
+
+        GenderMGroup.add(Icon10);
+        Icon10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Avatars/S10.png"))); // NOI18N
+        Icon10.setOpaque(false);
+        Icon10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Icon10MouseClicked(evt);
+            }
+        });
+        AvatarPanel.add(Icon10, new org.netbeans.lib.awtextra.AbsoluteConstraints(776, 124, -1, -1));
+
+        GenderMGroup.add(Icon11);
+        Icon11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Avatars/S11.png"))); // NOI18N
+        Icon11.setOpaque(false);
+        Icon11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Icon11MouseClicked(evt);
+            }
+        });
+        AvatarPanel.add(Icon11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 248, -1, -1));
+
+        GenderMGroup.add(Icon12);
+        Icon12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Avatars/S12.png"))); // NOI18N
+        Icon12.setOpaque(false);
+        Icon12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Icon12MouseClicked(evt);
+            }
+        });
+        AvatarPanel.add(Icon12, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 248, -1, -1));
+
+        GenderMGroup.add(Icon13);
+        Icon13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Avatars/S13.png"))); // NOI18N
+        Icon13.setOpaque(false);
+        Icon13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Icon13MouseClicked(evt);
+            }
+        });
+        AvatarPanel.add(Icon13, new org.netbeans.lib.awtextra.AbsoluteConstraints(438, 248, -1, -1));
+
+        GenderMGroup.add(Icon14);
+        Icon14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Avatars/S14.png"))); // NOI18N
+        Icon14.setOpaque(false);
+        Icon14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Icon14MouseClicked(evt);
+            }
+        });
+        AvatarPanel.add(Icon14, new org.netbeans.lib.awtextra.AbsoluteConstraints(607, 248, -1, -1));
+
+        GenderMGroup.add(Icon15);
+        Icon15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Avatars/S15.png"))); // NOI18N
+        Icon15.setOpaque(false);
+        Icon15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Icon15MouseClicked(evt);
+            }
+        });
+        AvatarPanel.add(Icon15, new org.netbeans.lib.awtextra.AbsoluteConstraints(776, 248, -1, -1));
+
+        Panel7_1.add(AvatarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 1011, 375));
+
+        ContentPanel7.add(Panel7_1, "AVATAR");
+
+        Panel7_2.setBackground(new java.awt.Color(255, 255, 255));
+        Panel7_2.setMaximumSize(new java.awt.Dimension(1090, 620));
+        Panel7_2.setMinimumSize(new java.awt.Dimension(1090, 620));
+        Panel7_2.setPreferredSize(new java.awt.Dimension(1090, 620));
+        Panel7_2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Avatar2.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
+        Avatar2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Avatar2.setText("Avatar");
+        Avatar2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Avatar2MouseClicked(evt);
+            }
+        });
+        Panel7_2.add(Avatar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 18, 209, 50));
+
+        Password2.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
+        Password2.setForeground(new java.awt.Color(255, 255, 255));
+        Password2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Password2.setText("Password");
+        Panel7_2.add(Password2, new org.netbeans.lib.awtextra.AbsoluteConstraints(231, 18, 209, 50));
+
+        Number2.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
+        Number2.setForeground(new java.awt.Color(51, 51, 51));
+        Number2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Number2.setText("Number");
+        Number2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Number1MouseClicked(evt);
+            }
+        });
+        Panel7_2.add(Number2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 18, 209, 50));
+
+        DateBirth2.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
+        DateBirth2.setForeground(new java.awt.Color(51, 51, 51));
+        DateBirth2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DateBirth2.setText("Date of Birth");
+        DateBirth2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DateBirth5MouseClicked(evt);
+            }
+        });
+        Panel7_2.add(DateBirth2, new org.netbeans.lib.awtextra.AbsoluteConstraints(651, 18, 209, 50));
+
+        Country2.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
+        Country2.setForeground(new java.awt.Color(51, 51, 51));
+        Country2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Country2.setText("Country");
+        Country2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Country4MouseClicked(evt);
+            }
+        });
+        Panel7_2.add(Country2, new org.netbeans.lib.awtextra.AbsoluteConstraints(861, 18, 209, 50));
+
+        HeaderMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/S2.jpg"))); // NOI18N
+        Panel7_2.add(HeaderMenu2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+
+        Save2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        Save2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Save2.setText("SAVE");
+        Save2.setToolTipText("Save button");
+        Save2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Save2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Save2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Save2MouseExited(evt);
+            }
+        });
+        Panel7_2.add(Save2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 510, 190, 60));
+
+        Instructions2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        Instructions2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Instructions2.setText("Instructions: Fill up the required fields and click on the Save button. No change gets updated until save button is pressed.");
+        Panel7_2.add(Instructions2, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 590, 1040, -1));
+
+        CurrentLabel.setFont(new java.awt.Font("Arial", 0, 34)); // NOI18N
+        CurrentLabel.setText("Current Password:");
+        Panel7_2.add(CurrentLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 370, 40));
+
+        CurrentPassword.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        CurrentPassword.setBorder(null);
+        CurrentPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                CurrentPasswordKeyPressed(evt);
+            }
+        });
+        Panel7_2.add(CurrentPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 190, 310, 40));
+
+        ViewC1.setBackground(new java.awt.Color(255, 255, 255));
+        ViewC1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ViewC1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/EYE.png"))); // NOI18N
+        ViewC1.setOpaque(true);
+        ViewC1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ViewC1MouseClicked(evt);
+            }
+        });
+        Panel7_2.add(ViewC1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 190, 40, 40));
+
+        UL1.setBackground(new java.awt.Color(153, 153, 153));
+        UL1.setOpaque(true);
+        Panel7_2.add(UL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 230, 350, 3));
+
+        InstructionLabel1.setText("*Press ENTER after completion of Password.");
+        Panel7_2.add(InstructionLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 235, 300, -1));
+
+        NewPLabel1.setFont(new java.awt.Font("Arial", 0, 34)); // NOI18N
+        NewPLabel1.setText("Enter New Password:");
+        Panel7_2.add(NewPLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 370, 40));
+
+        NewPassword1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        NewPassword1.setBorder(null);
+        Panel7_2.add(NewPassword1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 290, 310, 40));
+
+        ViewP1.setBackground(new java.awt.Color(255, 255, 255));
+        ViewP1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ViewP1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/EYE.png"))); // NOI18N
+        ViewP1.setOpaque(true);
+        ViewP1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ViewP1MouseClicked(evt);
+            }
+        });
+        Panel7_2.add(ViewP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 290, 40, 40));
+
+        UL2.setBackground(new java.awt.Color(153, 153, 153));
+        UL2.setOpaque(true);
+        Panel7_2.add(UL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, 350, 3));
+
+        NewPLabel2.setFont(new java.awt.Font("Arial", 0, 34)); // NOI18N
+        NewPLabel2.setText("Re-Enter new password:");
+        Panel7_2.add(NewPLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 370, 40));
+
+        NewPassword2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        NewPassword2.setBorder(null);
+        Panel7_2.add(NewPassword2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 360, 310, 40));
+
+        ViewP2.setBackground(new java.awt.Color(255, 255, 255));
+        ViewP2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ViewP2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/EYE.png"))); // NOI18N
+        ViewP2.setOpaque(true);
+        ViewP2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ViewP2MouseClicked(evt);
+            }
+        });
+        Panel7_2.add(ViewP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 360, 40, 40));
+
+        UL3.setBackground(new java.awt.Color(153, 153, 153));
+        UL3.setOpaque(true);
+        Panel7_2.add(UL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 400, 350, 3));
+
+        ContentPanel7.add(Panel7_2, "PASSWORD");
+
+        Panel7_3.setBackground(new java.awt.Color(255, 255, 255));
+        Panel7_3.setMaximumSize(new java.awt.Dimension(1090, 620));
+        Panel7_3.setMinimumSize(new java.awt.Dimension(1090, 620));
+        Panel7_3.setPreferredSize(new java.awt.Dimension(1090, 620));
+        Panel7_3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Avatar3.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
+        Avatar3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Avatar3.setText("Avatar");
+        Avatar3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Avatar2MouseClicked(evt);
+            }
+        });
+        Panel7_3.add(Avatar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 18, 209, 50));
+
+        Password3.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
+        Password3.setForeground(new java.awt.Color(51, 51, 51));
+        Password3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Password3.setText("Password");
+        Password3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Password3MouseClicked(evt);
+            }
+        });
+        Panel7_3.add(Password3, new org.netbeans.lib.awtextra.AbsoluteConstraints(231, 18, 209, 50));
+
+        Number3.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
+        Number3.setForeground(new java.awt.Color(255, 255, 255));
+        Number3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Number3.setText("Number");
+        Panel7_3.add(Number3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 18, 209, 50));
+
+        DateBirth3.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
+        DateBirth3.setForeground(new java.awt.Color(51, 51, 51));
+        DateBirth3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DateBirth3.setText("Date of Birth");
+        DateBirth3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DateBirth5MouseClicked(evt);
+            }
+        });
+        Panel7_3.add(DateBirth3, new org.netbeans.lib.awtextra.AbsoluteConstraints(651, 18, 209, 50));
+
+        Country3.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
+        Country3.setForeground(new java.awt.Color(51, 51, 51));
+        Country3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Country3.setText("Country");
+        Country3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Country4MouseClicked(evt);
+            }
+        });
+        Panel7_3.add(Country3, new org.netbeans.lib.awtextra.AbsoluteConstraints(861, 18, 209, 50));
+
+        HeaderMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/S3.jpg"))); // NOI18N
+        Panel7_3.add(HeaderMenu3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+
+        Save3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        Save3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Save3.setText("SAVE");
+        Save3.setToolTipText("Save button");
+        Save3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Save3MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Save3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Save3MouseExited(evt);
+            }
+        });
+        Panel7_3.add(Save3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 510, 190, 60));
+
+        Instructions3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        Instructions3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Instructions3.setText("Instructions: Enter your number to be updated and click on the Save button. No change gets updated until save button is pressed.");
+        Panel7_3.add(Instructions3, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 590, 1040, -1));
+
+        PhoneLabel.setFont(new java.awt.Font("Arial", 0, 34)); // NOI18N
+        PhoneLabel.setText("New phone number:");
+        Panel7_3.add(PhoneLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 320, 40));
+
+        PhoneField.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        PhoneField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        PhoneField.setBorder(null);
+        PhoneField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                PhoneFieldKeyTyped(evt);
+            }
+        });
+        Panel7_3.add(PhoneField, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 290, 270, 40));
+
+        UL4.setBackground(new java.awt.Color(153, 153, 153));
+        UL4.setOpaque(true);
+        Panel7_3.add(UL4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 330, 270, 3));
+
+        ContentPanel7.add(Panel7_3, "NUMBER");
+
+        Panel7_4.setBackground(new java.awt.Color(255, 255, 255));
+        Panel7_4.setMaximumSize(new java.awt.Dimension(1090, 620));
+        Panel7_4.setMinimumSize(new java.awt.Dimension(1090, 620));
+        Panel7_4.setPreferredSize(new java.awt.Dimension(1090, 620));
+        Panel7_4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Avatar4.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
+        Avatar4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Avatar4.setText("Avatar");
+        Avatar4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Avatar2MouseClicked(evt);
+            }
+        });
+        Panel7_4.add(Avatar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 18, 209, 50));
+
+        Password4.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
+        Password4.setForeground(new java.awt.Color(51, 51, 51));
+        Password4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Password4.setText("Password");
+        Password4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Password3MouseClicked(evt);
+            }
+        });
+        Panel7_4.add(Password4, new org.netbeans.lib.awtextra.AbsoluteConstraints(231, 18, 209, 50));
+
+        Number4.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
+        Number4.setForeground(new java.awt.Color(51, 51, 51));
+        Number4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Number4.setText("Number");
+        Number4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Number1MouseClicked(evt);
+            }
+        });
+        Panel7_4.add(Number4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 18, 209, 50));
+
+        DateBirth4.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
+        DateBirth4.setForeground(new java.awt.Color(255, 255, 255));
+        DateBirth4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DateBirth4.setText("Date of Birth");
+        Panel7_4.add(DateBirth4, new org.netbeans.lib.awtextra.AbsoluteConstraints(651, 18, 209, 50));
+
+        Country4.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
+        Country4.setForeground(new java.awt.Color(51, 51, 51));
+        Country4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Country4.setText("Country");
+        Country4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Country4MouseClicked(evt);
+            }
+        });
+        Panel7_4.add(Country4, new org.netbeans.lib.awtextra.AbsoluteConstraints(861, 18, 209, 50));
+
+        HeaderMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/S4.jpg"))); // NOI18N
+        Panel7_4.add(HeaderMenu4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+
+        Save4.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        Save4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Save4.setText("SAVE");
+        Save4.setToolTipText("Save button");
+        Save4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Save4MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Save4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Save4MouseExited(evt);
+            }
+        });
+        Panel7_4.add(Save4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 510, 190, 60));
+
+        Instructions4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        Instructions4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Instructions4.setText("Instructions: Select your date of birth and click on the save button. No change gets updated until save button is pressed.");
+        Panel7_4.add(Instructions4, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 590, 1040, -1));
+
+        DOBLabel.setFont(new java.awt.Font("Arial", 0, 34)); // NOI18N
+        DOBLabel.setText("Date of birth:");
+        Panel7_4.add(DOBLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 290, 220, 40));
+
+        NewDOB.setDateFormatString("dd.MM.yyyy");
+        NewDOB.setFont(new java.awt.Font("Arial", 0, 21)); // NOI18N
+        NewDOB.setIcon(new javax.swing.ImageIcon("C:\\Users\\Saksham\\Downloads\\CalenderIcon.png"));
+        Panel7_4.add(NewDOB, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 290, 180, 40));
+
+        ContentPanel7.add(Panel7_4, "DOB");
+
+        Panel7_5.setBackground(new java.awt.Color(255, 255, 255));
+        Panel7_5.setMaximumSize(new java.awt.Dimension(1090, 620));
+        Panel7_5.setMinimumSize(new java.awt.Dimension(1090, 620));
+        Panel7_5.setPreferredSize(new java.awt.Dimension(1090, 620));
+        Panel7_5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Avatar5.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
+        Avatar5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Avatar5.setText("Avatar");
+        Avatar5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Avatar2MouseClicked(evt);
+            }
+        });
+        Panel7_5.add(Avatar5, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 18, 209, 50));
+
+        Password5.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
+        Password5.setForeground(new java.awt.Color(51, 51, 51));
+        Password5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Password5.setText("Password");
+        Password5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Password3MouseClicked(evt);
+            }
+        });
+        Panel7_5.add(Password5, new org.netbeans.lib.awtextra.AbsoluteConstraints(231, 18, 209, 50));
+
+        Number5.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
+        Number5.setForeground(new java.awt.Color(51, 51, 51));
+        Number5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Number5.setText("Number");
+        Number5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Number1MouseClicked(evt);
+            }
+        });
+        Panel7_5.add(Number5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 18, 209, 50));
+
+        DateBirth5.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
+        DateBirth5.setForeground(new java.awt.Color(51, 51, 51));
+        DateBirth5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DateBirth5.setText("Date of Birth");
+        DateBirth5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DateBirth5MouseClicked(evt);
+            }
+        });
+        Panel7_5.add(DateBirth5, new org.netbeans.lib.awtextra.AbsoluteConstraints(651, 18, 209, 50));
+
+        Country5.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
+        Country5.setForeground(new java.awt.Color(255, 255, 255));
+        Country5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Country5.setText("Country");
+        Panel7_5.add(Country5, new org.netbeans.lib.awtextra.AbsoluteConstraints(861, 18, 209, 50));
+
+        HeaderMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/S5.jpg"))); // NOI18N
+        Panel7_5.add(HeaderMenu5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+
+        Save5.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        Save5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Save5.setText("SAVE");
+        Save5.setToolTipText("Save button");
+        Save5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Save5MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Save5MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Save5MouseExited(evt);
+            }
+        });
+        Panel7_5.add(Save5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 510, 190, 60));
+
+        Instructions5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        Instructions5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Instructions5.setText("Instructions: Select the desired country and click on the Save button. No change gets updated until save button is pressed.");
+        Panel7_5.add(Instructions5, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 590, 1040, -1));
+
+        CountryLabel.setFont(new java.awt.Font("Arial", 0, 34)); // NOI18N
+        CountryLabel.setText("Country of residence:");
+        Panel7_5.add(CountryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 320, 40));
+
+        CountryBox.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        CountryBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Afghanistan (AF)", "Albania (AL)", "Algeria (DZ)", "American Samoa (AS)", "Andorra (AD)", "Angola (AO)", "Anguilla (AI)", "Antigua (AG)", "Argentina (AR)", "Armenia (AM)", "Aruba (AW)", "Australia (AU)", "Austria (AT)", "Azerbaijan (AZ)", "The Bahamas (BS)", "Bahrain (BH)", "Bangladesh (BD)", "Barbados (BB)", "Belarus (BY)", "Belgium (BE)", "Belize (BZ)", "Benin (BJ)", "Bermuda (BM)", "Bhutan (BT)", "Bolivia (BO)", "Bosnia and Herzegovina (BA)", "Botswana (BW)", "Brazil (BR)", "British Indian Ocean Territory (IO)", "Brunei (BN)", "Bulgaria (BG)", "Burkina Faso (BF)", "Burundi (BI)", "Cambodia (KH)", "Cameroon (CM)", "Canada (CA)", "Cape Verde (CV)", "Cayman Islands (KY)", "Central African Republic (CF)", "Chad (TD)", "Chile (CL)", "China (CN)", "Colombia (CO)", "Comoros (KM)", "Republic of the Congo (CG)", "Democratic Republic of Congo (CD)", "Cook Islands (CK)", "Costa Rica (CR)", "CÃ´te d'Ivoire (CI)", "Croatia (HR)", "Cuba (CU)", "Cyprus (CY)", "Czech Republic (CZ)", "Denmark (DK)", "Djibouti (DJ)", "Dominica (DM)", "Dominican Republic (DO)", "Ecuador (EC)", "Egypt (EG)", "El Salvador (SV)", "Equatorial Guinea (GQ)", "Eritrea (ER)", "Estonia (EE)", "Ethiopia (ET)", "Falkland Islands (FK)", "Faroe Islands (FO)", "Fiji (FJ)", "Finland (FI)", "France (FR)", "French Guiana (GF)", "French Polynesia (PF)", "Gabon (GA)", "The Gambia (GM)", "Georgia (GE)", "Germany (DE)", "Ghana (GH)", "Gibraltar (GI)", "Greece (GR)", "Greenland (GL)", "Grenada (GD)", "Guadeloupe (GP)", "Guam (GU)", "Guatemala (GT)", "Guinea (GN)", "Guinea-Bissau (GW)", "Guyana (GY)", "Haiti (HT)", "Vatican City (VA)", "Honduras (HN)", "Hong Kong (HK)", "Hungary (HU)", "Iceland (IS)", "India (IN)", "Indonesia (ID)", "Iran (IR)", "Iraq (IQ)", "Ireland (IE)", "Israel (IL)", "Italy (IT)", "Jamaica (JM)", "Japan (JP)", "Jordan (JO)", "Kazakhstan (KZ)", "Kenya (KE)", "Kiribati (KI)", "South Korea (KR)", "Kuwait (KW)", "Kyrgyzstan (KG)", "Laos (LA)", "Latvia (LV)", "Lebanon (LB)", "Lesotho (LS)", "Liberia (LR)", "Libya (LY)", "Liechtenstein (LI)", "Lithuania (LT)", "Luxembourg (LU)", "Macau (MO)", "Macedonia (MK)", "Madagascar (MG)", "Malawi (MW)", "Malaysia (MY)", "Maldives (MV)", "Mali (ML)", "Malta (MT)", "Marshall Islands (MH)", "Martinique (MQ)", "Mauritania (MR)", "Mauritius (MU)", "Mayotte (YT)", "Mexico (MX)", "Federated States of Micronesia (FM)", "Moldova (MD)", "Monaco (MC)", "Mongolia (MN)", "Montenegro (ME)", "Montserrat (MS)", "Morocco (MA)", "Mozambique (MZ)", "Burma Myanmar (MM)", "Namibia (NA)", "Nauru (NR)", "Nepal (NP)", "Netherlands (NL)", "Netherlands Antilles (AN)", "New Caledonia (NC)", "New Zealand (NZ)", "Nicaragua (NI)", "Niger (NE)", "Nigeria (NG)", "Niue (NU)", "Norfolk Island (NF)", "Northern Mariana Islands (MP)", "Norway (NO)", "Oman (OM)", "Pakistan (PK)", "Palau (PW)", "Palestine (PS)", "Panama (PA)", "Papua New Guinea (PG)", "Paraguay (PY)", "Peru (PE)", "Philippines (PH)", "Poland (PL)", "Portugal (PT)", "Puerto Rico (PR)", "Qatar (QA)", "RÃ©union (RE)", "Romania (RO)", "Russia (RU)", "Rwanda (RW)", "Saint BarthÃ©lemy (BL)", "Saint Helena (SH)", "Saint Kitts and Nevis (KN)", "St. Lucia (LC)", "Saint Martin (MF)", "Saint Pierre and Miquelon (PM)", "Saint Vincent and the Grenadines (VC)", "Samoa (WS)", "San Marino (SM)", "SÃ£o TomÃ© and PrÃ­ncipe (ST)", "Saudi Arabia (SA)", "Senegal (SN)", "Serbia (RS)", "Seychelles (SC)", "Sierra Leone (SL)", "Singapore (SG)", "Slovakia (SK)", "Slovenia (SI)", "Solomon Islands (SB)", "Somalia (SO)", "South Africa (ZA)", "Spain (ES)", "Sri Lanka (LK)", "Sudan (SD)", "Suriname (SR)", "Swaziland (SZ)", "Sweden (SE)", "Switzerland (CH)", "Syria (SY)", "Taiwan (TW)", "Tajikistan (TJ)", "Tanzania (TZ)", "Thailand (TH)", "Timor-Leste (TL)", "Togo (TG)", "Tokelau (TK)", "Tonga (TO)", "Trinidad and Tobago (TT)", "Tunisia (TN)", "Turkey (TR)", "Turkmenistan (TM)", "Turks and Caicos Islands (TC)", "Tuvalu (TV)", "Uganda (UG)", "Ukraine (UA)", "United Arab Emirates (AE)", "United Kingdom (GB)", "United States (US)", "Uruguay (UY)", "US Virgin Islands (VI)", "Uzbekistan (UZ)", "Vanuatu (VU)", "Venezuela (VE)", "Vietnam (VN)", "Wallis and Futuna (WF)", "Yemen (YE)", "Zambia (ZM)", "Zimbabwe (ZW)" }));
+        CountryBox.setSelectedIndex(92);
+        Panel7_5.add(CountryBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 290, 270, 40));
+
+        ContentPanel7.add(Panel7_5, "COUNTRY");
+
+        LayeredPane7.add(ContentPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 1090, -1));
+
+        SettingsPanel.add(LayeredPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 1200, 620));
+
+        getContentPane().add(SettingsPanel, "CARD7");
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void Logout1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Logout1MouseClicked
+        // TODO add your handling code here:
+        Login login = new Login("");
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_Logout1MouseClicked
+
+    private void MenuLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuLabel1MouseClicked
+        // TODO add your handling code here:
+        if(LabelPanel1.isVisible()){
+            LabelPanel1.setVisible(false);
+            DashIcon1.setBackground(new Color(102, 102, 102));
+        }else{
+            LabelPanel1.setVisible(true);
+            DashIcon1.setBackground(new Color(51, 51, 51));
+        }
+    }//GEN-LAST:event_MenuLabel1MouseClicked
+
+    private void ContentPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ContentPanel1MouseClicked
+        // TODO add your handling code here:
+        LabelPanel1.setVisible(false);
+        DashIcon1.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_ContentPanel1MouseClicked
+
+    private void ContentPanel1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContentPanel1FocusGained
+        // TODO add your handling code here:
+        LabelPanel1.setVisible(false);
+        DashIcon1.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_ContentPanel1FocusGained
+
+    private void MenuLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuLabel2MouseClicked
+        // TODO add your handling code here:
+        if(LabelPanel2.isVisible()){
+            LabelPanel2.setVisible(false);
+            BookIcon2.setBackground(new Color(102, 102, 102));
+        }else{
+            LabelPanel2.setVisible(true);
+            BookIcon2.setBackground(new Color(51, 51, 51));
+        }
+    }//GEN-LAST:event_MenuLabel2MouseClicked
+
+    private void ContentPanel2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContentPanel2FocusGained
+        // TODO add your handling code here:
+        LabelPanel2.setVisible(false);
+        BookIcon2.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_ContentPanel2FocusGained
+
+    private void ContentPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ContentPanel2MouseClicked
+        // TODO add your handling code here:
+        LabelPanel2.setVisible(false);
+        BookIcon2.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_ContentPanel2MouseClicked
+
+    private void MenuLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuLabel3MouseClicked
+        // TODO add your handling code here:
+        if(LabelPanel3.isVisible()){
+            LabelPanel3.setVisible(false);
+            ManageIcon3.setBackground(new Color(102, 102, 102));
+        }else{
+            LabelPanel3.setVisible(true);
+            ManageIcon3.setBackground(new Color(51, 51, 51));
+        }
+    }//GEN-LAST:event_MenuLabel3MouseClicked
+
+    private void ContentPanel3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContentPanel3FocusGained
+        // TODO add your handling code here:
+        LabelPanel3.setVisible(false);
+        ManageIcon3.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_ContentPanel3FocusGained
+
+    private void ContentPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ContentPanel3MouseClicked
+        // TODO add your handling code here:
+        LabelPanel3.setVisible(false);
+        ManageIcon3.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_ContentPanel3MouseClicked
+
+    private void MenuLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuLabel4MouseClicked
+        // TODO add your handling code here:
+        if(LabelPanel4.isVisible()){
+            LabelPanel4.setVisible(false);
+            ExperienceIcon4.setBackground(new Color(102, 102, 102));
+        }else{
+            LabelPanel4.setVisible(true);
+            ExperienceIcon4.setBackground(new Color(51, 51, 51));
+        }
+    }//GEN-LAST:event_MenuLabel4MouseClicked
+
+    private void ContentPanel4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContentPanel4FocusGained
+        // TODO add your handling code here:
+        LabelPanel4.setVisible(false);
+        ExperienceIcon4.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_ContentPanel4FocusGained
+
+    private void ContentPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ContentPanel4MouseClicked
+        // TODO add your handling code here:
+        LabelPanel4.setVisible(false);
+        ExperienceIcon4.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_ContentPanel4MouseClicked
+
+    private void MenuLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuLabel5MouseClicked
+        // TODO add your handling code here:
+        if(LabelPanel5.isVisible()){
+            LabelPanel5.setVisible(false);
+            WhereweFlyIcon5.setBackground(new Color(102, 102, 102));
+        }else{
+            LabelPanel5.setVisible(true);
+            WhereweFlyIcon5.setBackground(new Color(51, 51, 51));
+        }
+    }//GEN-LAST:event_MenuLabel5MouseClicked
+
+    private void ContentPanel5FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContentPanel5FocusGained
+        // TODO add your handling code here:
+        LabelPanel5.setVisible(false);
+        WhereweFlyIcon5.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_ContentPanel5FocusGained
+
+    private void ContentPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ContentPanel5MouseClicked
+        // TODO add your handling code here:
+        LabelPanel5.setVisible(false);
+        WhereweFlyIcon5.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_ContentPanel5MouseClicked
+
+    private void MenuLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuLabel6MouseClicked
+        // TODO add your handling code here:
+        if(LabelPanel6.isVisible()){
+            LabelPanel6.setVisible(false);
+            HelpIcon6.setBackground(new Color(102, 102, 102));
+        }else{
+            LabelPanel6.setVisible(true);
+            HelpIcon6.setBackground(new Color(51, 51, 51));
+        }
+    }//GEN-LAST:event_MenuLabel6MouseClicked
+
+    private void ContentPanel6FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContentPanel6FocusGained
+        // TODO add your handling code here:
+        LabelPanel6.setVisible(false);
+        HelpIcon6.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_ContentPanel6FocusGained
+
+    private void ContentPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ContentPanel6MouseClicked
+        // TODO add your handling code here:
+        LabelPanel6.setVisible(false);
+        HelpIcon6.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_ContentPanel6MouseClicked
+
+    private void MenuLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuLabel7MouseClicked
+        // TODO add your handling code here:
+        if(LabelPanel7.isVisible()){
+            LabelPanel7.setVisible(false);
+            SettingsIcon7.setBackground(new Color(102, 102, 102));
+        }else{
+            LabelPanel7.setVisible(true);
+            SettingsIcon7.setBackground(new Color(51, 51, 51));
+        }
+    }//GEN-LAST:event_MenuLabel7MouseClicked
+
+    private void ContentPanel7FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContentPanel7FocusGained
+        // TODO add your handling code here:
+        LabelPanel7.setVisible(false);
+        SettingsIcon7.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_ContentPanel7FocusGained
+
+    private void ContentPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ContentPanel7MouseClicked
+        // TODO add your handling code here:
+        LabelPanel7.setVisible(false);
+        SettingsIcon7.setBackground(new Color(102, 102, 102));
+    }//GEN-LAST:event_ContentPanel7MouseClicked
+
+    private void Exit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Exit1MouseClicked
+        // TODO add your handling code here:
+        exit();
+    }//GEN-LAST:event_Exit1MouseClicked
+
+    private void Logout2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Logout2MouseClicked
+        // TODO add your handling code here:
+        login();
+    }//GEN-LAST:event_Logout2MouseClicked
+
+    private void Exit2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Exit2MouseClicked
+        // TODO add your handling code here:
+        exit();
+    }//GEN-LAST:event_Exit2MouseClicked
+
+    private void Logout3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Logout3MouseClicked
+        // TODO add your handling code here:
+        login();
+    }//GEN-LAST:event_Logout3MouseClicked
+
+    private void Exit3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Exit3MouseClicked
+        // TODO add your handling code here:
+        exit();
+    }//GEN-LAST:event_Exit3MouseClicked
+
+    private void Exit4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Exit4MouseClicked
+        // TODO add your handling code here:
+        exit();
+    }//GEN-LAST:event_Exit4MouseClicked
+
+    private void Logout4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Logout4MouseClicked
+        // TODO add your handling code here:
+        login();
+    }//GEN-LAST:event_Logout4MouseClicked
+
+    private void Logout5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Logout5MouseClicked
+        // TODO add your handling code here:
+        login();
+    }//GEN-LAST:event_Logout5MouseClicked
+
+    private void Exit5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Exit5MouseClicked
+        // TODO add your handling code here:
+        exit();
+    }//GEN-LAST:event_Exit5MouseClicked
+
+    private void Logout6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Logout6MouseClicked
+        // TODO add your handling code here:
+        login();
+    }//GEN-LAST:event_Logout6MouseClicked
+
+    private void Exit6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Exit6MouseClicked
+        // TODO add your handling code here:
+        exit();
+    }//GEN-LAST:event_Exit6MouseClicked
+
+    private void Logout7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Logout7MouseClicked
+        // TODO add your handling code here:
+        login();
+    }//GEN-LAST:event_Logout7MouseClicked
+
+    private void Exit7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Exit7MouseClicked
+        // TODO add your handling code here:
+        exit();
+    }//GEN-LAST:event_Exit7MouseClicked
+
+    private void DashboardLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DashboardLabel8MouseClicked
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "CARD1");
+    }//GEN-LAST:event_DashboardLabel8MouseClicked
+
+    private void BookLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookLabel8MouseClicked
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "CARD2");
+    }//GEN-LAST:event_BookLabel8MouseClicked
+
+    private void ManageLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ManageLabel8MouseClicked
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "CARD3");
+    }//GEN-LAST:event_ManageLabel8MouseClicked
+
+    private void ExperienceLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExperienceLabel8MouseClicked
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "CARD4");
+    }//GEN-LAST:event_ExperienceLabel8MouseClicked
+
+    private void WhereweFlyLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WhereweFlyLabel8MouseClicked
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "CARD5");
+    }//GEN-LAST:event_WhereweFlyLabel8MouseClicked
+
+    private void HelpLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HelpLabel8MouseClicked
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "CARD6");
+    }//GEN-LAST:event_HelpLabel8MouseClicked
+
+    private void SettingsLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SettingsLabel8MouseClicked
+        // TODO add your handling code here:
+
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "CARD7");
+    }//GEN-LAST:event_SettingsLabel8MouseClicked
+
+    private void Back5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Back5MouseClicked
+        // TODO add your handling code here:
+        Back5.setVisible(false);
+        CardLayout cardLayout = (CardLayout) ContentPanel5.getLayout();
+        cardLayout.show(ContentPanel5, "HOME5");
+    }//GEN-LAST:event_Back5MouseClicked
+
+    private void Avatar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Avatar2MouseClicked
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) ContentPanel7.getLayout();
+        cardLayout.show(ContentPanel7, "AVATAR");
+    }//GEN-LAST:event_Avatar2MouseClicked
+
+    private void Password3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Password3MouseClicked
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) ContentPanel7.getLayout();
+        cardLayout.show(ContentPanel7, "PASSWORD");
+    }//GEN-LAST:event_Password3MouseClicked
+
+    private void Number1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Number1MouseClicked
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) ContentPanel7.getLayout();
+        cardLayout.show(ContentPanel7, "NUMBER");
+    }//GEN-LAST:event_Number1MouseClicked
+
+    private void DateBirth5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DateBirth5MouseClicked
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) ContentPanel7.getLayout();
+        cardLayout.show(ContentPanel7, "DOB");
+    }//GEN-LAST:event_DateBirth5MouseClicked
+
+    private void Country4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Country4MouseClicked
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) ContentPanel7.getLayout();
+        cardLayout.show(ContentPanel7, "COUNTRY");
+    }//GEN-LAST:event_Country4MouseClicked
+
+    private void Icon2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Icon2MouseClicked
+        // TODO add your handling code here:
+        allTransparent();
+        Icon2.setOpaque(true);
+    }//GEN-LAST:event_Icon2MouseClicked
+
+    private void Icon1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Icon1MouseClicked
+        // TODO add your handling code here:
+        allTransparent();
+        Icon1.setOpaque(true);
+    }//GEN-LAST:event_Icon1MouseClicked
+
+    private void Icon3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Icon3MouseClicked
+        // TODO add your handling code here:
+        allTransparent();
+        Icon3.setOpaque(true);
+    }//GEN-LAST:event_Icon3MouseClicked
+
+    private void Icon4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Icon4MouseClicked
+        // TODO add your handling code here:
+        allTransparent();
+        Icon4.setOpaque(true);
+    }//GEN-LAST:event_Icon4MouseClicked
+
+    private void Icon5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Icon5MouseClicked
+        // TODO add your handling code here:
+        allTransparent();
+        Icon5.setOpaque(true);
+    }//GEN-LAST:event_Icon5MouseClicked
+
+    private void Icon6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Icon6MouseClicked
+        // TODO add your handling code here:
+        allTransparent();
+        Icon6.setOpaque(true);
+    }//GEN-LAST:event_Icon6MouseClicked
+
+    private void Icon7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Icon7MouseClicked
+        // TODO add your handling code here:
+        allTransparent();
+        Icon7.setOpaque(true);
+    }//GEN-LAST:event_Icon7MouseClicked
+
+    private void Icon8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Icon8MouseClicked
+        // TODO add your handling code here:
+        allTransparent();
+        Icon8.setOpaque(true);
+    }//GEN-LAST:event_Icon8MouseClicked
+
+    private void Icon9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Icon9MouseClicked
+        // TODO add your handling code here:
+        allTransparent();
+        Icon9.setOpaque(true);
+    }//GEN-LAST:event_Icon9MouseClicked
+
+    private void Icon10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Icon10MouseClicked
+        // TODO add your handling code here:
+        allTransparent();
+        Icon10.setOpaque(true);
+    }//GEN-LAST:event_Icon10MouseClicked
+
+    private void Save1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Save1MouseClicked
+        // TODO add your handling code here:
+
+        int current = getCurrentSelected();
+        if (current == icon) {
+            JLabel label = new JLabel("No changes detected.");
+            label.setFont(new Font("Arial", Font.BOLD, 15));
+            String title = "Update";
+            JOptionPane.showMessageDialog(null, label, title, JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            //Order is: IconCode, Name, DateofBirth, Mobile Number
+            String IC = Integer.toString(current);
+            icon = current;
+            String[] details = {IC, name, date, mobilenumber};
+            settingDetails(details);
+
+            //Updating in Database:
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con = DriverManager.getConnection(
+                        "jdbc:mysql://localhost:3306/project8525?useSSL=false&characterEncoding=latin1", "root", "123456789");
+                Statement stmt = con.createStatement();
+                stmt.executeUpdate("UPDATE userdetails SET Icon =" + current + " WHERE Email = '" + email + "';");
+                con.close();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+            JLabel label = new JLabel("Changes saved successfully.");
+            label.setFont(new Font("Arial", Font.BOLD, 15));
+            String title = "Success";
+            JOptionPane.showMessageDialog(null, label, title, JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }//GEN-LAST:event_Save1MouseClicked
+    
+    private void Icon11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Icon11MouseClicked
+        // TODO add your handling code here:
+        allTransparent();
+        Icon11.setOpaque(true);
+    }//GEN-LAST:event_Icon11MouseClicked
+
+    private void Icon12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Icon12MouseClicked
+        // TODO add your handling code here:
+        allTransparent();
+        Icon12.setOpaque(true);
+    }//GEN-LAST:event_Icon12MouseClicked
+
+    private void Icon13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Icon13MouseClicked
+        // TODO add your handling code here:
+        allTransparent();
+        Icon13.setOpaque(true);
+    }//GEN-LAST:event_Icon13MouseClicked
+
+    private void Icon14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Icon14MouseClicked
+        // TODO add your handling code here:
+        allTransparent();
+        Icon14.setOpaque(true);
+    }//GEN-LAST:event_Icon14MouseClicked
+
+    private void Icon15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Icon15MouseClicked
+        // TODO add your handling code here:
+        allTransparent();
+        Icon15.setOpaque(true);
+    }//GEN-LAST:event_Icon15MouseClicked
+
+    private void CurrentPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CurrentPasswordKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            String str = new String(CurrentPassword.getPassword());
+            str= str.trim();
+            if(str.isEmpty() || str.equals(" ")){
+                CurrentPassword.setText("");
+                JLabel label = new JLabel("Empty Password Entered. Please try again.");
+                label.setFont(new Font("Arial", Font.BOLD, 15));
+                String title = "Invalid Password";
+                JOptionPane.showMessageDialog(null, label, title, JOptionPane.WARNING_MESSAGE);
+            }else{
+                String passcode = Database.getPasscode(email);
+                String strp = Database.getMd5(str);
+                if(strp.equals(passcode)){
+                    NewPLabel1.setVisible(true);
+                    NewPLabel2.setVisible(true);
+                    ViewP1.setVisible(true);
+                    ViewP2.setVisible(true);
+                    UL2.setVisible(true);
+                    UL3.setVisible(true);
+                    Save2.setVisible(true);
+                    NewPassword1.setVisible(true);
+                    NewPassword2.setVisible(true);
+                }else{
+                    JLabel label = new JLabel("Incorrect Password Entered. Please try again.");
+                    label.setFont(new Font("Arial", Font.BOLD, 15));
+                    String title = "Invalid Password";
+                    JOptionPane.showMessageDialog(null, label, title, JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_CurrentPasswordKeyPressed
+
+    private void ViewC1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ViewC1MouseClicked
+        // TODO add your handling code here:
+        if(flagc1 == 0){
+            ViewC1.setBackground(new Color(240, 240, 240));
+            CurrentPassword.setEchoChar((char) 0);
+            flagc1 = 1;
+        }else{
+            ViewC1.setBackground(Color.WHITE);
+            CurrentPassword.setEchoChar('*');
+            flagc1 = 0;
+        }
+    }//GEN-LAST:event_ViewC1MouseClicked
+
+    private void ViewP1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ViewP1MouseClicked
+        // TODO add your handling code here:
+        if(flagp1 == 0){
+            ViewP1.setBackground(new Color(240, 240, 240));
+            NewPassword1.setEchoChar((char) 0);
+            flagp1 = 1;
+        }else{
+            ViewP1.setBackground(Color.WHITE);
+            NewPassword1.setEchoChar('*');
+            flagp1 = 0;
+        }
+    }//GEN-LAST:event_ViewP1MouseClicked
+
+    private void ViewP2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ViewP2MouseClicked
+        // TODO add your handling code here:
+        if(flagp2 == 0){
+            ViewP2.setBackground(new Color(240, 240, 240));
+            NewPassword2.setEchoChar((char) 0);
+            flagp2 = 1;
+        }else{
+            ViewP2.setBackground(Color.WHITE);
+            NewPassword2.setEchoChar('*');
+            flagp2 = 0;
+        }
+    }//GEN-LAST:event_ViewP2MouseClicked
+
+    private void Save5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Save5MouseEntered
+        // TODO add your handling code here:
+        Save5.setForeground(Color.DARK_GRAY);
+        Save5.setFont(new Font("Arial", Font.BOLD, 28));
+    }//GEN-LAST:event_Save5MouseEntered
+
+    private void Save5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Save5MouseExited
+        // TODO add your handling code here:
+        Save5.setForeground(Color.BLACK);
+        Save5.setFont(new Font("Arial", Font.BOLD, 24));
+    }//GEN-LAST:event_Save5MouseExited
+
+    private void Save1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Save1MouseEntered
+        // TODO add your handling code here:
+        Save1.setForeground(Color.DARK_GRAY);
+        Save1.setFont(new Font("Arial", Font.BOLD, 28));
+    }//GEN-LAST:event_Save1MouseEntered
+
+    private void Save1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Save1MouseExited
+        // TODO add your handling code here:
+        Save1.setForeground(Color.BLACK);
+        Save1.setFont(new Font("Arial", Font.BOLD, 24));
+    }//GEN-LAST:event_Save1MouseExited
+
+    private void Save2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Save2MouseClicked
+        // TODO add your handling code here:
+        String pass1 = new String(NewPassword1.getPassword());
+        String pass2 = new String(NewPassword2.getPassword());
+        if(pass1.isEmpty() || pass2.isEmpty()){
+            JLabel label = new JLabel("Empty Password Entered. Please try again.");
+            label.setFont(new Font("Arial", Font.BOLD, 15));
+            String title = "Invalid Password";
+            JOptionPane.showMessageDialog(null, label, title, JOptionPane.WARNING_MESSAGE);
+        }else {
+            if (pass1.equals(pass2)) {
+                Database.updatePasscode(email, pass1);
+                CurrentPassword.setText("");
+                NewPassword1.setText("");
+                NewPassword2.setText("");
+                JLabel label = new JLabel("Password updated successfully.");
+                label.setFont(new Font("Arial", Font.BOLD, 15));
+                String title = "Success";
+                JOptionPane.showMessageDialog(null, label, title, JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JLabel label = new JLabel("Password do not match. Please try again.");
+                label.setFont(new Font("Arial", Font.BOLD, 15));
+                String title = "Password Mismatch";
+                JOptionPane.showMessageDialog(null, label, title, JOptionPane.WARNING_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_Save2MouseClicked
+
+    private void Save2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Save2MouseEntered
+        // TODO add your handling code here:
+        Save2.setForeground(Color.DARK_GRAY);
+        Save2.setFont(new Font("Arial", Font.BOLD, 28));
+    }//GEN-LAST:event_Save2MouseEntered
+
+    private void Save2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Save2MouseExited
+        // TODO add your handling code here:
+        Save2.setForeground(Color.BLACK);
+        Save2.setFont(new Font("Arial", Font.BOLD, 24));
+    }//GEN-LAST:event_Save2MouseExited
+
+    private void Save3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Save3MouseEntered
+        // TODO add your handling code here:
+        Save3.setForeground(Color.DARK_GRAY);
+        Save3.setFont(new Font("Arial", Font.BOLD, 28));
+    }//GEN-LAST:event_Save3MouseEntered
+
+    private void Save3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Save3MouseExited
+        // TODO add your handling code here:
+        Save3.setForeground(Color.BLACK);
+        Save3.setFont(new Font("Arial", Font.BOLD, 24));
+    }//GEN-LAST:event_Save3MouseExited
+
+    private void Save4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Save4MouseEntered
+        // TODO add your handling code here:
+        Save4.setForeground(Color.DARK_GRAY);
+        Save4.setFont(new Font("Arial", Font.BOLD, 28));
+    }//GEN-LAST:event_Save4MouseEntered
+
+    private void Save4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Save4MouseExited
+        // TODO add your handling code here:
+        Save4.setForeground(Color.BLACK);
+        Save4.setFont(new Font("Arial", Font.BOLD, 24));
+    }//GEN-LAST:event_Save4MouseExited
+
+    private void Save3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Save3MouseClicked
+        // TODO add your handling code here:
+        String number = PhoneField.getText();
+        number = number.trim();
+
+        if(number.isEmpty()){
+            JLabel label = new JLabel("Phone number to be updated can not be Empty.");
+            label.setFont(new Font("Arial", Font.BOLD, 15));
+            String title = "Error";
+            JOptionPane.showMessageDialog(null, label, title, JOptionPane.WARNING_MESSAGE);
+        }else {
+            startWork(number);
+        }
+    }//GEN-LAST:event_Save3MouseClicked
+
+    private void PhoneFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PhoneFieldKeyTyped
+        // TODO add your handling code here:
+        if(PhoneField.getText().length() < 15){
+            char c = evt.getKeyChar();
+            if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+                getToolkit().beep();
+                evt.consume();
+            }
+        }else{
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_PhoneFieldKeyTyped
+
+    private void Save4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Save4MouseClicked
+        // TODO add your handling code here:
+
+        Date datet = NewDOB.getDate();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+        String newDate = formatter.format(datet);
+
+        if(newDate.equals(date)){
+            JLabel label = new JLabel("No changes detected.");
+            label.setFont(new Font("Arial", Font.BOLD, 15));
+            String title = "Update";
+            JOptionPane.showMessageDialog(null, label, title, JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JLabel label = new JLabel("Date of Birth to be updated is: " + newDate + ". Update changes?");
+            label.setFont(new Font("Arial", Font.BOLD, 15));
+            String title = "Confirmation";
+            int run = JOptionPane.showConfirmDialog(null, label, title,
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+            if (run == 0) {
+
+                try {
+                    Database.updateDate(email, newDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                date = newDate;
+                String[] details = {Integer.toString(icon), name, newDate, mobilenumber};
+                settingDetails(details);
+                JLabel label1 = new JLabel("Date of birth Updated.");
+                label1.setFont(new Font("Arial", Font.BOLD, 15));
+                String title1 = "Success";
+                JOptionPane.showMessageDialog(null, label1, title1,
+                        JOptionPane.INFORMATION_MESSAGE, successIcon);
+            }
+        }
+    }//GEN-LAST:event_Save4MouseClicked
+
+    private void Save5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Save5MouseClicked
+        // TODO add your handling code here:
+        String currCountry = (String) CountryBox.getSelectedItem();
+        int countryIndex = CountryBox.getSelectedIndex();
+        String oldCountry = Database.getCountry(email);
+
+        if(oldCountry.equalsIgnoreCase(currCountry)){
+            JLabel label = new JLabel("No changes detected.");
+            label.setFont(new Font("Arial", Font.BOLD, 15));
+            String title = "Update";
+            JOptionPane.showMessageDialog(null, label, title, JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JLabel label = new JLabel("Country to be updated is: " + currCountry + ". Update changes?");
+            label.setFont(new Font("Arial", Font.BOLD, 15));
+            String title = "Confirmation";
+            int run = JOptionPane.showConfirmDialog(null, label, title,
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, questionIcon);
+
+            if (run == 0) {
+
+                Database.updateCountry(email, currCountry);
+                CountryBox.setSelectedIndex(countryIndex);
+                JLabel label1 = new JLabel("Country of Residence updated.");
+                label1.setFont(new Font("Arial", Font.BOLD, 15));
+                String title1 = "Success";
+                JOptionPane.showMessageDialog(null, label1, title1,
+                        JOptionPane.INFORMATION_MESSAGE, successIcon);
+            }
+        }
+    }//GEN-LAST:event_Save5MouseClicked
+
+    private void CountryLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CountryLabel2MouseClicked
+        // TODO add your handling code here:
+        CountriesPanel list =  new CountriesPanel(name, email, "AFRICA");
+        list.setVisible(true);
+        list.toFront();
+        javax.swing.Timer timer = new javax.swing.Timer(1000, e -> this.dispose());
+        timer.setRepeats(false);
+        timer.start();
+        
+    }//GEN-LAST:event_CountryLabel2MouseClicked
+
+    private void CountryLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CountryLabel2MouseEntered
+        // TODO add your handling code here:
+        CountryLabel2.setFont(new Font("Arial", Font.BOLD, 26));
+        CountryLabel2.setBackground(lightGray);
+        CountryPicLabel2.setBackground(lightGray);
+    }//GEN-LAST:event_CountryLabel2MouseEntered
+
+    private void CountryLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CountryLabel2MouseExited
+        // TODO add your handling code here:
+        CountryLabel2.setFont(new Font("Arial", Font.BOLD, 20));
+        CountryLabel2.setBackground(Color.WHITE);
+        CountryPicLabel2.setBackground(Color.WHITE);
+    }//GEN-LAST:event_CountryLabel2MouseExited
+
+    private void CountryLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CountryLabel4MouseClicked
+        // TODO add your handling code here:
+        CountriesPanel list =  new CountriesPanel(name, email, "UAE");
+        list.setVisible(true);
+        list.toFront();
+        javax.swing.Timer timer = new javax.swing.Timer(1000, e -> this.dispose());
+        timer.setRepeats(false);
+        timer.start();
+    }//GEN-LAST:event_CountryLabel4MouseClicked
+
+    private void CountryLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CountryLabel4MouseEntered
+        // TODO add your handling code here:
+        CountryLabel4.setFont(new Font("Arial", Font.BOLD, 26));
+        CountryLabel4.setBackground(lightGray);
+        CountryPicLabel4.setBackground(lightGray);
+        InstructionsLabel.setVisible(true);
+    }//GEN-LAST:event_CountryLabel4MouseEntered
+
+    private void CountryLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CountryLabel4MouseExited
+        // TODO add your handling code here:
+        CountryLabel4.setFont(new Font("Arial", Font.BOLD, 20));
+        CountryLabel4.setBackground(Color.WHITE);
+        CountryPicLabel4.setBackground(Color.WHITE);
+        InstructionsLabel.setVisible(true);
+    }//GEN-LAST:event_CountryLabel4MouseExited
+
+    private void CountryLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CountryLabel1MouseEntered
+        // TODO add your handling code here:
+        CountryLabel1.setFont(new Font("Arial", Font.BOLD, 26));
+        CountryLabel1.setBackground(lightGray);
+        CountryPicLabel1.setBackground(lightGray);
+    }//GEN-LAST:event_CountryLabel1MouseEntered
+
+    private void CountryLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CountryLabel1MouseExited
+        // TODO add your handling code here:
+        CountryLabel1.setFont(new Font("Arial", Font.BOLD, 20));
+        CountryLabel1.setBackground(Color.WHITE);
+        CountryPicLabel1.setBackground(Color.WHITE);
+    }//GEN-LAST:event_CountryLabel1MouseExited
+
+    private void CountryPicLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CountryPicLabel1MouseClicked
+        // TODO add your handling code here:
+        CountriesPanel list =  new CountriesPanel(name, email, "AMERICA");
+        list.setVisible(true);
+        list.toFront();
+        javax.swing.Timer timer = new javax.swing.Timer(1000, e -> this.dispose());
+        timer.setRepeats(false);
+        timer.start();
+        
+    }//GEN-LAST:event_CountryPicLabel1MouseClicked
+
+    private void CountryPicLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CountryPicLabel3MouseClicked
+        // TODO add your handling code here:
+        CountriesPanel list =  new CountriesPanel(name, email, "ASIA");
+        list.setVisible(true);
+        list.toFront();
+        javax.swing.Timer timer = new javax.swing.Timer(1000, e -> this.dispose());
+        timer.setRepeats(false);
+        timer.start();
+    }//GEN-LAST:event_CountryPicLabel3MouseClicked
+
+    private void CountryPicLabel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CountryPicLabel3MouseEntered
+        // TODO add your handling code here:
+        CountryLabel3.setFont(new Font("Arial", Font.BOLD, 26));
+        CountryLabel3.setBackground(lightGray);
+        CountryPicLabel3.setBackground(lightGray);
+    }//GEN-LAST:event_CountryPicLabel3MouseEntered
+
+    private void CountryPicLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CountryPicLabel3MouseExited
+        // TODO add your handling code here:
+        CountryLabel3.setFont(new Font("Arial", Font.BOLD, 20));
+        CountryLabel3.setBackground(Color.WHITE);
+        CountryPicLabel3.setBackground(Color.WHITE);
+    }//GEN-LAST:event_CountryPicLabel3MouseExited
+
+    private void CountryPicLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CountryPicLabel5MouseClicked
+        // TODO add your handling code here:
+        CountriesPanel list =  new CountriesPanel(name, email, "EUROPE");
+        list.setVisible(true);
+        list.toFront();
+        javax.swing.Timer timer = new javax.swing.Timer(1000, e -> this.dispose());
+        timer.setRepeats(false);
+        timer.start();
+    }//GEN-LAST:event_CountryPicLabel5MouseClicked
+
+    private void CountryPicLabel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CountryPicLabel5MouseEntered
+        // TODO add your handling code here:
+        CountryLabel5.setFont(new Font("Arial", Font.BOLD, 26));
+        CountryLabel5.setBackground(lightGray);
+        CountryPicLabel5.setBackground(lightGray);
+    }//GEN-LAST:event_CountryPicLabel5MouseEntered
+
+    private void CountryPicLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CountryPicLabel5MouseExited
+        // TODO add your handling code here:
+        CountryLabel5.setFont(new Font("Arial", Font.BOLD, 20));
+        CountryLabel5.setBackground(Color.WHITE);
+        CountryPicLabel5.setBackground(Color.WHITE);
+    }//GEN-LAST:event_CountryPicLabel5MouseExited
+
+    private void AMinusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AMinusMouseClicked
+        // TODO add your handling code here:
+        if(passengers >= 2) {
+            int num = Integer.parseInt(ATextField.getText());
+            if (num >= 2) {
+                num--;
+                ATextField.setText(Integer.toString(num));
+                passengers--;
+            } else {
+                getToolkit().beep();
+            }
+        }else{
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_AMinusMouseClicked
+
+    private void APlusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_APlusMouseClicked
+        // TODO add your handling code here:
+        if(passengers <= 8) {
+            int num = Integer.parseInt(ATextField.getText());
+            if (num <= 8) {
+                num++;
+                ATextField.setText(Integer.toString(num));
+                passengers++;
+            } else {
+                getToolkit().beep();
+            }
+        }else{
+            BookingInstruction.setVisible(true);
+            javax.swing.Timer timer = new javax.swing.Timer(3000,
+                    e -> BookingInstruction.setVisible(false));
+            timer.setRepeats(false);
+            timer.start();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_APlusMouseClicked
+
+    private void KMinusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KMinusMouseClicked
+        // TODO add your handling code here:
+        if(passengers >= 2) {
+            int num = Integer.parseInt(KTextField.getText());
+            if (num >= 1) {
+                num--;
+                KTextField.setText(Integer.toString(num));
+                passengers--;
+            } else {
+                getToolkit().beep();
+            }
+        }else{
+
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_KMinusMouseClicked
+
+    private void KPlusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KPlusMouseClicked
+        // TODO add your handling code here:
+        if(passengers <= 8) {
+            int num = Integer.parseInt(KTextField.getText());
+            if (num <= 8) {
+                num++;
+                KTextField.setText(Integer.toString(num));
+                passengers++;
+            } else {
+                getToolkit().beep();
+            }
+        }else{
+            BookingInstruction.setVisible(true);
+            javax.swing.Timer timer = new javax.swing.Timer(3000,
+                    e -> BookingInstruction.setVisible(false));
+            timer.setRepeats(false);
+            timer.start();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_KPlusMouseClicked
+
+    private void SearchFlightsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchFlightsMouseClicked
+        // TODO add your handling code here:
+        boolean flag = false, dateFlag = false;
+        String from = Country1Combo.getSelectedItem().toString();
+        String to = Country2Combo.getSelectedItem().toString();
+        from = from.substring(from.length()-3);
+        to = to.substring(to.length()-3);
+        java.util.Date dDate = DepartingDate.getDate();
+        boolean flexibility = FlexibilityCheckbox.isSelected();
+        try{
+            dDate.toString();
+        }catch(NullPointerException np){
+            JLabel label = new JLabel("Departure Date can not be Empty.");
+            label.setFont(new Font("Arial", Font.BOLD, 15));
+            String title = "Error";
+            JOptionPane.showMessageDialog(null, label, title,
+                    JOptionPane.INFORMATION_MESSAGE, errorIcon);
+            DepartingDate.requestFocusInWindow();
+            return;
+        }
+
+        //Validating the Departure Date:
+        java.util.Date date = new java.util.Date();
+        SimpleDateFormat sdfo = new SimpleDateFormat("yyyy-MM-dd");
+        String depDate = sdfo.format(dDate);
+        String nowDate = sdfo.format(date);
+        String arrDate;
+
+        // Get the two dates to be compared
+        Date d1 = null, d2 = null, d3 = null;
+        try {
+            d1 = sdfo.parse(depDate);
+            d2 = sdfo.parse(nowDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (d1.after(d2)) {
+            
+            java.util.Date aDate = ReturningDate.getDate();
+            try {
+                aDate.toString();
+            } catch (NullPointerException np) {
+                flag = true;
+            }
+
+            if(flag){
+
+                System.out.println("One Way");
+                searchOneWay(from, to, passengers, flexibility, dDate);
+
+            }else{
+
+                arrDate = sdfo.format(aDate);
+                try {
+                    d3 = sdfo.parse(arrDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                if(d3.after(d1)) {
+
+                    System.out.println("Two Way");
+                    searchTwoWay(from, to, passengers, flexibility, dDate, aDate);
+
+                }else{
+                    JLabel labeln = new JLabel("Return Date can't be before Departure date.");
+                    labeln.setFont(new Font("Arial", Font.BOLD, 15));
+                    String title = "Error";
+                    JOptionPane.showMessageDialog(null, labeln, title,
+                            JOptionPane.INFORMATION_MESSAGE, errorIcon);
+                }
+            }
+
+        }else{
+            JLabel label;
+            if(d1.equals(d2)){
+                label = new JLabel("No flights for the same day.");
+            }else{
+                label = new JLabel("Departure Date can not be before today's date.");
+            }
+            label.setFont(new Font("Arial", Font.BOLD, 15));
+            String title = "Error";
+            JOptionPane.showMessageDialog(null, label, title,
+                    JOptionPane.INFORMATION_MESSAGE, errorIcon);
+        }
+
+    }//GEN-LAST:event_SearchFlightsMouseClicked
+
+    private void NextLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NextLabelMouseClicked
+        // TODO add your handling code here:
+        if(NextLabel.isEnabled()){
+            if(!FlightDisplayTable.isRowSelected(FlightDisplayTable.getSelectedRow())){
+                
+                CardLayout cardLayout = (CardLayout) DisplayPanel.getLayout();
+                cardLayout.show(DisplayPanel, "NoFlightPanel");
+                javax.swing.Timer timer = new javax.swing.Timer(2000, e -> cardLayout.show(DisplayPanel, "TablePanel"));
+                timer.setRepeats(false);
+                timer.start();
+                
+            }else{
+                String flightCode = FlightDisplayTable.getValueAt(FlightDisplayTable.getSelectedRow(), 0).toString();
+                CardLayout cardLayout = (CardLayout) ContentPanel2.getLayout();
+                cardLayout.show(ContentPanel2, "CONFIRMATION");
+                boolean status = Database.getConnectingStatus(flightCode);
+                if(status){
+                    CardLayout cardLayoutN = (CardLayout) DetailsDisplay.getLayout();
+                    cardLayoutN.show(DetailsDisplay, "INDIRECT");
+                }else{
+                    CardLayout cardLayoutN = (CardLayout) DetailsDisplay.getLayout();
+                    cardLayoutN.show(DetailsDisplay, "DIRECT");
+                }
+                settheScene(flightCode, status);
+            }
+        }
+    }//GEN-LAST:event_NextLabelMouseClicked
+
+    private void NextLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NextLabelMouseEntered
+        // TODO add your handling code here:
+        if(NextLabel.isEnabled()){
+            NextLabel.setFont(new Font("Arial", Font.PLAIN, 26));
+            NextLabel.setForeground(lightGray);
+        }
+    }//GEN-LAST:event_NextLabelMouseEntered
+
+    private void NextLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NextLabelMouseExited
+        // TODO add your handling code here:
+        if(NextLabel.isEnabled()){
+            NextLabel.setFont(new Font("Arial", Font.PLAIN, 23));
+            NextLabel.setForeground(lightGray);
+        }
+    }//GEN-LAST:event_NextLabelMouseExited
+
+    private void BackLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackLabelMouseClicked
+        // TODO add your handling code here:
+        CardLayout cardLayout1 = (CardLayout) ContentPanel2.getLayout();
+        cardLayout1.show(ContentPanel2, "HOME");
+    }//GEN-LAST:event_BackLabelMouseClicked
+
+    private void BackLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackLabelMouseEntered
+        // TODO add your handling code here:
+        BackLabel.setFont(new Font("Arial", Font.PLAIN, 26));
+        BackLabel.setForeground(lightGray);
+    }//GEN-LAST:event_BackLabelMouseEntered
+
+    private void BackLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackLabelMouseExited
+        // TODO add your handling code here:
+        BackLabel.setFont(new Font("Arial", Font.PLAIN, 23));
+        BackLabel.setForeground(Color.white);
+    }//GEN-LAST:event_BackLabelMouseExited
+
+    private void InclusiveRadioButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InclusiveRadioButtonMouseClicked
+        // TODO add your handling code here:
+        if(InclusiveRadioButton.isSelected()){
+            MealTypeLabel.setVisible(true);
+            MealRadioButton1.setVisible(true);
+            MealRadioButton2.setVisible(true);
+        }
+    }//GEN-LAST:event_InclusiveRadioButtonMouseClicked
+
+    private void ExclusiveRadioButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExclusiveRadioButtonMouseClicked
+        // TODO add your handling code here:
+        if(ExclusiveRadioButton.isSelected()){
+            MealTypeLabel.setVisible(false);
+            MealRadioButton1.setVisible(false);
+            MealRadioButton2.setVisible(false);
+        }
+    }//GEN-LAST:event_ExclusiveRadioButtonMouseClicked
+
+    private void ReturnFlightsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnFlightsButtonActionPerformed
+        // TODO add your handling code here:
+        CardLayout cardLayout1 = (CardLayout) ContentPanel2.getLayout();
+        cardLayout1.show(ContentPanel2, "HOME");
+    }//GEN-LAST:event_ReturnFlightsButtonActionPerformed
+
+    private void ContinueFlightsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContinueFlightsButtonActionPerformed
+        // TODO add your handling code here:
+        CardLayout cardLayout1 = (CardLayout) ContentPanel2.getLayout();
+        cardLayout1.show(ContentPanel2, "SHOW");
+        doPaymentWork();
+    }//GEN-LAST:event_ContinueFlightsButtonActionPerformed
+
+    private void BackNLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackNLabelActionPerformed
+        // TODO add your handling code here:
+        CardLayout cardLayout1 = (CardLayout) ContentPanel2.getLayout();
+        cardLayout1.show(ContentPanel2, "HOME");
+    }//GEN-LAST:event_BackNLabelActionPerformed
+
+    private void NextNLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextNLabelActionPerformed
+        // TODO add your handling code here:
+        CardLayout cardLayout1 = (CardLayout) ContentPanel2.getLayout();
+        cardLayout1.show(ContentPanel2, "PAYMENT");
+        javax.swing.Timer timer = new javax.swing.Timer(7000, e -> PaymentAnimation.setVisible(false));
+        timer.setRepeats(false);
+        timer.start();
+
+        Thread t1 = new Thread(){
+            @Override
+            public void run() {
+                bookFlight(totalfare);
+            }
+            // for stopping the thread
+            @Override
+            public void interrupt() {
+                super.interrupt();
+            }
+        };
+        t1.setPriority(Thread.MAX_PRIORITY);
+        t1.start();
+
+        timer = new javax.swing.Timer(10000, e -> bookingDone());
+        timer.setRepeats(false);
+        timer.start();
+    }//GEN-LAST:event_NextNLabelActionPerformed
+
+    private void FareBreakupLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FareBreakupLabelMouseClicked
+        // TODO add your handling code here:
+        if(farekey == 0){
+            FareBreakupPanel.setVisible(true);
+            ShowHideLabel.setIcon(new ImageIcon(getClass().getResource("/Images/IconUp.png")));
+            farekey = 1;
+        }else if(farekey == 1){
+            FareBreakupPanel.setVisible(false);
+            ShowHideLabel.setIcon(new ImageIcon(getClass().getResource("/Images/IconDown.png")));
+            farekey = 0;
+        }
+    }//GEN-LAST:event_FareBreakupLabelMouseClicked
+
+    private void EImage1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EImage1MouseClicked
+        // TODO add your handling code here:
+        ClassCombo.setSelectedIndex(2);
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        LabelPanel2.setVisible(false);
+        cardLayout.show(getContentPane(), "CARD2");
+        CardLayout cardLayout1 = (CardLayout) ContentPanel2.getLayout();
+        cardLayout1.show(ContentPanel2, "HOME");
+    }//GEN-LAST:event_EImage1MouseClicked
+
+    private void BusinessLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BusinessLabelMouseClicked
+        // TODO add your handling code here:
+        ClassCombo.setSelectedIndex(1);
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        LabelPanel2.setVisible(false);
+        cardLayout.show(getContentPane(), "CARD2");
+        CardLayout cardLayout1 = (CardLayout) ContentPanel2.getLayout();
+        cardLayout1.show(ContentPanel2, "HOME");
+    }//GEN-LAST:event_BusinessLabelMouseClicked
+
+    private void EconomyLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EconomyLabelMouseClicked
+        // TODO add your handling code here:
+        ClassCombo.setSelectedIndex(0);
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        LabelPanel2.setVisible(false);
+        cardLayout.show(getContentPane(), "CARD2");
+        CardLayout cardLayout1 = (CardLayout) ContentPanel2.getLayout();
+        cardLayout1.show(ContentPanel2, "HOME");
+    }//GEN-LAST:event_EconomyLabelMouseClicked
+
+    private void EImage1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EImage1MouseEntered
+        // TODO add your handling code here:
+        FirstLabel.setBackground(lightGray);
+    }//GEN-LAST:event_EImage1MouseEntered
+
+    private void EImage1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EImage1MouseExited
+        // TODO add your handling code here:
+        FirstLabel.setBackground(Color.white);
+    }//GEN-LAST:event_EImage1MouseExited
+
+    private void BusinessLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BusinessLabelMouseEntered
+        // TODO add your handling code here:
+        BusinessLabel.setBackground(lightGray);
+    }//GEN-LAST:event_BusinessLabelMouseEntered
+
+    private void BusinessLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BusinessLabelMouseExited
+        // TODO add your handling code here:
+        BusinessLabel.setBackground(Color.white);
+    }//GEN-LAST:event_BusinessLabelMouseExited
+
+    private void EconomyLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EconomyLabelMouseEntered
+        // TODO add your handling code here:
+        EconomyLabel.setBackground(lightGray);
+    }//GEN-LAST:event_EconomyLabelMouseEntered
+
+    private void EconomyLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EconomyLabelMouseExited
+        // TODO add your handling code here:
+        EconomyLabel.setBackground(Color.white);
+    }//GEN-LAST:event_EconomyLabelMouseExited
+
+    private void RefernceNumberMFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_RefernceNumberMFieldKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            doReference();
+        }
+    }//GEN-LAST:event_RefernceNumberMFieldKeyPressed
+
+    private void SearchRefernceLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchRefernceLabelMouseClicked
+        // TODO add your handling code here:
+        doReference();
+    }//GEN-LAST:event_SearchRefernceLabelMouseClicked
+
+    private void SearchAllLabelMouseClicked(MouseEvent evt) {//GEN-FIRST:event_SearchAllLabelMouseClicked
+        // TODO add your handling code here:
+        if(Database.checkBookingExistenceEmail(email)){
+            setSearchResultTable(email);
+            CardLayout cardLayout = (CardLayout) ContentPanel3.getLayout();
+            cardLayout.show(ContentPanel3, "SEARCHALL");
+        }else{
+            CardLayout cardLayout = (CardLayout) ContentPanel3.getLayout();
+            cardLayout.show(ContentPanel3, "NOFLIGHT");
+            Timer timer = new Timer(2000,
+                    e -> cardLayout.show(ContentPanel3, "HOME"));
+            timer.setRepeats(false);
+            timer.start();
+        }
+    }//GEN-LAST:event_SearchAllLabelMouseClicked
+
+    private void BackMFlightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackMFlightButtonActionPerformed
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) ContentPanel3.getLayout();
+        cardLayout.show(ContentPanel3, "HOME");
+        RefernceNumberMField.setText("");
+        RefernceNumberMField.requestFocusInWindow();
+    }//GEN-LAST:event_BackMFlightButtonActionPerformed
+
+    private void CancelthisFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelthisFlightActionPerformed
+        // TODO add your handling code here:
+        String refernceNo = Value1.getText().trim().toUpperCase();
+        if(refernceNo.contains("#")) {
+
+            JLabel label = new JLabel("Cancelling a connected flight will cancel both the flights. Continue?");
+            label.setFont(new Font("Arial", Font.BOLD, 15));
+            String title = "Cancellation?";
+            int run = JOptionPane.showConfirmDialog(null, label, title,
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, questionIcon);
+            
+            if (run == 0) {
+                cancelReturnFlight(Value1.getText().trim().toUpperCase());
+                updateFlightDashboard();
+                JLabel label1 = new JLabel("Flights deleted successfully.");
+                label1.setFont(new Font("Arial", Font.BOLD, 15));
+                String title1 = "Deletion Successful";
+                JOptionPane.showMessageDialog(null, label1, title1,
+                        JOptionPane.INFORMATION_MESSAGE, successIcon);
+                goHome();
+            }
+        }else{
+
+            JLabel label = new JLabel("Please confirm the cancellation of this flight");
+            label.setFont(new Font("Arial", Font.BOLD, 15));
+            String title = "Cancellation?";
+            int run = JOptionPane.showConfirmDialog(null, label, title,
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, questionIcon);
+
+            if (run == 0) {
+                cancelThisFlight(Value1.getText().trim().toUpperCase());
+                updateFlightDashboard();
+                JLabel label1 = new JLabel("Flight deleted successfully.");
+                label1.setFont(new Font("Arial", Font.BOLD, 15));
+                String title1 = "Deletion Successful";
+                JOptionPane.showMessageDialog(null, label1, title1,
+                        JOptionPane.INFORMATION_MESSAGE, successIcon);
+                goHome();
+            }
+        }
+    }//GEN-LAST:event_CancelthisFlightActionPerformed
+
+    private void BackMLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackMLabelMouseClicked
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) ContentPanel3.getLayout();
+        cardLayout.show(ContentPanel3, "HOME");
+        RefernceNumberMField.setText("");
+    }//GEN-LAST:event_BackMLabelMouseClicked
+
+    private void BackMLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackMLabelMouseEntered
+        // TODO add your handling code here:
+        BackMLabel.setFont(new Font("Arial", Font.PLAIN, 26));
+    }//GEN-LAST:event_BackMLabelMouseEntered
+
+    private void BackMLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackMLabelMouseExited
+        // TODO add your handling code here:
+        BackMLabel.setFont(new Font("Arial", Font.PLAIN, 23));
+    }//GEN-LAST:event_BackMLabelMouseExited
+
+    private void NextMLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NextMLabelMouseClicked
+        // TODO add your handling code here:
+        if(!FlightMDisplayTable.isRowSelected(FlightMDisplayTable.getSelectedRow())){
+
+            CardLayout cardLayout = (CardLayout) ContentPanel3.getLayout();
+            cardLayout.show(ContentPanel3, "NOROW");
+            javax.swing.Timer timer = new javax.swing.Timer(2000, e -> cardLayout.show(ContentPanel3, "SEARCHALL"));
+            timer.setRepeats(false);
+            timer.start();
+
+        }else{
+
+            String str = FlightMDisplayTable.getValueAt(FlightMDisplayTable.getSelectedRow(), 0).toString();
+            str = str.trim().toUpperCase();
+            String flightCode = str.substring(0, str.indexOf("-"));
+            boolean status = Database.getConnectingStatus(flightCode);
+            settheSearchResult(Database.getBookingDetails(str), status);
+            if(status){
+                CardLayout cardLayoutN = (CardLayout) DetailsNDisplay.getLayout();
+                cardLayoutN.show(DetailsNDisplay, "INDIRECT");
+            }else{
+                CardLayout cardLayoutN = (CardLayout) DetailsNDisplay.getLayout();
+                cardLayoutN.show(DetailsNDisplay, "DIRECT");
+            }
+            CardLayout cardLayout = (CardLayout) ContentPanel3.getLayout();
+            cardLayout.show(ContentPanel3, "RESULT");
+            
+        }
+    }//GEN-LAST:event_NextMLabelMouseClicked
+
+    private void NextMLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NextMLabelMouseEntered
+        // TODO add your handling code here:
+        NextMLabel.setFont(new Font("Arial", Font.PLAIN, 26));
+    }//GEN-LAST:event_NextMLabelMouseEntered
+
+    private void NextMLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NextMLabelMouseExited
+        // TODO add your handling code here:
+        NextMLabel.setFont(new Font("Arial", Font.PLAIN, 23));
+    }//GEN-LAST:event_NextMLabelMouseExited
+
+    private void Back2WLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Back2WLabelMouseClicked
+        // TODO add your handling code here:
+        CardLayout cardLayout1 = (CardLayout) ContentPanel2.getLayout();
+        cardLayout1.show(ContentPanel2, "HOME");
+    }//GEN-LAST:event_Back2WLabelMouseClicked
+
+    private void Back2WLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Back2WLabelMouseEntered
+        // TODO add your handling code here:
+        Back2WLabel.setFont(new Font("Arial", Font.PLAIN, 26));
+        Back2WLabel.setForeground(lightGray);
+    }//GEN-LAST:event_Back2WLabelMouseEntered
+
+    private void Back2WLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Back2WLabelMouseExited
+        // TODO add your handling code here:
+        Back2WLabel.setFont(new Font("Arial", Font.PLAIN, 23));
+        Back2WLabel.setForeground(Color.white);
+    }//GEN-LAST:event_Back2WLabelMouseExited
+
+    private void Next2WLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Next2WLabelMouseClicked
+        // TODO add your handling code here:
+        if(Next2WLabel.isEnabled()) {
+            if(!FlightDisplayTable1.isRowSelected(FlightDisplayTable1.getSelectedRow())){
+
+                CardLayout cardLayout = (CardLayout) DisplayPanel1.getLayout();
+                cardLayout.show(DisplayPanel1, "NoFlightPanel");
+                javax.swing.Timer timer = new javax.swing.Timer(2000, e -> cardLayout.show(DisplayPanel1, "TablePanel"));
+                timer.setRepeats(false);
+                timer.start();
+
+            }else if(!FlightDisplayTable2.isRowSelected(FlightDisplayTable2.getSelectedRow())){
+
+                CardLayout cardLayout = (CardLayout) DisplayPanel2.getLayout();
+                cardLayout.show(DisplayPanel2, "NoFlightPanel");
+                javax.swing.Timer timer = new javax.swing.Timer(2000, e -> cardLayout.show(DisplayPanel2, "TablePanel"));
+                timer.setRepeats(false);
+                timer.start();
+
+            }else{
+
+                String str1 = FlightDisplayTable1.getValueAt(FlightDisplayTable1.getSelectedRow(), 0).toString();
+                String str2 = FlightDisplayTable2.getValueAt(FlightDisplayTable2.getSelectedRow(), 0).toString();
+                str1 = str1.trim().toUpperCase();
+                str2 = str2.trim().toUpperCase();
+                if(Database.checkDateDiff(str1, str2)) {
+                    boolean status1 = Database.getConnectingStatus(str1);
+                    boolean status2 = Database.getConnectingStatus(str2);
+                    settheScene2(str1, str2, status1, status2);
+                    CardLayout cardLayout = (CardLayout) ContentPanel2.getLayout();
+                    cardLayout.show(ContentPanel2, "CONFIRMATION2");
+                    Confirmation2ScrollPane.getViewport().setViewPosition(new Point(0, 0));
+                }else{
+                    JLabel labeln = new JLabel("Incompatible Dates. These flights can not be booked together.");
+                    labeln.setFont(new Font("Arial", Font.BOLD, 15));
+                    String title = "Error";
+                    JOptionPane.showMessageDialog(null, labeln, title,
+                            JOptionPane.INFORMATION_MESSAGE, errorIcon);
+                }
+            }
+        }
+    }//GEN-LAST:event_Next2WLabelMouseClicked
+
+    private void Next2WLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Next2WLabelMouseEntered
+        // TODO add your handling code here:
+        if(Next2WLabel.isEnabled()) {
+            Next2WLabel.setFont(new Font("Arial", Font.PLAIN, 26));
+            Next2WLabel.setForeground(lightGray);
+        }
+    }//GEN-LAST:event_Next2WLabelMouseEntered
+
+    private void Next2WLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Next2WLabelMouseExited
+        // TODO add your handling code here:
+        if(Next2WLabel.isEnabled()) {
+            Next2WLabel.setFont(new Font("Arial", Font.PLAIN, 23));
+            Next2WLabel.setForeground(Color.white);
+        }
+    }//GEN-LAST:event_Next2WLabelMouseExited
+
+    private void ExclusiveRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExclusiveRadioButton1MouseClicked
+        // TODO add your handling code here:
+        if(ExclusiveRadioButton1.isSelected()){
+            MealTypeLabel1.setVisible(false);
+            MealRadioButton3.setVisible(false);
+            MealRadioButton4.setVisible(false);
+        }
+    }//GEN-LAST:event_ExclusiveRadioButton1MouseClicked
+
+    private void InclusiveRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InclusiveRadioButton1MouseClicked
+        // TODO add your handling code here:
+        if(InclusiveRadioButton1.isSelected()){
+            MealTypeLabel1.setVisible(true);
+            MealRadioButton3.setVisible(true);
+            MealRadioButton4.setVisible(true);
+        }
+    }//GEN-LAST:event_InclusiveRadioButton1MouseClicked
+
+    private void ReturnFlightsButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnFlightsButton1ActionPerformed
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) ContentPanel2.getLayout();
+        cardLayout.show(ContentPanel2, "HOME");
+    }//GEN-LAST:event_ReturnFlightsButton1ActionPerformed
+
+    private void ContinueFlightsButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContinueFlightsButton1ActionPerformed
+        // TODO add your handling code here:
+        CardLayout cardLayout1 = (CardLayout) ContentPanel2.getLayout();
+        cardLayout1.show(ContentPanel2, "SHOW2");
+        doPaymentWork2();
+    }//GEN-LAST:event_ContinueFlightsButton1ActionPerformed
+
+    private void InclusiveRadioButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InclusiveRadioButton2MouseClicked
+        // TODO add your handling code here:
+        if(InclusiveRadioButton2.isSelected()){
+            MealTypeLabel2.setVisible(true);
+            MealRadioButton5.setVisible(true);
+            MealRadioButton6.setVisible(true);
+        }
+    }//GEN-LAST:event_InclusiveRadioButton2MouseClicked
+
+    private void ExclusiveRadioButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExclusiveRadioButton2MouseClicked
+        // TODO add your handling code here:
+        if(ExclusiveRadioButton2.isSelected()){
+            MealTypeLabel2.setVisible(false);
+            MealRadioButton5.setVisible(false);
+            MealRadioButton6.setVisible(false);
+        }
+    }//GEN-LAST:event_ExclusiveRadioButton2MouseClicked
+
+    private void NextNLabel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextNLabel1ActionPerformed
+        // TODO add your handling code here:
+        CardLayout cardLayout1 = (CardLayout) ContentPanel2.getLayout();
+        cardLayout1.show(ContentPanel2, "PAYMENT");
+        javax.swing.Timer timer = new javax.swing.Timer(7000, e -> PaymentAnimation.setVisible(false));
+        timer.setRepeats(false);
+        timer.start();
+
+        Thread t1 = new Thread(){
+            @Override
+            public void run() {
+                bookReturnFlight(totalfare);
+            }
+            // for stopping the thread
+            @Override
+            public void interrupt() {
+                super.interrupt();
+            }
+        };
+        t1.setPriority(Thread.MAX_PRIORITY);
+        t1.start();
+
+        timer = new javax.swing.Timer(10000, e -> bookingDone());
+        timer.setRepeats(false);
+        timer.start();
+    }//GEN-LAST:event_NextNLabel1ActionPerformed
+
+    private void BackNLabel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackNLabel1ActionPerformed
+        // TODO add your handling code here:
+        CardLayout cardLayout1 = (CardLayout) ContentPanel2.getLayout();
+        cardLayout1.show(ContentPanel2, "HOME");
+    }//GEN-LAST:event_BackNLabel1ActionPerformed
+
+    private void FareBreakupLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FareBreakupLabel1MouseClicked
+        // TODO add your handling code here:
+        if(farekeyN == 0){
+            FareBreakupPanel1.setVisible(true);
+            ShowHideLabel1.setIcon(new ImageIcon(getClass().getResource("/Images/IconUp.png")));
+            farekeyN = 1;
+        }else if(farekeyN == 1){
+            FareBreakupPanel1.setVisible(false);
+            ShowHideLabel1.setIcon(new ImageIcon(getClass().getResource("/Images/IconDown.png")));
+            farekeyN = 0;
+        }
+    }//GEN-LAST:event_FareBreakupLabel1MouseClicked
+
+    private void QLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel1MouseClicked
+        // TODO add your handling code here:
+        QuestionsPanel questions =  new QuestionsPanel("Q1");
+        questions.setVisible(true);
+        questions.toFront();
+    }//GEN-LAST:event_QLabel1MouseClicked
+
+    private void QLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel1MouseEntered
+        // TODO add your handling code here:
+        QLabel1.setFont(new Font("Microsoft JhengHei", Font.BOLD, 26));
+        QLabel1.setBackground(lightGray);
+    }//GEN-LAST:event_QLabel1MouseEntered
+
+    private void QLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel1MouseExited
+        // TODO add your handling code here:
+        QLabel1.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 24));
+        QLabel1.setBackground(Color.white);
+    }//GEN-LAST:event_QLabel1MouseExited
+
+    private void QLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel2MouseClicked
+        // TODO add your handling code here:
+        QuestionsPanel questions =  new QuestionsPanel("Q2");
+        questions.setVisible(true);
+        questions.toFront();
+    }//GEN-LAST:event_QLabel2MouseClicked
+
+    private void QLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel2MouseEntered
+        // TODO add your handling code here:
+        Border b1 = BorderFactory.createBevelBorder(5);
+
+        QLabel2.setFont(new Font("Microsoft JhengHei", Font.BOLD, 26));
+        QLabel2.setBackground(lightGray);
+        QLabel2.setBorder(b1);
+    }//GEN-LAST:event_QLabel2MouseEntered
+
+    private void QLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel2MouseExited
+        // TODO add your handling code here:
+        Border b2 = BorderFactory.createEmptyBorder();
+        QLabel2.setBorder(b2);
+        QLabel2.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 24));
+        QLabel2.setBackground(Color.white);
+    }//GEN-LAST:event_QLabel2MouseExited
+
+    private void QLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel3MouseClicked
+        // TODO add your handling code here:
+        QuestionsPanel questions =  new QuestionsPanel("Q3");
+        questions.setVisible(true);
+        questions.toFront();
+    }//GEN-LAST:event_QLabel3MouseClicked
+
+    private void QLabel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel3MouseEntered
+        // TODO add your handling code here:
+        QLabel3.setFont(new Font("Microsoft JhengHei", Font.BOLD, 26));
+        QLabel3.setBackground(lightGray);
+    }//GEN-LAST:event_QLabel3MouseEntered
+
+    private void QLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel3MouseExited
+        // TODO add your handling code here:
+        QLabel3.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 24));
+        QLabel3.setBackground(Color.white);
+    }//GEN-LAST:event_QLabel3MouseExited
+
+    private void QLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel4MouseClicked
+        // TODO add your handling code here:
+        QuestionsPanel questions =  new QuestionsPanel("Q4");
+        questions.setVisible(true);
+        questions.toFront();
+    }//GEN-LAST:event_QLabel4MouseClicked
+
+    private void QLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel4MouseEntered
+        // TODO add your handling code here:
+        QLabel4.setFont(new Font("Microsoft JhengHei", Font.BOLD, 26));
+        QLabel4.setBackground(lightGray);
+    }//GEN-LAST:event_QLabel4MouseEntered
+
+    private void QLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel4MouseExited
+        // TODO add your handling code here:
+        QLabel4.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 24));
+        QLabel4.setBackground(Color.white);
+    }//GEN-LAST:event_QLabel4MouseExited
+
+    private void QLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel5MouseClicked
+        // TODO add your handling code here:
+        QuestionsPanel questions =  new QuestionsPanel("Q5");
+        questions.setVisible(true);
+        questions.toFront();
+    }//GEN-LAST:event_QLabel5MouseClicked
+
+    private void QLabel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel5MouseEntered
+        // TODO add your handling code here:
+        QLabel5.setFont(new Font("Microsoft JhengHei", Font.BOLD, 26));
+        QLabel5.setBackground(lightGray);
+    }//GEN-LAST:event_QLabel5MouseEntered
+
+    private void QLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel5MouseExited
+        // TODO add your handling code here:
+        QLabel5.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 24));
+        QLabel5.setBackground(Color.white);
+    }//GEN-LAST:event_QLabel5MouseExited
+
+    private void QLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel6MouseClicked
+        // TODO add your handling code here:
+        QuestionsPanel questions =  new QuestionsPanel("Q6");
+        questions.setVisible(true);
+        questions.toFront();
+    }//GEN-LAST:event_QLabel6MouseClicked
+
+    private void QLabel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel6MouseEntered
+        // TODO add your handling code here:
+        QLabel6.setFont(new Font("Microsoft JhengHei", Font.BOLD, 26));
+        QLabel6.setBackground(lightGray);
+    }//GEN-LAST:event_QLabel6MouseEntered
+
+    private void QLabel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel6MouseExited
+        // TODO add your handling code here:
+        QLabel6.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 24));
+        QLabel6.setBackground(Color.white);
+    }//GEN-LAST:event_QLabel6MouseExited
+
+    private void QLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel7MouseClicked
+        // TODO add your handling code here:
+        QuestionsPanel questions =  new QuestionsPanel("Q7");
+        questions.setVisible(true);
+        questions.toFront();
+    }//GEN-LAST:event_QLabel7MouseClicked
+
+    private void QLabel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel7MouseEntered
+        // TODO add your handling code here:
+        QLabel7.setFont(new Font("Microsoft JhengHei", Font.BOLD, 26));
+        QLabel7.setBackground(lightGray);
+    }//GEN-LAST:event_QLabel7MouseEntered
+
+    private void QLabel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel7MouseExited
+        // TODO add your handling code here:
+        QLabel7.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 24));
+        QLabel7.setBackground(Color.white);
+    }//GEN-LAST:event_QLabel7MouseExited
+
+    private void QLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel8MouseClicked
+        // TODO add your handling code here:
+        QuestionsPanel questions =  new QuestionsPanel("Q8");
+        questions.setVisible(true);
+        questions.toFront();
+    }//GEN-LAST:event_QLabel8MouseClicked
+
+    private void QLabel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel8MouseEntered
+        // TODO add your handling code here:
+        QLabel8.setFont(new Font("Microsoft JhengHei", Font.BOLD, 26));
+        QLabel8.setBackground(lightGray);
+    }//GEN-LAST:event_QLabel8MouseEntered
+
+    private void QLabel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel8MouseExited
+        // TODO add your handling code here:
+        QLabel8.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 24));
+        QLabel8.setBackground(Color.white);
+    }//GEN-LAST:event_QLabel8MouseExited
+
+    private void QLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel9MouseClicked
+        // TODO add your handling code here:
+        QuestionsPanel questions =  new QuestionsPanel("Q9");
+        questions.setVisible(true);
+        questions.toFront();
+    }//GEN-LAST:event_QLabel9MouseClicked
+
+    private void QLabel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel9MouseEntered
+        // TODO add your handling code here:
+        QLabel9.setFont(new Font("Microsoft JhengHei", Font.BOLD, 26));
+        QLabel9.setBackground(lightGray);
+    }//GEN-LAST:event_QLabel9MouseEntered
+
+    private void QLabel9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel9MouseExited
+        // TODO add your handling code here:
+        QLabel9.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 24));
+        QLabel9.setBackground(Color.white);
+    }//GEN-LAST:event_QLabel9MouseExited
+
+    private void QLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel10MouseClicked
+        // TODO add your handling code here:
+        QuestionsPanel questions =  new QuestionsPanel("Q10");
+        questions.setVisible(true);
+        questions.toFront();
+    }//GEN-LAST:event_QLabel10MouseClicked
+
+    private void QLabel10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel10MouseEntered
+        // TODO add your handling code here:
+        QLabel10.setFont(new Font("Microsoft JhengHei", Font.BOLD, 26));
+        QLabel10.setBackground(lightGray);
+    }//GEN-LAST:event_QLabel10MouseEntered
+
+    private void QLabel10MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QLabel10MouseExited
+        // TODO add your handling code here:
+        QLabel10.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 24));
+        QLabel10.setBackground(Color.white);
+    }//GEN-LAST:event_QLabel10MouseExited
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Final.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Final.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Final.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Final.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    new Final("", "", "").setVisible(true);
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(Final.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AMinus;
+    private javax.swing.JLabel APlus;
+    private javax.swing.JTextField ATextField;
+    private javax.swing.JLabel AdultsLabel;
+    private javax.swing.JLabel AnimationDLabel;
+    private javax.swing.JLabel AnimationDLabel1;
+    private javax.swing.JLabel AnimationDLabel2;
+    private javax.swing.JLabel AnimationDLabel3;
+    private javax.swing.JLabel AnimationILabel1;
+    private javax.swing.JLabel AnimationILabel2;
+    private javax.swing.JLabel AnimationILabel3;
+    private javax.swing.JLabel AnimationILabel4;
+    private javax.swing.JLabel AnimationILabel5;
+    private javax.swing.JLabel AnimationILabel6;
+    private javax.swing.JLabel AnimationILabel7;
+    private javax.swing.JLabel AnimationILabel8;
+    private javax.swing.JLabel ArrivalFlightsTableLabel;
+    private javax.swing.JLabel Astronaut;
+    private javax.swing.JLabel Astronaut1;
+    private javax.swing.JLabel Astronaut2;
+    private javax.swing.JLabel AstronautM;
+    private javax.swing.JLabel Avatar;
+    private javax.swing.JLabel Avatar1;
+    private javax.swing.JLabel Avatar2;
+    private javax.swing.JLabel Avatar3;
+    private javax.swing.JLabel Avatar4;
+    private javax.swing.JLabel Avatar5;
+    private javax.swing.JPanel AvatarPanel;
+    private javax.swing.JLabel Back2WLabel;
+    private javax.swing.JLabel Back5;
+    private javax.swing.JLabel BackLabel;
+    private javax.swing.JButton BackMFlightButton;
+    private javax.swing.JLabel BackMLabel;
+    private javax.swing.JButton BackNLabel;
+    private javax.swing.JButton BackNLabel1;
+    private javax.swing.JLabel BackgroundPic1;
+    private javax.swing.JLabel BackgroundPic2;
+    private javax.swing.JLabel BaseFareLabel;
+    private javax.swing.JLabel BaseFareLabel1;
+    private javax.swing.JLabel BookIcon1;
+    private javax.swing.JLabel BookIcon2;
+    private javax.swing.JLabel BookIcon3;
+    private javax.swing.JLabel BookIcon4;
+    private javax.swing.JLabel BookIcon5;
+    private javax.swing.JLabel BookIcon6;
+    private javax.swing.JLabel BookIcon7;
+    private javax.swing.JLabel BookLabel1;
+    private javax.swing.JLabel BookLabel2;
+    private javax.swing.JLabel BookLabel3;
+    private javax.swing.JLabel BookLabel4;
+    private javax.swing.JLabel BookLabel5;
+    private javax.swing.JLabel BookLabel6;
+    private javax.swing.JLabel BookLabel7;
+    private javax.swing.JPanel BookPanel;
+    private javax.swing.JLabel BookingCode;
+    private javax.swing.JLabel BookingInstruction;
+    private javax.swing.JLabel BottomInstructionBookingLabel;
+    private javax.swing.JLabel BottomInstructionBookingLabel1;
+    private javax.swing.JLabel BottomInstructionBookingLabel2;
+    private javax.swing.JLabel BusinessLabel;
+    private javax.swing.JButton CancelthisFlight;
+    private javax.swing.JComboBox<String> ClassCombo;
+    private javax.swing.JPanel Confimation;
+    private javax.swing.JPanel Confirmation2;
+    private javax.swing.JScrollPane Confirmation2ScrollPane;
+    private javax.swing.JLabel ConfirmationHeading;
+    private javax.swing.JLabel ConfirmationHeading1;
+    private javax.swing.JLabel ConnectingILabel;
+    private javax.swing.JLabel ConnectingILabel1;
+    private javax.swing.JLabel ConnectingILabel2;
+    private javax.swing.JLabel ConnectingILabel3;
+    private javax.swing.JPanel ContentPanel1;
+    private javax.swing.JPanel ContentPanel2;
+    private javax.swing.JPanel ContentPanel3;
+    private javax.swing.JPanel ContentPanel4;
+    private javax.swing.JPanel ContentPanel5;
+    private javax.swing.JPanel ContentPanel6;
+    private javax.swing.JPanel ContentPanel7;
+    private javax.swing.JButton ContinueFlightsButton;
+    private javax.swing.JButton ContinueFlightsButton1;
+    private javax.swing.JLabel Country1;
+    public javax.swing.JComboBox<String> Country1Combo;
+    private javax.swing.JLabel Country2;
+    public javax.swing.JComboBox<String> Country2Combo;
+    private javax.swing.JLabel Country3;
+    private javax.swing.JLabel Country4;
+    private javax.swing.JLabel Country5;
+    private javax.swing.JComboBox<String> CountryBox;
+    private javax.swing.JLabel CountryLabel;
+    private javax.swing.JLabel CountryLabel1;
+    private javax.swing.JLabel CountryLabel2;
+    private javax.swing.JLabel CountryLabel3;
+    private javax.swing.JLabel CountryLabel4;
+    private javax.swing.JLabel CountryLabel5;
+    private javax.swing.JLabel CountryPicLabel1;
+    private javax.swing.JLabel CountryPicLabel2;
+    private javax.swing.JLabel CountryPicLabel3;
+    private javax.swing.JLabel CountryPicLabel4;
+    private javax.swing.JLabel CountryPicLabel5;
+    private javax.swing.JLabel CurrentLabel;
+    private javax.swing.JPasswordField CurrentPassword;
+    private javax.swing.JLabel D1;
+    private javax.swing.JLabel D2;
+    private javax.swing.JLabel D2W1_1;
+    private javax.swing.JLabel D2W1_10;
+    private javax.swing.JLabel D2W1_2;
+    private javax.swing.JLabel D2W1_3;
+    private javax.swing.JLabel D2W1_4;
+    private javax.swing.JLabel D2W1_5;
+    private javax.swing.JLabel D2W1_6;
+    private javax.swing.JLabel D2W1_7;
+    private javax.swing.JLabel D2W1_8;
+    private javax.swing.JLabel D2W1_9;
+    private javax.swing.JLabel D3;
+    private javax.swing.JLabel D4;
+    private javax.swing.JLabel D5;
+    private javax.swing.JLabel DOBBLabel;
+    private javax.swing.JLabel DOBLabel;
+    private javax.swing.JLabel DOBTLabel;
+    private javax.swing.JLabel DashIcon1;
+    private javax.swing.JLabel DashIcon2;
+    private javax.swing.JLabel DashIcon3;
+    private javax.swing.JLabel DashIcon4;
+    private javax.swing.JLabel DashIcon5;
+    private javax.swing.JLabel DashIcon6;
+    private javax.swing.JLabel DashIcon7;
+    private javax.swing.JLabel DashboardLabel1;
+    private javax.swing.JLabel DashboardLabel2;
+    private javax.swing.JLabel DashboardLabel3;
+    private javax.swing.JLabel DashboardLabel4;
+    private javax.swing.JLabel DashboardLabel5;
+    private javax.swing.JLabel DashboardLabel6;
+    private javax.swing.JLabel DashboardLabel7;
+    private javax.swing.JLabel DateBirth1;
+    private javax.swing.JLabel DateBirth2;
+    private javax.swing.JLabel DateBirth3;
+    private javax.swing.JLabel DateBirth4;
+    private javax.swing.JLabel DateBirth5;
+    private com.toedter.calendar.JDateChooser DepartingDate;
+    private javax.swing.JLabel DepartureFlightsTableLabel;
+    private javax.swing.JLabel DestinationLabel;
+    private javax.swing.JLabel DestinationLabel1;
+    private javax.swing.JLabel DestinationLabel2;
+    private javax.swing.JLabel DestinationLabel3;
+    private javax.swing.JPanel DetailsDisplay;
+    private javax.swing.JPanel DetailsDisplay1;
+    private javax.swing.JPanel DetailsDisplay2;
+    private javax.swing.JPanel DetailsNDisplay;
+    private javax.swing.JPanel DirectPanel;
+    private javax.swing.JPanel DirectPanel1;
+    private javax.swing.JPanel DirectPanel2;
+    private javax.swing.JPanel DirectPanel3;
+    private javax.swing.JPanel DisplayPanel;
+    private javax.swing.JPanel DisplayPanel1;
+    private javax.swing.JPanel DisplayPanel2;
+    private javax.swing.JLabel EImage1;
+    private javax.swing.JLabel EImage2;
+    private javax.swing.JLabel EImage3;
+    private javax.swing.JLabel EconomyLabel;
+    private javax.swing.JLabel EmailBLabel;
+    private javax.swing.JLabel EmailTLabel;
+    private javax.swing.JRadioButton ExclusiveRadioButton;
+    private javax.swing.JRadioButton ExclusiveRadioButton1;
+    private javax.swing.JRadioButton ExclusiveRadioButton2;
+    private javax.swing.JLabel Exit1;
+    private javax.swing.JLabel Exit2;
+    private javax.swing.JLabel Exit3;
+    private javax.swing.JLabel Exit4;
+    private javax.swing.JLabel Exit5;
+    private javax.swing.JLabel Exit6;
+    private javax.swing.JLabel Exit7;
+    private javax.swing.JLabel ExperienceIcon1;
+    private javax.swing.JLabel ExperienceIcon2;
+    private javax.swing.JLabel ExperienceIcon3;
+    private javax.swing.JLabel ExperienceIcon4;
+    private javax.swing.JLabel ExperienceIcon5;
+    private javax.swing.JLabel ExperienceIcon6;
+    private javax.swing.JLabel ExperienceIcon7;
+    private javax.swing.JLabel ExperienceLabel1;
+    private javax.swing.JLabel ExperienceLabel2;
+    private javax.swing.JLabel ExperienceLabel3;
+    private javax.swing.JLabel ExperienceLabel4;
+    private javax.swing.JLabel ExperienceLabel5;
+    private javax.swing.JLabel ExperienceLabel6;
+    private javax.swing.JLabel ExperienceLabel7;
+    private javax.swing.JPanel ExperiencePanel;
+    private javax.swing.JLabel FareBreakupLabel;
+    private javax.swing.JLabel FareBreakupLabel1;
+    private javax.swing.JPanel FareBreakupPanel;
+    private javax.swing.JPanel FareBreakupPanel1;
+    private javax.swing.JLabel FareField1;
+    private javax.swing.JLabel FareField10;
+    private javax.swing.JLabel FareField11;
+    private javax.swing.JLabel FareField2;
+    private javax.swing.JLabel FareField3;
+    private javax.swing.JLabel FareField4;
+    private javax.swing.JLabel FareField5;
+    private javax.swing.JLabel FareField6;
+    private javax.swing.JLabel FareField7;
+    private javax.swing.JLabel FareField8;
+    private javax.swing.JLabel FareField9;
+    private javax.swing.JSeparator FieldUnderline1;
+    private javax.swing.JSeparator FieldUnderline2;
+    private javax.swing.JPanel FirstFlight;
+    private javax.swing.JLabel FirstLabel;
+    private javax.swing.JCheckBox FlexibilityCheckbox;
+    private javax.swing.JLabel FlightClassField;
+    private javax.swing.JLabel FlightClassField1;
+    private javax.swing.JLabel FlightClassLabel;
+    private javax.swing.JLabel FlightClassLabel1;
+    private javax.swing.JLabel FlightCodeField;
+    private javax.swing.JLabel FlightCodeField1;
+    private javax.swing.JLabel FlightCodeField2;
+    private javax.swing.JLabel FlightCodeLabel;
+    private javax.swing.JLabel FlightCodeLabel1;
+    private javax.swing.JLabel FlightCodeLabel2;
+    private javax.swing.JLabel FlightDetails;
+    private javax.swing.JTable FlightDisplayTable;
+    private javax.swing.JTable FlightDisplayTable1;
+    private javax.swing.JTable FlightDisplayTable2;
+    private javax.swing.JTable FlightMDisplayTable;
+    private javax.swing.JTable FlightNDisplayTable;
+    private javax.swing.JLabel FlightPassengersField;
+    private javax.swing.JLabel FlightPassengersField1;
+    private javax.swing.JLabel FlightPassengersLabel;
+    private javax.swing.JLabel FlightPassengersLabel1;
+    private javax.swing.JPanel FlightsDisplay;
+    private javax.swing.JLabel FromDLabel;
+    private javax.swing.JLabel FromDLabel1;
+    private javax.swing.JLabel FromDLabel2;
+    private javax.swing.JLabel FromDLabel3;
+    private javax.swing.JLabel FromILabel;
+    private javax.swing.JLabel FromILabel1;
+    private javax.swing.JLabel FromILabel2;
+    private javax.swing.JLabel FromILabel3;
+    private javax.swing.JLabel FullNameBLabel;
+    private javax.swing.JLabel FullNameTLabel;
+    private javax.swing.ButtonGroup GenderMGroup;
+    private javax.swing.JLabel Header1;
+    private javax.swing.JLabel Header2;
+    private javax.swing.JLabel Header3;
+    private javax.swing.JLabel Header4;
+    private javax.swing.JLabel Header5;
+    private javax.swing.JLabel Header6;
+    private javax.swing.JLabel HeaderMenu1;
+    private javax.swing.JLabel HeaderMenu2;
+    private javax.swing.JLabel HeaderMenu3;
+    private javax.swing.JLabel HeaderMenu4;
+    private javax.swing.JLabel HeaderMenu5;
+    private javax.swing.JLabel HelpHeader;
+    private javax.swing.JLabel HelpIcon1;
+    private javax.swing.JLabel HelpIcon2;
+    private javax.swing.JLabel HelpIcon3;
+    private javax.swing.JLabel HelpIcon4;
+    private javax.swing.JLabel HelpIcon5;
+    private javax.swing.JLabel HelpIcon6;
+    private javax.swing.JLabel HelpIcon7;
+    private javax.swing.JLabel HelpLabel1;
+    private javax.swing.JLabel HelpLabel2;
+    private javax.swing.JLabel HelpLabel3;
+    private javax.swing.JLabel HelpLabel4;
+    private javax.swing.JLabel HelpLabel5;
+    private javax.swing.JLabel HelpLabel6;
+    private javax.swing.JLabel HelpLabel7;
+    private javax.swing.JPanel HelpPanel;
+    private javax.swing.JPanel Home2;
+    private javax.swing.JPanel Home5;
+    private javax.swing.JPanel Home6;
+    private javax.swing.JPanel HomePanel;
+    private javax.swing.JSeparator Hyphen;
+    private javax.swing.JLabel IDL1;
+    private javax.swing.JLabel IDL2;
+    private javax.swing.JLabel IDL3;
+    private javax.swing.JLabel IDL4;
+    private javax.swing.JLabel IDL5;
+    private javax.swing.JLabel IDLF1;
+    private javax.swing.JLabel IDLF10;
+    private javax.swing.JLabel IDLF11;
+    private javax.swing.JLabel IDLF12;
+    private javax.swing.JLabel IDLF13;
+    private javax.swing.JLabel IDLF14;
+    private javax.swing.JLabel IDLF15;
+    private javax.swing.JLabel IDLF16;
+    private javax.swing.JLabel IDLF17;
+    private javax.swing.JLabel IDLF18;
+    private javax.swing.JLabel IDLF19;
+    private javax.swing.JLabel IDLF2;
+    private javax.swing.JLabel IDLF20;
+    private javax.swing.JLabel IDLF3;
+    private javax.swing.JLabel IDLF4;
+    private javax.swing.JLabel IDLF5;
+    private javax.swing.JLabel IDLF6;
+    private javax.swing.JLabel IDLF7;
+    private javax.swing.JLabel IDLF8;
+    private javax.swing.JLabel IDLF9;
+    private javax.swing.JLabel ISL1;
+    private javax.swing.JLabel ISL2;
+    private javax.swing.JLabel ISL3;
+    private javax.swing.JLabel ISL4;
+    private javax.swing.JLabel ISL5;
+    private javax.swing.JLabel ISLF1;
+    private javax.swing.JLabel ISLF10;
+    private javax.swing.JLabel ISLF11;
+    private javax.swing.JLabel ISLF12;
+    private javax.swing.JLabel ISLF13;
+    private javax.swing.JLabel ISLF14;
+    private javax.swing.JLabel ISLF15;
+    private javax.swing.JLabel ISLF16;
+    private javax.swing.JLabel ISLF17;
+    private javax.swing.JLabel ISLF18;
+    private javax.swing.JLabel ISLF19;
+    private javax.swing.JLabel ISLF2;
+    private javax.swing.JLabel ISLF20;
+    private javax.swing.JLabel ISLF3;
+    private javax.swing.JLabel ISLF4;
+    private javax.swing.JLabel ISLF5;
+    private javax.swing.JLabel ISLF6;
+    private javax.swing.JLabel ISLF7;
+    private javax.swing.JLabel ISLF8;
+    private javax.swing.JLabel ISLF9;
+    private javax.swing.JRadioButton Icon1;
+    private javax.swing.JRadioButton Icon10;
+    private javax.swing.JRadioButton Icon11;
+    private javax.swing.JRadioButton Icon12;
+    private javax.swing.JRadioButton Icon13;
+    private javax.swing.JRadioButton Icon14;
+    private javax.swing.JRadioButton Icon15;
+    private javax.swing.JRadioButton Icon2;
+    private javax.swing.JRadioButton Icon3;
+    private javax.swing.JRadioButton Icon4;
+    private javax.swing.JRadioButton Icon5;
+    private javax.swing.JRadioButton Icon6;
+    private javax.swing.JRadioButton Icon7;
+    private javax.swing.JRadioButton Icon8;
+    private javax.swing.JRadioButton Icon9;
+    private javax.swing.JPanel IconPanel1;
+    private javax.swing.JPanel IconPanel2;
+    private javax.swing.JPanel IconPanel3;
+    private javax.swing.JPanel IconPanel4;
+    private javax.swing.JPanel IconPanel5;
+    private javax.swing.JPanel IconPanel6;
+    private javax.swing.JPanel IconPanel7;
+    private javax.swing.JRadioButton InclusiveRadioButton;
+    private javax.swing.JRadioButton InclusiveRadioButton1;
+    private javax.swing.JRadioButton InclusiveRadioButton2;
+    private javax.swing.JPanel IndirectPanel;
+    private javax.swing.JPanel IndirectPanel1;
+    private javax.swing.JPanel IndirectPanel2;
+    private javax.swing.JPanel IndirectPanel3;
+    private javax.swing.JPanel InfotainmentPanel;
+    private javax.swing.JLabel InstructionLabel1;
+    private javax.swing.JLabel InstructionMLabel;
+    private javax.swing.JLabel Instructions1;
+    private javax.swing.JLabel Instructions2;
+    private javax.swing.JLabel Instructions3;
+    private javax.swing.JLabel Instructions4;
+    private javax.swing.JLabel Instructions5;
+    private javax.swing.JTextArea InstructionsBookFlights;
+    private javax.swing.JLabel InstructionsLabel;
+    private javax.swing.JLabel KMinus;
+    private javax.swing.JLabel KPlus;
+    private javax.swing.JTextField KTextField;
+    private javax.swing.JLabel KidsFareInstruction;
+    private javax.swing.JLabel KidsFareInstruction1;
+    private javax.swing.JLabel KidsLabel;
+    private javax.swing.JPanel LabelPanel1;
+    private javax.swing.JPanel LabelPanel2;
+    private javax.swing.JPanel LabelPanel3;
+    private javax.swing.JPanel LabelPanel4;
+    private javax.swing.JPanel LabelPanel5;
+    private javax.swing.JPanel LabelPanel6;
+    private javax.swing.JPanel LabelPanel7;
+    private javax.swing.JLayeredPane LayeredPane1;
+    private javax.swing.JLayeredPane LayeredPane2;
+    private javax.swing.JLayeredPane LayeredPane3;
+    private javax.swing.JLayeredPane LayeredPane4;
+    private javax.swing.JLayeredPane LayeredPane5;
+    private javax.swing.JLayeredPane LayeredPane6;
+    private javax.swing.JLayeredPane LayeredPane7;
+    private javax.swing.JLabel LogoLabel1;
+    private javax.swing.JLabel LogoLabel2;
+    private javax.swing.JLabel LogoLabel3;
+    private javax.swing.JLabel LogoLabel4;
+    private javax.swing.JLabel LogoLabel5;
+    private javax.swing.JLabel LogoLabel6;
+    private javax.swing.JLabel LogoLabel7;
+    private javax.swing.JLabel Logout1;
+    private javax.swing.JLabel Logout2;
+    private javax.swing.JLabel Logout3;
+    private javax.swing.JLabel Logout4;
+    private javax.swing.JLabel Logout5;
+    private javax.swing.JLabel Logout6;
+    private javax.swing.JLabel Logout7;
+    private javax.swing.JPanel MHomePanel;
+    private javax.swing.JPanel MResult1Panel;
+    private javax.swing.JPanel MSearchAllPanel;
+    private javax.swing.JSeparator MUnderline;
+    private javax.swing.JLabel MailSentLabel;
+    private javax.swing.JPanel MainR2Panel;
+    private javax.swing.JLabel ManageBackground;
+    private javax.swing.JLabel ManageDPanel;
+    private javax.swing.JLabel ManageIcon1;
+    private javax.swing.JLabel ManageIcon2;
+    private javax.swing.JLabel ManageIcon3;
+    private javax.swing.JLabel ManageIcon4;
+    private javax.swing.JLabel ManageIcon5;
+    private javax.swing.JLabel ManageIcon6;
+    private javax.swing.JLabel ManageIcon7;
+    private javax.swing.JLabel ManageLabel1;
+    private javax.swing.JLabel ManageLabel2;
+    private javax.swing.JLabel ManageLabel3;
+    private javax.swing.JLabel ManageLabel4;
+    private javax.swing.JLabel ManageLabel5;
+    private javax.swing.JLabel ManageLabel6;
+    private javax.swing.JLabel ManageLabel7;
+    private javax.swing.JPanel ManagePanel;
+    private javax.swing.ButtonGroup Meal1;
+    private javax.swing.ButtonGroup Meal2;
+    private javax.swing.ButtonGroup MealButtonGroup;
+    private javax.swing.JLabel MealChargesLabel;
+    private javax.swing.JLabel MealChargesLabel1;
+    private javax.swing.JRadioButton MealRadioButton1;
+    private javax.swing.JRadioButton MealRadioButton2;
+    private javax.swing.JRadioButton MealRadioButton3;
+    private javax.swing.JRadioButton MealRadioButton4;
+    private javax.swing.JRadioButton MealRadioButton5;
+    private javax.swing.JRadioButton MealRadioButton6;
+    private javax.swing.JLabel MealTypeLabel;
+    private javax.swing.JLabel MealTypeLabel1;
+    private javax.swing.JLabel MealTypeLabel2;
+    private javax.swing.JLabel MealsLabel;
+    private javax.swing.JLabel MealsLabel1;
+    private javax.swing.JLabel MealsLabel2;
+    private javax.swing.JLabel MenuLabel1;
+    private javax.swing.JLabel MenuLabel2;
+    private javax.swing.JLabel MenuLabel3;
+    private javax.swing.JLabel MenuLabel4;
+    private javax.swing.JLabel MenuLabel5;
+    private javax.swing.JLabel MenuLabel6;
+    private javax.swing.JLabel MenuLabel7;
+    private javax.swing.JLabel MobileBLabel;
+    private javax.swing.JLabel MobileTLabel;
+    private com.toedter.calendar.JDateChooser NewDOB;
+    private javax.swing.JLabel NewPLabel1;
+    private javax.swing.JLabel NewPLabel2;
+    private javax.swing.JPasswordField NewPassword1;
+    private javax.swing.JPasswordField NewPassword2;
+    private javax.swing.JLabel Next2WLabel;
+    private javax.swing.JLabel NextLabel;
+    private javax.swing.JLabel NextMLabel;
+    private javax.swing.JButton NextNLabel;
+    private javax.swing.JButton NextNLabel1;
+    private javax.swing.JLabel NoFlightMLabel;
+    private javax.swing.JPanel NoFlightMPanel;
+    private javax.swing.JLabel NoFlightMSelectedLabel;
+    private javax.swing.JLabel NoFlightR2Image;
+    private javax.swing.JLabel NoFlightR2Label;
+    private javax.swing.JPanel NoFlightR2Panel;
+    private javax.swing.JPanel NoFlightSelected;
+    private javax.swing.JPanel NoFlightSelected1;
+    private javax.swing.JPanel NoFlightSelected2;
+    private javax.swing.JLabel NoFlightSelectedLabel;
+    private javax.swing.JLabel NoFlightSelectedLabel1;
+    private javax.swing.JLabel NoFlightSelectedLabel2;
+    private javax.swing.JDialog NoInternet;
+    private javax.swing.JLabel NoResultLabel;
+    private javax.swing.JPanel NoResultPanel;
+    private javax.swing.JPanel NoRowPanel;
+    private javax.swing.JLabel Number1;
+    private javax.swing.JLabel Number2;
+    private javax.swing.JLabel Number3;
+    private javax.swing.JLabel Number4;
+    private javax.swing.JLabel Number5;
+    private javax.swing.JPanel Panel7_1;
+    private javax.swing.JPanel Panel7_2;
+    private javax.swing.JPanel Panel7_3;
+    private javax.swing.JPanel Panel7_4;
+    private javax.swing.JPanel Panel7_5;
+    private javax.swing.JLabel Password1;
+    private javax.swing.JLabel Password2;
+    private javax.swing.JLabel Password3;
+    private javax.swing.JLabel Password4;
+    private javax.swing.JLabel Password5;
+    private javax.swing.JLabel PaymentAnimation;
+    private javax.swing.JPanel PaymentPage;
+    private javax.swing.JPanel PaymentShow;
+    private javax.swing.JPanel PaymentShow2;
+    private javax.swing.JLabel PaymentSuccess;
+    private javax.swing.JLabel PaymentWalletAnimation;
+    private javax.swing.JLabel PaymentWalletAnimation1;
+    private javax.swing.JTextField PhoneField;
+    private javax.swing.JLabel PhoneLabel;
+    private javax.swing.JLabel QLabel1;
+    private javax.swing.JLabel QLabel10;
+    private javax.swing.JLabel QLabel2;
+    private javax.swing.JLabel QLabel3;
+    private javax.swing.JLabel QLabel4;
+    private javax.swing.JLabel QLabel5;
+    private javax.swing.JLabel QLabel6;
+    private javax.swing.JLabel QLabel7;
+    private javax.swing.JLabel QLabel8;
+    private javax.swing.JLabel QLabel9;
+    private javax.swing.JPanel QPanel1;
+    private javax.swing.JPanel QPanel10;
+    private javax.swing.JPanel QPanel2;
+    private javax.swing.JPanel QPanel3;
+    private javax.swing.JPanel QPanel4;
+    private javax.swing.JPanel QPanel5;
+    private javax.swing.JPanel QPanel6;
+    private javax.swing.JPanel QPanel7;
+    private javax.swing.JPanel QPanel8;
+    private javax.swing.JPanel QPanel9;
+    private javax.swing.JCheckBox RCheckBox;
+    private javax.swing.JCheckBox RCheckBox1;
+    private javax.swing.JTextField RefernceNumberMField;
+    private javax.swing.JLabel RefernceNumberMLabel;
+    private javax.swing.JLabel RefundableLabel;
+    private javax.swing.JLabel RefundableLabel1;
+    private javax.swing.JLabel RefundableLabel2;
+    private javax.swing.JLabel RefundableLabel3;
+    private javax.swing.JLabel RefundableLabel4;
+    private javax.swing.JLabel RefundableLabel5;
+    private javax.swing.JLabel RefundableLabel6;
+    private javax.swing.JPanel Result;
+    private javax.swing.JPanel Result2;
+    private javax.swing.JPanel ResultDisplayPanel;
+    private javax.swing.JButton ReturnFlightsButton;
+    private javax.swing.JButton ReturnFlightsButton1;
+    private com.toedter.calendar.JDateChooser ReturningDate;
+    private javax.swing.JLabel S1;
+    private javax.swing.JLabel S2;
+    private javax.swing.JLabel S2W1_1;
+    private javax.swing.JLabel S2W1_10;
+    private javax.swing.JLabel S2W1_2;
+    private javax.swing.JLabel S2W1_3;
+    private javax.swing.JLabel S2W1_4;
+    private javax.swing.JLabel S2W1_5;
+    private javax.swing.JLabel S2W1_6;
+    private javax.swing.JLabel S2W1_7;
+    private javax.swing.JLabel S2W1_8;
+    private javax.swing.JLabel S2W1_9;
+    private javax.swing.JLabel S3;
+    private javax.swing.JLabel S4;
+    private javax.swing.JLabel S5;
+    private javax.swing.JLabel Save1;
+    private javax.swing.JLabel Save2;
+    private javax.swing.JLabel Save3;
+    private javax.swing.JLabel Save4;
+    private javax.swing.JLabel Save5;
+    private javax.swing.JLabel SearchAllLabel;
+    private javax.swing.JLabel SearchBackground2;
+    private javax.swing.JLabel SearchFlights;
+    private javax.swing.JLabel SearchRefernceLabel;
+    private javax.swing.JPanel SecondFlight;
+    private javax.swing.JLabel SettingsIcon1;
+    private javax.swing.JLabel SettingsIcon2;
+    private javax.swing.JLabel SettingsIcon3;
+    private javax.swing.JLabel SettingsIcon4;
+    private javax.swing.JLabel SettingsIcon5;
+    private javax.swing.JLabel SettingsIcon6;
+    private javax.swing.JLabel SettingsIcon7;
+    private javax.swing.JLabel SettingsLabel1;
+    private javax.swing.JLabel SettingsLabel2;
+    private javax.swing.JLabel SettingsLabel3;
+    private javax.swing.JLabel SettingsLabel4;
+    private javax.swing.JLabel SettingsLabel5;
+    private javax.swing.JLabel SettingsLabel6;
+    private javax.swing.JLabel SettingsLabel7;
+    private javax.swing.JPanel SettingsPanel;
+    private javax.swing.JLabel ShowHideLabel;
+    private javax.swing.JLabel ShowHideLabel1;
+    private javax.swing.JLabel SourceLabel;
+    private javax.swing.JLabel SourceLabel1;
+    private javax.swing.JLabel SourceLabel2;
+    private javax.swing.JLabel SourceLabel3;
+    private javax.swing.JScrollPane TableNScrollPane;
+    private javax.swing.JScrollPane TableNScrollPane1;
+    private javax.swing.JPanel TablePanel;
+    private javax.swing.JPanel TablePanel1;
+    private javax.swing.JPanel TablePanel2;
+    private javax.swing.JScrollPane TableScrollPane;
+    private javax.swing.JScrollPane TableScrollPane1;
+    private javax.swing.JScrollPane TableScrollPane2;
+    private javax.swing.JLabel TipsLabel;
+    private javax.swing.JPanel TipsPanel;
+    private javax.swing.JLabel ToDLabel;
+    private javax.swing.JLabel ToDLabel1;
+    private javax.swing.JLabel ToDLabel2;
+    private javax.swing.JLabel ToDLabel3;
+    private javax.swing.JLabel ToILabel;
+    private javax.swing.JLabel ToILabel1;
+    private javax.swing.JLabel ToILabel2;
+    private javax.swing.JLabel ToILabel3;
+    private javax.swing.JPanel TopPanel1;
+    private javax.swing.JPanel TopPanel2;
+    private javax.swing.JPanel TopPanel3;
+    private javax.swing.JPanel TopPanel4;
+    private javax.swing.JPanel TopPanel5;
+    private javax.swing.JPanel TopPanel6;
+    private javax.swing.JPanel TopPanel7;
+    private javax.swing.JLabel TotalAmountField;
+    private javax.swing.JLabel TotalAmountField1;
+    private javax.swing.JLabel TotalAmountLabel;
+    private javax.swing.JLabel TotalAmountLabel1;
+    private javax.swing.ButtonGroup Type1;
+    private javax.swing.ButtonGroup Type2;
+    private javax.swing.ButtonGroup TypeButtonGroup;
+    private javax.swing.JLabel UL1;
+    private javax.swing.JLabel UL2;
+    private javax.swing.JLabel UL3;
+    private javax.swing.JLabel UL4;
+    private javax.swing.JLabel ULLabel1;
+    private javax.swing.JLabel ULLabel2;
+    private javax.swing.JLabel ULLabel3;
+    private javax.swing.JLabel ULLabel4;
+    private javax.swing.JLabel ULLabel5;
+    private javax.swing.JLabel ULLabel6;
+    private javax.swing.JLabel ULLabel7;
+    private javax.swing.JLabel ULLabel8;
+    private javax.swing.JLabel ULLabel9;
+    private javax.swing.JLabel UpcomingFlightsLabel;
+    private javax.swing.JLabel Value1;
+    private javax.swing.JLabel Value2;
+    private javax.swing.JLabel Value3;
+    private javax.swing.JLabel Value4;
+    private javax.swing.JLabel Value5;
+    private javax.swing.JLabel Value6;
+    private javax.swing.JLabel Value7;
+    private javax.swing.JLabel Value8;
+    private javax.swing.JLabel Value9;
+    private javax.swing.JSeparator VerticalLine;
+    private javax.swing.JLabel ViewC1;
+    private javax.swing.JLabel ViewP1;
+    private javax.swing.JLabel ViewP2;
+    private javax.swing.JLabel WelcomeLabel1;
+    private javax.swing.JLabel WhereweFlyIcon1;
+    private javax.swing.JLabel WhereweFlyIcon2;
+    private javax.swing.JLabel WhereweFlyIcon3;
+    private javax.swing.JLabel WhereweFlyIcon4;
+    private javax.swing.JLabel WhereweFlyIcon5;
+    private javax.swing.JLabel WhereweFlyIcon6;
+    private javax.swing.JLabel WhereweFlyIcon7;
+    private javax.swing.JLabel WhereweFlyLabel1;
+    private javax.swing.JLabel WhereweFlyLabel2;
+    private javax.swing.JLabel WhereweFlyLabel3;
+    private javax.swing.JLabel WhereweFlyLabel4;
+    private javax.swing.JLabel WhereweFlyLabel5;
+    private javax.swing.JLabel WhereweFlyLabel6;
+    private javax.swing.JLabel WhereweFlyLabel7;
+    private javax.swing.JPanel WhereweFlyPanel;
+    // End of variables declaration//GEN-END:variables
+
+    private void myinitComponents(){
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2,dim.height/2-this.getSize().height/2);
+        NoInternet.setLocation(dim.width/2-this.getSize().width/2,(dim.height/2-this.getSize().height/2)+70);
+        NoInternet.setLayout(new BorderLayout());
+        NoInternet.setVisible(false);
+
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+        
+        setIconImage(bufferedImage);
+        setTitle("Dashboard");
+        setCursor();
+
+        LabelPanel1.setVisible(false);
+        Back5.setVisible(false);
+
+        //SettingPanel2
+        Save2.setVisible(false);
+        NewPLabel1.setVisible(false);
+        NewPLabel2.setVisible(false);
+        ViewP1.setVisible(false);
+        ViewP2.setVisible(false);
+        NewPassword1.setVisible(false);
+        NewPassword2.setVisible(false);
+        UL2.setVisible(false);
+        UL3.setVisible(false);
+
+        Country1Combo.setBackground(new java.awt.Color(0,0,0,0));
+        Country2Combo.setBackground(new java.awt.Color(0,0,0,0));
+        ClassCombo.setBackground(new java.awt.Color(0,0,0,0));
+        
+        //Book Flights:
+        Date dt = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(dt);
+        c.add(Calendar.DATE, 1);
+        dt = c.getTime();
+        DepartingDate.setDate(dt);
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+        centerRenderer.setBackground(Color.white);
+        FlightDisplayTable.setDefaultRenderer(Object.class, centerRenderer);
+        FlightDisplayTable1.setDefaultRenderer(Object.class, centerRenderer);
+        FlightDisplayTable2.setDefaultRenderer(Object.class, centerRenderer);
+        FlightMDisplayTable.setDefaultRenderer(Object.class, centerRenderer);
+        FlightNDisplayTable.setDefaultRenderer(Object.class, centerRenderer);
+        BookingInstruction.setVisible(false);
+        MealTypeLabel.setVisible(false);
+        MealRadioButton1.setVisible(false);
+        MealRadioButton2.setVisible(false);
+        ReturnFlightsButton.setBackground(new java.awt.Color(0,0,0,0));
+        ContinueFlightsButton.setBackground(new java.awt.Color(0,0,0,0));
+        BackNLabel.setBackground(new java.awt.Color(0,0,0,0));
+        NextNLabel.setBackground(new java.awt.Color(0,0,0,0));
+        FareBreakupPanel.setVisible(false);
+
+        Confirmation2ScrollPane.getVerticalScrollBar().setUnitIncrement(20);
+        MealTypeLabel1.setVisible(false);
+        MealRadioButton3.setVisible(false);
+        MealRadioButton4.setVisible(false);
+        MealTypeLabel2.setVisible(false);
+        MealRadioButton5.setVisible(false);
+        MealRadioButton6.setVisible(false);
+        ReturnFlightsButton1.setBackground(new java.awt.Color(0,0,0,0));
+        ContinueFlightsButton1.setBackground(new java.awt.Color(0,0,0,0));
+        BackNLabel1.setBackground(new java.awt.Color(0,0,0,0));
+        NextNLabel1.setBackground(new java.awt.Color(0,0,0,0));
+        FareBreakupPanel1.setVisible(false);
+
+
+        //Experience Panel:
+        FirstLabel.setBackground(Color.white);
+        EconomyLabel.setBackground(Color.white);
+        BusinessLabel.setBackground(Color.white);
+        
+        //Manage Panel:
+        InstructionMLabel.setVisible(false);
+        CancelthisFlight.setBackground(new java.awt.Color(0,0,0,0));
+        BackMFlightButton.setBackground(new java.awt.Color(0,0,0,0));
+
+        //Help Panel
+        QPanel1.setBackground(lightGray);
+        QPanel2.setBackground(lightGray);
+        QPanel3.setBackground(lightGray);
+        QPanel4.setBackground(lightGray);
+        QPanel5.setBackground(lightGray);
+        QPanel6.setBackground(lightGray);
+        QPanel7.setBackground(lightGray);
+        QPanel8.setBackground(lightGray);
+        QPanel9.setBackground(lightGray);
+        QPanel10.setBackground(lightGray);
+
+    }
+    
+    private void exit() {
+        JLabel label = new JLabel("Are you sure you want to exit?");
+        label.setFont(new Font("Arial", Font.BOLD, 15));
+        String title = "Exit";
+        int run = JOptionPane.showConfirmDialog(null, label, title, JOptionPane.YES_NO_OPTION);
+        if(run == 0){
+            System.exit(0);
+        }
+    }
+
+    private void login() {
+        Login login = new Login("");
+        login.setVisible(true);
+        this.dispose();
+    }
+
+    private void startWork(String number) {
+        if (Database.checkInternet()) {
+
+            if (Database.startVerification(email, number)) {
+
+                PhoneField.setText("");
+                Database.updateNumber(email, number);
+                mobilenumber = number;
+                String[] details = {Integer.toString(icon), name, date, number};
+                settingDetails(details);
+                JLabel label = new JLabel("Phone number successfully.");
+                label.setFont(new Font("Arial", Font.BOLD, 15));
+                String title = "Success";
+                JOptionPane.showMessageDialog(null, label, title,
+                        JOptionPane.INFORMATION_MESSAGE, successIcon);
+
+            } else {
+
+                JLabel label = new JLabel("Invalid phone number. Please try again");
+                label.setFont(new Font("Arial", Font.BOLD, 15));
+                String title = "Error";
+                JOptionPane.showMessageDialog(null, label, title, JOptionPane.WARNING_MESSAGE);
+
+            }
+
+        } else {
+
+            Thread t2 = new Thread(){
+                @Override
+                public void run() {
+                    NoInternet.add(new NoInternet(1));
+                    NoInternet.pack();
+                    NoInternet.setVisible(true);
+                }
+                // for stopping the thread
+                @Override
+                public void interrupt() {
+                    NoInternet.setVisible(false);
+                    NoInternet.dispose();
+                    super.interrupt();
+                }
+            };
+            t2.setPriority(Thread.MAX_PRIORITY);
+
+            javax.swing.Timer timer = new javax.swing.Timer(5800,
+                    e -> t2.interrupt());
+            timer.setRepeats(false);
+            t2.start();
+            timer.start();
+
+        }
+    }
+
+    private void bookFlight(int amount) {
+
+        String[] bookingDetails = new String[14];
+
+        //Order is: BookingNumber, Reference, Name, Email, FlightCode, DepDate,
+        //              Passengers, Adults, Kids, Class, Meal, Preference, Cancellation, Amount
+
+        bookingDetails[0] = Database.getBookingNumber();
+//        bookingDetails[0] = "1";
+        bookingDetails[1] = FlightCodeField.getText().trim() + "-B" + bookingDetails[0];
+        BookingCode.setText("<html><body align=\"center\"> Your booking code is: <br>" + bookingDetails[1]);
+        bookingDetails[2] = name;
+        bookingDetails[3] = email;
+        bookingDetails[4] = FlightCodeField.getText().trim();
+        bookingDetails[5] = Database.getFlightDepDate(bookingDetails[4].toUpperCase());
+        bookingDetails[6] = FlightPassengersField.getText().trim();
+        bookingDetails[7] = ATextField.getText().trim();
+        bookingDetails[8] = KTextField.getText().trim();
+        bookingDetails[9] = FlightClassField.getText().trim();
+        bookingDetails[10] = getMealStatus();
+        if(bookingDetails[10].equals("I")){
+            bookingDetails[11] = getMealType();
+        }else{
+            bookingDetails[11] = "E";
+        }
+        if(RCheckBox.isSelected()){
+            bookingDetails[12] = "Y";
+        }else{
+            bookingDetails[12] = "N";
+        }
+        bookingDetails[13] = Integer.toString(amount);
+
+        Database.bookFlight(bookingDetails);
+        Database.updateFlightPassengers(bookingDetails[4], Integer.parseInt(bookingDetails[6]));
+
+        //Sending Booking Confirmartion Mail:
+
+        //Order of BookingDetails: BookingNumber, Reference, Name, Email, FlightCode, DepDate,
+        //              Passengers, Adults, Kids, Class, Meal, Preference, Cancellation, Amount
+        // Order is: [from, to, dDate, dTime, dAirport, dCity, dcountry, aDate, aTime, aAirport, aCity, acountry]
+        String[] res = Database.getFlightDetails(bookingDetails[4]);
+
+        //New Order is: Refernce, Name, dAirport, dCity, dDate, dTime, aAirport, aCity, Passegers, Class
+        //      Meals
+
+        String val1;
+        if(bookingDetails[10].equals("I")){
+            val1 = "Included";
+        }else{
+            val1 = "Excluded";
+        }
+        String[] arr = {bookingDetails[1], bookingDetails[2], res[4], res[5], res[2], res[3], res[9], res[10],
+                bookingDetails[6], bookingDetails[9], val1};
+        if(Database.checkInternet()){
+            Mail.sendBookingConfirmation(arr, email);
+        }else{
+            MailSentLabel.setText("<html><body align = \"center\">Unable to send email due to unavailability of Internet Connection.");
+        }
+    }
+
+    private void bookReturnFlight(int amount) {
+
+        String[] bookingDetails1 = new String[14];
+        String[] bookingDetails2 = new String[14];
+
+        //Order is: BookingNumber, Reference, Name, Email, FlightCode, DepDate,
+        //              Passengers, Adults, Kids, Class, Meal, Preference, Cancellation, Amount
+
+//        AMI00SINLAX378-B1#1
+//        AMI00LAXSIN604-B2#1
+
+        bookingDetails1[0] = Database.getBookingNumber();
+        bookingDetails1[1] = FlightCodeField1.getText().trim() + "-B" + bookingDetails1[0]
+                +"#" + bookingDetails1[0];
+        bookingDetails1[2] = name;
+        bookingDetails1[3] = email;
+        bookingDetails1[4] = FlightCodeField1.getText().trim();
+        bookingDetails1[5] = Database.getFlightDepDate(bookingDetails1[4].toUpperCase());
+        bookingDetails1[6] = FlightPassengersField1.getText().trim();
+        bookingDetails1[7] = ATextField.getText().trim();
+        bookingDetails1[8] = KTextField.getText().trim();
+        bookingDetails1[9] = FlightClassField1.getText().trim();
+        if(InclusiveRadioButton1.isSelected()){
+            bookingDetails1[10] = "I";
+        }else{
+            bookingDetails1[10] = "E";
+        }
+        if(bookingDetails1[10].equals("I")){
+            if(MealRadioButton3.isSelected()){
+                bookingDetails1[11] = "V";
+            }else{
+                bookingDetails1[11] = "N";
+            }
+        }else{
+            bookingDetails1[11] = "E";
+        }
+        if(RCheckBox1.isSelected()){
+            bookingDetails1[12] = "Y";
+        }else{
+            bookingDetails1[12] = "N";
+        }
+        bookingDetails1[13] = Integer.toString(amount);
+
+
+        bookingDetails2[0] = Integer.toString(Integer.parseInt(bookingDetails1[0])+1);
+        bookingDetails2[1] = FlightCodeField2.getText().trim() + "-B" + bookingDetails2[0]
+                +"#" + bookingDetails1[0] ;
+        bookingDetails2[2] = name;
+        bookingDetails2[3] = email;
+        bookingDetails2[4] = FlightCodeField2.getText().trim();
+        bookingDetails2[5] = Database.getFlightDepDate(bookingDetails2[4].toUpperCase());
+        bookingDetails2[6] = FlightPassengersField1.getText().trim();
+        bookingDetails2[7] = ATextField.getText().trim();
+        bookingDetails2[8] = KTextField.getText().trim();
+        bookingDetails2[9] = FlightClassField1.getText().trim();
+        if(InclusiveRadioButton2.isSelected()){
+            bookingDetails2[10] = "I";
+        }else{
+            bookingDetails2[10] = "E";
+        }
+        if(bookingDetails2[10].equals("I")){
+            if(MealRadioButton5.isSelected()){
+                bookingDetails2[11] = "V";
+            }else{
+                bookingDetails2[11] = "N";
+            }
+        }else{
+            bookingDetails2[11] = "E";
+        }
+        if(RCheckBox1.isSelected()){
+            bookingDetails2[12] = "Y";
+        }else{
+            bookingDetails2[12] = "N";
+        }
+        bookingDetails2[13] = Integer.toString(amount);
+
+        BookingCode.setText("<html><body align=\"center\"> Your booking code is: <br>"
+                + bookingDetails1[1] + " and " + bookingDetails2[1]);
+
+        Database.bookReturnFlight(bookingDetails1, bookingDetails2);
+        Database.updateFlightPassengers(bookingDetails1[4], Integer.parseInt(bookingDetails1[6]));
+        Database.updateFlightPassengers(bookingDetails2[4], Integer.parseInt(bookingDetails2[6]));
+
+        if(Database.checkInternet()){
+            Mail.sendBookingReturnConfirmation(bookingDetails1[1], bookingDetails2[1], email);
+        }else{
+            MailSentLabel.setText("<html><body align = \"center\">Unable to send email due to unavailability of Internet Connection.");
+        }
+    }
+
+    private String getMealType() {
+        if(MealRadioButton1.isSelected()){
+            return "V";
+        }else{
+            return "N";
+        }
+
+    }
+
+    private String getMealStatus() {
+        if(InclusiveRadioButton.isSelected()){
+            return "I";
+        }else{
+            return "E";
+        }
+    }
+
+    private void updateFlightDashboard() {
+        if(Database.getFlightStatus(email)){
+            setFlightsforDisplay();
+            CardLayout cardLayout = (CardLayout) InfotainmentPanel.getLayout();
+            cardLayout.show(InfotainmentPanel, "FLIGHTS");
+        }else{
+            CardLayout cardLayout = (CardLayout) InfotainmentPanel.getLayout();
+            cardLayout.show(InfotainmentPanel, "TIPS");
+        }
+    }
+
+    private void setFlightsforDisplay() {
+
+        String[] result = Database.getRecentFlightDetails(email);
+
+        DefaultTableModel tableModel = (DefaultTableModel) FlightNDisplayTable.getModel();
+        tableModel.setRowCount(0);
+        Object[] tableData = new Object[]{result[0], result[1], result[2], result[3],
+                                                result[4], result[5], result[6]};
+        tableModel.addRow(tableData);
+
+    }
+
+    private void bookingDone() {
+
+        CardLayout cardLayout1 = (CardLayout) ContentPanel2.getLayout();
+        cardLayout1.show(ContentPanel2, "HOME");
+        PaymentAnimation.setVisible(true);
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        LabelPanel1.setVisible(false);
+        updateFlightDashboard();
+
+        javax.swing.Timer timer = new javax.swing.Timer(1500, e -> cardLayout.show(getContentPane(), "CARD1"));
+        timer.setRepeats(false);
+        timer.start();
+        clearBooking();
+
+    }
+
+    private boolean validateRefernceNumber(String str) {
+        return str.length() >= 15 && str.contains("-") && str.startsWith("AMI00");
+    }
+
+    private void settheSearchResult(String[] details, boolean status) {
+        //Order is: Reference, Class, Amount, Passengers, Adults, Kids, Refund Status, Meal, Type of Meal,
+        //          from and to details.
+        // Order is: [from, to, dDate, dTime, dAirport, dCity, dcountry, aDate, aTime, aAirport, aCity, acountry]
+
+        if(status){
+            FromILabel1.setText("<html>\n<body align=\"center\">\n<font size = \"6\">" +
+                    details[14] + "</font>\n<br>\n<font size = \"4\">(" +
+                    details[9] + ")</font>\n</body>\n</html>");
+            ToILabel1.setText("<html>\n<body align=\"center\">\n<font size = \"6\">" +
+                    details[19] + "</font>\n<br>\n<font size = \"4\">" +
+                    details[10] + "</font>\n</body>\n</html>");
+        }else{
+            FromDLabel1.setText("<html>\n<body align=\"center\">\n<font size = \"6\">" +
+                    details[14] + "</font>\n<br>\n<font size = \"4\">(" +
+                    details[9] + ")</font>\n</body>\n</html>");
+            ToDLabel1.setText("<html>\n<body align=\"center\">\n<font size = \"6\">" +
+                    details[19] + "</font>\n<br>\n<font size = \"4\">" +
+                    details[10] + "</font>\n</body>\n</html>");
+        }
+
+        Locale currentLocale = Locale.getDefault();
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(currentLocale);
+
+        Value1.setText(details[0]);
+        Value2.setText(details[1]);
+        Value3.setText(currencyFormatter.format(Math.round(Integer.parseInt(details[2]))));
+        Value4.setText(details[3]);
+        Value5.setText(details[4]);
+        Value6.setText(details[5]);
+        if(details[6].equals("Y")){
+            Value7.setText("Refundable");
+        }else{
+            Value7.setText("Non-Refundable");
+        }
+
+        if(details[7].equals("I")){
+            Value8.setText("Included");
+            Value9.setVisible(true);
+            ULLabel9.setVisible(true);
+            if(details[8].equals("V")){
+                Value9.setBackground(new Color(1, 124, 1));
+            }else{
+                Value9.setBackground(new Color(204, 0, 0));
+            }
+        }else{
+            Value8.setText("Excluded");
+            Value9.setVisible(false);
+            ULLabel9.setVisible(false);
+        }
+
+        S1.setText(details[11]);
+        S2.setText(details[12] +" Hrs");
+        S3.setText(details[13]);
+        S4.setText(details[14]);
+        S5.setText(details[15]);
+
+        D1.setText(details[16]);
+        D2.setText(details[17] + " Hrs");
+        D3.setText(details[18]);
+        D4.setText(details[19]);
+        D5.setText(details[20]);
+
+    }
+
+    private void setSearchResultTable(String email) {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = (Connection) DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/project8525?useSSL=false&characterEncoding=latin1", "root", "123456789");
+            Statement stmt = connection.createStatement();
+
+            //Checking the flexibility factor
+            ResultSet resultSet;
+            resultSet = stmt.executeQuery("SELECT Reference, depDate, class, meal FROM bookings WHERE email = '"
+                    + email + "' ORDER BY depDate ASC;");
+
+            DefaultTableModel tableModel = (DefaultTableModel) FlightMDisplayTable.getModel();
+            tableModel.setRowCount(0);
+
+            Object[] tableData;
+
+            while(resultSet.next()){
+
+                SimpleDateFormat s = new SimpleDateFormat("dd.MM.yyyy");
+                String ddate = s.format(resultSet.getDate(2));
+                String dtime = resultSet.getString(2).substring(11, 16) + " Hrs";
+                String classofF = resultSet.getString(3);
+                String meal;
+                if(resultSet.getString(4).equals("I")){
+                    meal = "Included";
+                }else{
+                    meal = "Excluded";
+                }
+
+                int index = Arrays.asList(list).indexOf(resultSet.getString(1).substring(5, 8));
+                String f = names[index];
+                index = Arrays.asList(list).indexOf(resultSet.getString(1).substring(8, 11));
+                String t = names[index];
+
+                //Order is: Reference No., From , To, DDate, Dtime, Class, Meal
+
+                tableData = new Object[]{resultSet.getString(1), f, t,
+                        ddate, dtime, classofF, meal};
+                tableModel.addRow(tableData);
+
+            }
+            connection.close();
+        }
+        catch(Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+    private void cancelThisFlight(String reference) {
+        Database.cancelFlight(reference);
+    }
+
+    private void cancelReturnFlight(String reference) {
+        Database.cancelReturnFlight(reference, email);
+    }
+
+    private void doReference() {
+        String str = RefernceNumberMField.getText().trim().toUpperCase();
+        if(validateRefernceNumber(str)){
+            if(Database.checkBookingExistence(str, email)){
+
+                String flightCode = str.substring(0, str.indexOf("-"));
+                boolean status = Database.getConnectingStatus(flightCode);
+                settheSearchResult(Database.getBookingDetails(str), status);
+                if(status){
+                    CardLayout cardLayoutN = (CardLayout) DetailsNDisplay.getLayout();
+                    cardLayoutN.show(DetailsNDisplay, "INDIRECT");
+                }else{
+                    CardLayout cardLayoutN = (CardLayout) DetailsNDisplay.getLayout();
+                    cardLayoutN.show(DetailsNDisplay, "DIRECT");
+                }
+                CardLayout cardLayout = (CardLayout) ContentPanel3.getLayout();
+                cardLayout.show(ContentPanel3, "RESULT");
+
+            }else{
+                CardLayout cardLayout = (CardLayout) ContentPanel3.getLayout();
+                cardLayout.show(ContentPanel3, "NOFLIGHT");
+                javax.swing.Timer timer = new javax.swing.Timer(2000,
+                        e -> cardLayout.show(ContentPanel3, "HOME"));
+                timer.setRepeats(false);
+                timer.start();
+            }
+        }else{
+            InstructionMLabel.setVisible(true);
+            javax.swing.Timer timer = new javax.swing.Timer(2000, e -> InstructionMLabel.setVisible(false));
+            timer.setRepeats(false);
+            timer.start();
+        }
+    }
+
+    private void setCursor() {
+
+        Cursor HC = new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR);
+        Save1.setCursor(HC);
+        Save2.setCursor(HC);
+        Save3.setCursor(HC);
+        Save4.setCursor(HC);
+        Save5.setCursor(HC);
+        ViewP1.setCursor(HC);
+        ViewP2.setCursor(HC);
+        ViewC1.setCursor(HC);
+        Avatar2.setCursor(HC);
+        Avatar3.setCursor(HC);
+        Avatar4.setCursor(HC);
+        Avatar5.setCursor(HC);
+        Password1.setCursor(HC);
+        Password3.setCursor(HC);
+        Password4.setCursor(HC);
+        Password5.setCursor(HC);
+        Number1.setCursor(HC);
+        Number2.setCursor(HC);
+        Number4.setCursor(HC);
+        Number5.setCursor(HC);
+        DateBirth1.setCursor(HC);
+        DateBirth2.setCursor(HC);
+        DateBirth3.setCursor(HC);
+        DateBirth5.setCursor(HC);
+        Country1.setCursor(HC);
+        Country2.setCursor(HC);
+        Country3.setCursor(HC);
+        Country4.setCursor(HC);
+
+        DashboardLabel2.setCursor(HC);
+        DashboardLabel3.setCursor(HC);
+        DashboardLabel4.setCursor(HC);
+        DashboardLabel5.setCursor(HC);
+        DashboardLabel6.setCursor(HC);
+        DashboardLabel7.setCursor(HC);
+        BookLabel1.setCursor(HC);
+        BookLabel3.setCursor(HC);
+        BookLabel4.setCursor(HC);
+        BookLabel5.setCursor(HC);
+        BookLabel6.setCursor(HC);
+        BookLabel7.setCursor(HC);
+        ManageLabel1.setCursor(HC);
+        ManageLabel2.setCursor(HC);
+        ManageLabel4.setCursor(HC);
+        ManageLabel5.setCursor(HC);
+        ManageLabel6.setCursor(HC);
+        ManageLabel7.setCursor(HC);
+        ExperienceLabel1.setCursor(HC);
+        ExperienceLabel2.setCursor(HC);
+        ExperienceLabel3.setCursor(HC);
+        ExperienceLabel5.setCursor(HC);
+        ExperienceLabel6.setCursor(HC);
+        ExperienceLabel7.setCursor(HC);
+        WhereweFlyLabel1.setCursor(HC);
+        WhereweFlyLabel2.setCursor(HC);
+        WhereweFlyLabel3.setCursor(HC);
+        WhereweFlyLabel4.setCursor(HC);
+        WhereweFlyLabel6.setCursor(HC);
+        WhereweFlyLabel7.setCursor(HC);
+        ExperienceLabel2.setCursor(HC);
+        ExperienceLabel3.setCursor(HC);
+        ExperienceLabel4.setCursor(HC);
+        ExperienceLabel6.setCursor(HC);
+        ExperienceLabel7.setCursor(HC);
+        HelpLabel1.setCursor(HC);
+        HelpLabel2.setCursor(HC);
+        HelpLabel3.setCursor(HC);
+        HelpLabel4.setCursor(HC);
+        HelpLabel5.setCursor(HC);
+        HelpLabel7.setCursor(HC);
+        SettingsLabel1.setCursor(HC);
+        SettingsLabel2.setCursor(HC);
+        SettingsLabel3.setCursor(HC);
+        SettingsLabel4.setCursor(HC);
+        SettingsLabel5.setCursor(HC);
+        SettingsLabel6.setCursor(HC);
+
+        MenuLabel1.setCursor(HC);
+        MenuLabel2.setCursor(HC);
+        MenuLabel3.setCursor(HC);
+        MenuLabel4.setCursor(HC);
+        MenuLabel5.setCursor(HC);
+        MenuLabel6.setCursor(HC);
+        MenuLabel7.setCursor(HC);
+
+        Exit1.setCursor(HC);
+        Exit2.setCursor(HC);
+        Exit3.setCursor(HC);
+        Exit4.setCursor(HC);
+        Exit5.setCursor(HC);
+        Exit6.setCursor(HC);
+        Exit7.setCursor(HC);
+        Logout1.setCursor(HC);
+        Logout2.setCursor(HC);
+        Logout3.setCursor(HC);
+        Logout4.setCursor(HC);
+        Logout5.setCursor(HC);
+        Logout6.setCursor(HC);
+        Logout7.setCursor(HC);
+        
+        EImage1.setCursor(HC);
+        EImage2.setCursor(HC);
+        EImage3.setCursor(HC);
+        FirstLabel.setCursor(HC);
+        BusinessLabel.setCursor(HC);
+        EconomyLabel.setCursor(HC);
+        
+        CountryLabel1.setCursor(HC);
+        CountryLabel2.setCursor(HC);
+        CountryLabel3.setCursor(HC);
+        CountryLabel4.setCursor(HC);
+        CountryLabel5.setCursor(HC);
+        CountryPicLabel1.setCursor(HC);
+        CountryPicLabel2.setCursor(HC);
+        CountryPicLabel3.setCursor(HC);
+        CountryPicLabel4.setCursor(HC);
+        CountryPicLabel5.setCursor(HC);
+        
+        Icon1.setCursor(HC);
+        Icon2.setCursor(HC);
+        Icon3.setCursor(HC);
+        Icon4.setCursor(HC);
+        Icon5.setCursor(HC);
+        Icon6.setCursor(HC);
+        Icon7.setCursor(HC);
+        Icon8.setCursor(HC);
+        Icon9.setCursor(HC);
+        Icon10.setCursor(HC);
+        Icon11.setCursor(HC);
+        Icon12.setCursor(HC);
+        Icon13.setCursor(HC);
+        Icon14.setCursor(HC);
+        Icon15.setCursor(HC);
+        ViewC1.setCursor(HC);
+        ViewP1.setCursor(HC);
+        ViewP2.setCursor(HC);
+        
+        Country1Combo.setCursor(HC);
+        Country2Combo.setCursor(HC);
+        AMinus.setCursor(HC);
+        APlus.setCursor(HC);
+        KPlus.setCursor(HC);
+        KMinus.setCursor(HC);
+        ClassCombo.setCursor(HC);
+        SearchFlights.setCursor(HC);
+        FlexibilityCheckbox.setCursor(HC);
+        BackLabel.setCursor(HC);
+        NextLabel.setCursor(HC);
+        Back2WLabel.setCursor(HC);
+        Next2WLabel.setCursor(HC);
+        ReturnFlightsButton.setCursor(HC);
+        ContinueFlightsButton.setCursor(HC);
+        ReturnFlightsButton1.setCursor(HC);
+        ContinueFlightsButton.setCursor(HC);
+        NextNLabel.setCursor(HC);
+        BackNLabel.setCursor(HC);
+        FareBreakupLabel.setCursor(HC);
+        ShowHideLabel.setCursor(HC);
+        NextNLabel.setCursor(HC);
+        BackNLabel.setCursor(HC);
+        FareBreakupLabel1.setCursor(HC);
+        ShowHideLabel1.setCursor(HC);
+        SearchRefernceLabel.setCursor(HC);
+        SearchAllLabel.setCursor(HC);
+        BackMLabel.setCursor(HC);
+        NextMLabel.setCursor(HC);
+        BackMFlightButton.setCursor(HC);
+        CancelthisFlight.setCursor(HC);
+
+        QLabel1.setCursor(HC);
+        QLabel2.setCursor(HC);
+        QLabel3.setCursor(HC);
+        QLabel4.setCursor(HC);
+        QLabel5.setCursor(HC);
+        QLabel6.setCursor(HC);
+        QLabel7.setCursor(HC);
+        QLabel8.setCursor(HC);
+        QLabel9.setCursor(HC);
+        QLabel10.setCursor(HC);
+
+    }
+
+    private void settingDetails(String[] Details) {
+
+        //Order is: IconCode, Name, DateofBirth, Mobile Number, Gender
+
+        //Setting global values:
+        icon = Integer.parseInt(Details[0]);      
+        name = Details[1];
+        date = Details[2];
+        mobilenumber = Details[3];
+
+        ImageIcon thisImage = new ImageIcon(getClass().getResource("/Images/Avatars/L"
+                + Details[0] + ".png"));
+
+        //Setting local values:
+        Avatar.setIcon(thisImage);
+        FullNameBLabel.setText(Details[1]);
+        EmailBLabel.setText(email);
+        DOBBLabel.setText(Details[2]);
+        MobileBLabel.setText(Details[3]);
+
+    }
+
+    private void allTransparent() {
+        Icon1.setOpaque(false);
+        Icon2.setOpaque(false);
+        Icon3.setOpaque(false);
+        Icon4.setOpaque(false);
+        Icon5.setOpaque(false);
+        Icon6.setOpaque(false);
+        Icon7.setOpaque(false);
+        Icon8.setOpaque(false);
+        Icon9.setOpaque(false);
+        Icon10.setOpaque(false);
+        Icon11.setOpaque(false);
+        Icon12.setOpaque(false);
+        Icon13.setOpaque(false);
+        Icon14.setOpaque(false);
+        Icon15.setOpaque(false);
+    }
+
+    private int getCurrentSelected(){
+        int val = 1;
+
+        if(Icon1.isSelected()){
+            val = 1;
+        }else if(Icon2.isSelected()){
+            val = 2;
+        }else if(Icon3.isSelected()){
+            val = 3;
+        }else if(Icon4.isSelected()){
+            val = 4;
+        }else if(Icon5.isSelected()){
+            val = 5;
+        }else if(Icon6.isSelected()){
+            val = 6;
+        }else if(Icon7.isSelected()){
+            val = 7;
+        }else if(Icon8.isSelected()){
+            val = 8;
+        }else if(Icon9.isSelected()){
+            val = 9;
+        }else if(Icon10.isSelected()){
+            val = 10;
+        }else if(Icon11.isSelected()){
+            val = 11;
+        }else if(Icon12.isSelected()){
+            val = 12;
+        }else if(Icon13.isSelected()){
+            val = 13;
+        }else if(Icon14.isSelected()){
+            val = 14;
+        }else if(Icon15.isSelected()){
+            val = 15;
+        }
+
+        return val;
+    }
+
+    private void setDOB(String date) {
+        try {
+            Date date1 = new SimpleDateFormat("dd.MM.yyyy").parse(date);
+            NewDOB.setDate(date1);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        
+    }
+
+    private void searchOneWay(String from, String to, int passengers, boolean flexibility, Date dDate) {
+        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+        String date = dateformat.format(dDate);
+        NextLabel.setEnabled(true);
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = (Connection) DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/project8525?useSSL=false&characterEncoding=latin1", "root", "123456789");
+            Statement stmt = connection.createStatement();
+
+            //Checking the flexibility factor
+            ResultSet resultSet = null;
+            if(flexibility) {
+
+                String startDT = date.concat(" 00:00:00");
+                Calendar c = Calendar.getInstance();
+                c.setTime(dDate);
+                c.add(Calendar.DATE, 3);
+                java.util.Date eDT = c.getTime();
+                String endDT = dateformat.format(eDT);
+                endDT = endDT.concat(" 23:59:59");
+                resultSet = stmt.executeQuery("SELECT * FROM flights WHERE fromm ='" + from
+                        + "' AND too = '" + to + "' AND remseats >= " + passengers + " AND departuredate >= '"
+                        + startDT + "' AND departuredate <= '" + endDT + "';");
+
+            }else{
+
+                String startDT = date.concat(" 00:00:00");
+                String endDT = date.concat(" 23:59:59");
+                resultSet = stmt.executeQuery("SELECT * FROM flights WHERE fromm ='" + from
+                        + "' AND too = '" + to + "' AND remseats >= " + passengers + " AND departuredate >= '"
+                        + startDT + "' AND departuredate <= '" + endDT + "';");
+
+            }
+
+            if (resultSet.next()) {             //Checking the corresponding flights.
+
+                resultSet.beforeFirst();
+                DefaultTableModel tableModel = (DefaultTableModel) FlightDisplayTable.getModel();
+                tableModel.setRowCount(0);
+
+                Object[] tableData;
+
+                while(resultSet.next()){
+
+                    //Getting Departure Date:
+                    SimpleDateFormat s1 = new SimpleDateFormat("dd.MM.yyyy");
+                    String dtime = resultSet.getString(5).substring(11, 16);
+                    SimpleDateFormat s2 = new SimpleDateFormat("HH:mm");
+                    String ddate = s1.format(resultSet.getDate(5));
+                    String adate = s1.format(resultSet.getDate(6));
+
+                    //Getting ETA:
+                    boolean connectingStatus = false;
+                    if(resultSet.getString(7).equals("true")){
+                        connectingStatus = true;
+                    }
+
+                    double dist = Database.getTime(from, to, connectingStatus);
+                    dist = Math.round(dist * 100.0) / 100.0;
+                    int h = (int) dist;
+                    int m = (int) (dist * 100) % 100;
+                    m = (int) Math.round(m * 0.6);
+                    String time = h + "hr " + m + "min";
+
+                    int index = Arrays.asList(list).indexOf(from);
+                    String f = names[index];
+                    index = Arrays.asList(list).indexOf(to);
+                    String t = names[index];
+
+                    tableData = new Object[]{resultSet.getString(2), f, t,
+                                    ddate, dtime, time, adate};
+                    tableModel.addRow(tableData);
+
+                }
+
+                CardLayout cardLayout = (CardLayout) DisplayPanel.getLayout();
+                cardLayout.show(DisplayPanel, "TablePanel");
+                CardLayout cardLayout1 = (CardLayout) ContentPanel2.getLayout();
+                cardLayout1.show(ContentPanel2, "RESULT");
+
+            }else{          //Checking Empty Result Set.
+
+                //Showing no flights found:
+                CardLayout cardLayout = (CardLayout) DisplayPanel.getLayout();
+                cardLayout.show(DisplayPanel, "NoResultPanel");
+                CardLayout cardLayout1 = (CardLayout) ContentPanel2.getLayout();
+                cardLayout1.show(ContentPanel2, "RESULT");
+                NextLabel.setEnabled(false);
+
+            }
+            connection.close();
+        }
+        catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void searchTwoWay(String from, String to, int passengers, boolean flexibility, Date dDate, Date aDate) {
+
+        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+        String depDate = dateformat.format(dDate);
+        String arrDate = dateformat.format(aDate);
+        Next2WLabel.setEnabled(true);
+
+        CardLayout cardLayout = (CardLayout) ContentPanel2.getLayout();
+        cardLayout.show(ContentPanel2, "RESULT2");
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = (Connection) DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/project8525?useSSL=false&characterEncoding=latin1", "root", "123456789");
+            Statement stmt1 = connection.createStatement();
+            Statement stmt2 = connection.createStatement();
+
+            //Checking the flexibility factor
+            ResultSet resultSet1;
+            ResultSet resultSet2;
+            Calendar c;
+            if(flexibility) {
+
+                //Flexibility factor of Departure Date:
+                String start1DT = depDate.concat(" 00:00:00");
+                c = Calendar.getInstance();
+                c.setTime(dDate);
+                c.add(Calendar.DATE, 3);
+                java.util.Date eDT1 = c.getTime();
+                String end1DT = dateformat.format(eDT1);
+                end1DT = end1DT.concat(" 23:59:59");
+
+                //Flexibility factor of Arrival Date:
+                String start2DT = depDate.concat(" 00:00:00");
+                c = Calendar.getInstance();
+                c.setTime(aDate);
+                c.add(Calendar.DATE, 3);
+                java.util.Date eDT2 = c.getTime();
+                String end2DT = dateformat.format(eDT2);
+                end2DT = end2DT.concat(" 23:59:59");
+
+                resultSet1 = stmt1.executeQuery("SELECT * FROM flights WHERE fromm ='" + from
+                        + "' AND too = '" + to + "' AND remseats >= " + passengers + " AND departuredate >= '"
+                        + start1DT + "' AND departuredate <= '" + end1DT + "';");
+
+                resultSet2 = stmt2.executeQuery("SELECT * FROM flights WHERE fromm ='" + to
+                        + "' AND too = '" + from + "' AND remseats >= " + passengers + " AND departuredate >= '"
+                        + start2DT + "' AND departuredate <= '" + end2DT + "';");
+
+            }else{
+
+                String start1DT = depDate.concat(" 00:00:00");
+                String start2DT = arrDate.concat(" 00:00:00");
+                String end1DT = depDate.concat(" 23:59:59");
+                String end2DT = arrDate.concat(" 23:59:59");
+                resultSet1 = stmt1.executeQuery("SELECT * FROM flights WHERE fromm ='" + from
+                        + "' AND too = '" + to + "' AND remseats >= " + passengers + " AND departuredate >= '"
+                        + start1DT + "' AND departuredate <= '" + end1DT + "';");
+                resultSet2 = stmt2.executeQuery("SELECT * FROM flights WHERE fromm ='" + to
+                        + "' AND too = '" + from + "' AND remseats >= " + passengers + " AND departuredate >= '"
+                        + start2DT + "' AND departuredate <= '" + end2DT + "';");
+
+            }
+
+            if (resultSet1.next() && resultSet2.next()) {             //Checking the corresponding flights.
+
+                resultSet1.beforeFirst();
+                resultSet2.beforeFirst();
+                DefaultTableModel tableModel1 = (DefaultTableModel) FlightDisplayTable1.getModel();
+                DefaultTableModel tableModel2 = (DefaultTableModel) FlightDisplayTable2.getModel();
+                tableModel1.setRowCount(0);
+                tableModel2.setRowCount(0);
+
+                Object[] tableData1;
+                Object[] tableData2;
+
+                //Adding Data to Table 1:
+                while(resultSet1.next()){
+
+                    //Getting Departure Date:
+                    SimpleDateFormat s1 = new SimpleDateFormat("dd.MM.yyyy");
+                    String dtime = resultSet1.getString(5).substring(11, 16);
+                    SimpleDateFormat s2 = new SimpleDateFormat("HH:mm");
+                    String ddate = s1.format(resultSet1.getDate(5));
+                    String adate = s1.format(resultSet1.getDate(6));
+
+                    //Getting ETA:
+                    boolean connectingStatus = false;
+                    if(resultSet1.getString(7).equals("true")){
+                        connectingStatus = true;
+                    }
+
+                    double dist = Database.getTime(from, to, connectingStatus);
+                    dist = Math.round(dist * 100.0) / 100.0;
+                    int h = (int) dist;
+                    int m = (int) (dist * 100) % 100;
+                    m = (int) Math.round(m * 0.6);
+                    String time = h + "hr " + m + "min";
+
+                    int index = Arrays.asList(list).indexOf(from);
+                    String f = names[index];
+                    index = Arrays.asList(list).indexOf(to);
+                    String t = names[index];
+
+                    tableData1 = new Object[]{resultSet1.getString(2), f, t,
+                            ddate, dtime, time, adate};
+                    tableModel1.addRow(tableData1);
+
+                }
+
+                //Adding Data to Table 2:
+                while(resultSet2.next()){
+
+                    //Getting Departure Date:
+                    SimpleDateFormat s1 = new SimpleDateFormat("dd.MM.yyyy");
+                    String dtime = resultSet2.getString(5).substring(11, 16);
+                    SimpleDateFormat s2 = new SimpleDateFormat("HH:mm");
+                    String ddate = s1.format(resultSet2.getDate(5));
+                    String adate = s1.format(resultSet2.getDate(6));
+
+                    //Getting ETA:
+                    boolean connectingStatus = false;
+                    if(resultSet2.getString(7).equals("true")){
+                        connectingStatus = true;
+                    }
+
+                    double dist = Database.getTime(from, to, connectingStatus);
+                    dist = Math.round(dist * 100.0) / 100.0;
+                    int h = (int) dist;
+                    int m = (int) (dist * 100) % 100;
+                    m = (int) Math.round(m * 0.6);
+                    String time = h + "hr " + m + "min";
+
+                    int index = Arrays.asList(list).indexOf(to);
+                    String f = names[index];
+                    index = Arrays.asList(list).indexOf(from);
+                    String t = names[index];
+
+                    tableData2 = new Object[]{resultSet2.getString(2), f, t,
+                            ddate, dtime, time, adate};
+                    tableModel2.addRow(tableData2);
+
+                }
+
+                CardLayout cardLayout1 = (CardLayout) ResultDisplayPanel.getLayout();
+                cardLayout1.show(ResultDisplayPanel, "MAIN2W");
+
+            }else{                                                        //Checking Empty Result Set.
+
+                //Showing no flights found:
+                CardLayout cardLayout1 = (CardLayout) ResultDisplayPanel.getLayout();
+                cardLayout1.show(ResultDisplayPanel, "NOFLIGHTS2W");
+                NextLabel.setEnabled(false);
+
+            }
+
+            connection.close();
+        }
+        catch(Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+    private void settheScene(String flightCode, boolean status) {
+        String typeOfClass = (String) ClassCombo.getSelectedItem();
+
+        //Setting the primary and top 3 values:
+        FlightCodeField.setText(flightCode);
+        FlightClassField.setText(typeOfClass);
+        FlightPassengersField.setText(Integer.toString(passengers));
+        
+        // Order is: [from, to, dDate, dTime, dAirport, dCity, dcountry, aDate, aTime, aAirport, aCity, acountry]
+        String[] result = Database.getFlightDetails(flightCode);
+        if(status){
+            FromILabel.setText("<html>\n<body align=\"center\">\n<font size = \"6\">" +
+                    result[5] + "</font>\n<br>\n<font size = \"4\">(" +
+                    result[0] + ")</font>\n</body>\n</html>");
+            ToILabel.setText("<html>\n<body align=\"center\">\n<font size = \"6\">" +
+                    result[10] + "</font>\n<br>\n<font size = \"4\">" +
+                    result[1] + "</font>\n</body>\n</html>");
+        }else{
+            FromDLabel.setText("<html>\n<body align=\"center\">\n<font size = \"6\">" +
+                    result[5] + "</font>\n<br>\n<font size = \"4\">(" +
+                    result[0] + ")</font>\n</body>\n</html>");
+            ToDLabel.setText("<html>\n<body align=\"center\">\n<font size = \"6\">" +
+                    result[10] + "</font>\n<br>\n<font size = \"4\">" +
+                    result[1] + "</font>\n</body>\n</html>");
+        }
+        ISL1.setText(result[2]);
+        ISL2.setText(result[3] + " Hrs");
+        ISL3.setText(result[4]);
+        ISL4.setText(result[5]);
+        ISL5.setText(result[6]);
+
+        IDL1.setText(result[7]);
+        IDL2.setText(result[8] + " Hrs");
+        IDL3.setText(result[9]);
+        IDL4.setText(result[10]);
+        IDL5.setText(result[11]);
+
+    }
+
+    private void settheScene2(String flightCode1, String flightCode2, boolean status1, boolean status2) {
+
+        // Order is: [from, to, dDate, dTime, dAirport, dCity, dcountry, aDate, aTime, aAirport, aCity, acountry]
+        String[] result1 = Database.getFlightDetails(flightCode1);
+        String[] result2 = Database.getFlightDetails(flightCode2);
+        
+        String typeOfClass = (String) ClassCombo.getSelectedItem();
+        //Setting the primary and top 2 values:
+        FlightClassField1.setText(typeOfClass);
+        FlightPassengersField1.setText(Integer.toString(passengers));
+        
+        //First Flight:
+        FlightCodeField1.setText(flightCode1);
+        if(status1){
+            CardLayout cardLayout1 = (CardLayout) DetailsDisplay1.getLayout();
+            cardLayout1.show(DetailsDisplay1, "INDIRECT");
+        }else{
+            CardLayout cardLayout1 = (CardLayout) DetailsDisplay1.getLayout();
+            cardLayout1.show(DetailsDisplay1, "DIRECT");
+        }
+        
+        if(status1){
+            FromILabel2.setText("<html>\n<body align=\"center\">\n<font size = \"6\">" +
+                    result1[5] + "</font>\n<br>\n<font size = \"4\">(" +
+                    result1[0] + ")</font>\n</body>\n</html>");
+            ToILabel2.setText("<html>\n<body align=\"center\">\n<font size = \"6\">" +
+                    result1[10] + "</font>\n<br>\n<font size = \"4\">(" +
+                    result1[1] + ")</font>\n</body>\n</html>");
+        }else{
+            FromDLabel2.setText("<html>\n<body align=\"center\">\n<font size = \"6\">" +
+                    result1[5] + "</font>\n<br>\n<font size = \"4\">(" +
+                    result1[0] + ")</font>\n</body>\n</html>");
+            ToDLabel2.setText("<html>\n<body align=\"center\">\n<font size = \"6\">" +
+                    result1[10] + "</font>\n<br>\n<font size = \"4\">(" +
+                    result1[1] + ")</font>\n</body>\n</html>");
+        }
+        
+        // Order is: [from, to, dDate, dTime, dAirport, dCity, dcountry, aDate, aTime, aAirport, aCity, acountry]
+        S2W1_1.setText(result1[2]);
+        S2W1_2.setText(result1[3]);
+        S2W1_3.setText(result1[4] + " Hrs");
+        S2W1_4.setText(result1[5]);
+        S2W1_5.setText(result1[6]);
+        D2W1_1.setText(result1[7]);
+        D2W1_2.setText(result1[8]);
+        D2W1_3.setText(result1[9]);
+        D2W1_4.setText(result1[10]);
+        D2W1_5.setText(result1[11]);
+        
+        //Second Flight:
+        FlightCodeField2.setText(flightCode2);
+        if(status2){
+            CardLayout cardLayout1 = (CardLayout) DetailsDisplay2.getLayout();
+            cardLayout1.show(DetailsDisplay2, "INDIRECT");
+        }else{
+            CardLayout cardLayout1 = (CardLayout) DetailsDisplay2.getLayout();
+            cardLayout1.show(DetailsDisplay2, "DIRECT");
+        }
+        
+        if(status2){
+            FromILabel3.setText("<html>\n<body align=\"center\">\n<font size = \"6\">" +
+                    result2[5] + "</font>\n<br>\n<font size = \"4\">(" +
+                    result2[0] + ")</font>\n</body>\n</html>");
+            ToILabel3.setText("<html>\n<body align=\"center\">\n<font size = \"6\">" +
+                    result2[10] + "</font>\n<br>\n<font size = \"4\">" +
+                    result2[1] + "</font>\n</body>\n</html>");
+        }else{
+            FromDLabel3.setText("<html>\n<body align=\"center\">\n<font size = \"6\">" +
+                    result2[5] + "</font>\n<br>\n<font size = \"4\">(" +
+                    result2[0] + ")</font>\n</body>\n</html>");
+            ToDLabel3.setText("<html>\n<body align=\"center\">\n<font size = \"6\">" +
+                    result2[10] + "</font>\n<br>\n<font size = \"4\">" +
+                    result2[1] + "</font>\n</body>\n</html>");
+        }
+        
+        // Order is: [from, to, dDate, dTime, dAirport, dCity, dcountry, aDate, aTime, aAirport, aCity, acountry]
+        S2W1_6.setText(result2[2]);
+        S2W1_7.setText(result2[3]);
+        S2W1_8.setText(result2[4] + " Hrs");
+        S2W1_9.setText(result2[5]);
+        S2W1_10.setText(result2[6]);
+        D2W1_6.setText(result2[7]);
+        D2W1_7.setText(result2[8]);
+        D2W1_8.setText(result2[9]);
+        D2W1_9.setText(result2[10]);
+        D2W1_10.setText(result2[11]);
+
+    }
+
+    private void clearBooking() {
+        Country1Combo.setSelectedIndex(7);
+        Country2Combo.setSelectedIndex(0);
+        Date dt = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(dt);
+        c.add(Calendar.DATE, 1);
+        dt = c.getTime();
+        DepartingDate.setDate(dt);
+        ReturningDate.setDate(null);
+        passengers = 1;
+        ATextField.setText("1");
+        KTextField.setText("0");
+        ClassCombo.setSelectedIndex(0);
+        FlexibilityCheckbox.setSelected(false);
+        ExclusiveRadioButton.setSelected(true);
+        ExclusiveRadioButton1.setSelected(true);
+        ExclusiveRadioButton2.setSelected(true);
+        MealTypeLabel.setVisible(false);
+        MealRadioButton1.setVisible(false);
+        MealRadioButton2.setVisible(false);
+        MealRadioButton1.setSelected(true);
+        RCheckBox.setSelected(false);
+        RCheckBox1.setSelected(false);
+        MealTypeLabel1.setVisible(false);
+        MealTypeLabel2.setVisible(false);
+        MealRadioButton3.setVisible(false);
+        MealRadioButton4.setVisible(false);
+        MealRadioButton5.setVisible(false);
+        MealRadioButton6.setVisible(false);
+    }
+
+    private void doPaymentWork() {
+
+        int baseFare = Database.getBaseFare(FlightCodeField.getText().trim().toUpperCase());
+        Locale currentLocale = Locale.getDefault();
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(currentLocale);
+
+        double totalFare = 0;
+
+        FareField1.setText(currencyFormatter.format(Math.round(baseFare)));
+        totalFare = totalFare + Math.round(baseFare);
+        if (InclusiveRadioButton.isSelected()) {
+            FareField2.setText(currencyFormatter.format(300));
+            totalFare = totalFare + 300;
+        } else {
+            FareField2.setText(currencyFormatter.format(0));
+        }
+
+        FareField5.setText("X" + passengers);
+        int adults = Integer.parseInt(ATextField.getText().trim());
+        int kids = Integer.parseInt(KTextField.getText().trim());
+
+        //Computing fare for adults and kids by summing up meals and base fare charges:
+        double aFare = adults*totalFare;
+        double kFare = kids*(totalFare*0.7);
+        totalFare = aFare + kFare;
+
+        if (RCheckBox.isSelected()) {
+            double refundable = 0.1*totalFare;
+            FareField3.setText(currencyFormatter.format((int)Math.round(refundable)));
+            totalFare = totalFare + (int)Math.round(refundable);
+        } else {
+            FareField3.setText(currencyFormatter.format(0));
+        }
+
+        //Class Factor:
+        int classCharges = 0;
+        if(FlightClassField.getText().trim().equals("Business")){
+            classCharges = 3000;
+        }else if(FlightClassField.getText().trim().equals("First")){
+            classCharges = 8000;
+        }
+        FareField4.setText(currencyFormatter.format(classCharges));
+        totalFare = totalFare + classCharges;
+        totalfare = (int)totalFare;
+
+        TotalAmountField.setText(currencyFormatter.format(Math.round(totalFare)));
+
+    }
+
+    private void doPaymentWork2() {
+
+        int baseFare = Database.getBaseFare(FlightCodeField1.getText().trim().toUpperCase());
+        Locale currentLocale = Locale.getDefault();
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(currentLocale);
+
+        double totalFare = 0;
+
+        FareField6.setText(currencyFormatter.format(Math.round(baseFare)));
+        totalFare = totalFare + Math.round(baseFare);
+        if (InclusiveRadioButton1.isSelected() && InclusiveRadioButton2.isSelected()) {
+            FareField7.setText(currencyFormatter.format(600));
+            totalFare = totalFare + 600;
+        } else if (InclusiveRadioButton1.isSelected() || InclusiveRadioButton2.isSelected()) {
+            FareField7.setText(currencyFormatter.format(300));
+            totalFare = totalFare + 300;
+        } else {
+            FareField7.setText(currencyFormatter.format(0));
+        }
+
+        FareField10.setText("X" + passengers);
+        int adults = Integer.parseInt(ATextField.getText().trim());
+        int kids = Integer.parseInt(KTextField.getText().trim());
+
+        //Computing fare for adults and kids by summing up meals and base fare charges:
+        double aFare = adults*totalFare;
+        double kFare = kids*(totalFare*0.7);
+        totalFare = aFare + kFare;
+
+        if (RCheckBox1.isSelected()) {
+            double refundable = 0.1*totalFare;
+            FareField8.setText(currencyFormatter.format((int)Math.round(refundable)));
+            totalFare = totalFare + (int)Math.round(refundable);
+        } else {
+            FareField8.setText(currencyFormatter.format(0));
+        }
+
+        //Class Factor:
+        int classCharges = 0;
+        if(FlightClassField1.getText().trim().equals("Business")){
+            classCharges = 3000;
+        }else if(FlightClassField1.getText().trim().equals("First")){
+            classCharges = 8000;
+        }
+        FareField9.setText(currencyFormatter.format(classCharges));
+        totalFare = totalFare + classCharges;
+
+        totalFare = 2 * totalFare;
+        totalfare = (int)totalFare;
+
+        TotalAmountField1.setText(currencyFormatter.format(Math.round(totalFare)));
+
+    }
+
+    private void goHome() {
+        CardLayout cardLayout = (CardLayout) ContentPanel3.getLayout();
+        cardLayout.show(ContentPanel3, "HOME");
+        RefernceNumberMField.setText("");
+        RefernceNumberMField.requestFocusInWindow();
+    }
+
+}
