@@ -48,5 +48,3 @@ A robust Java-based application that enables users to manage flight schedules, b
 - Java Development Kit (JDK) 8 or above.
 - MySQL Server.
 - Any IDE that supports Java (e.g., IntelliJ IDEA, Eclipse, NetBeans).
-
---
